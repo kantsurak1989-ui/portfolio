@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Юрий Канцурак — Lead E-learning Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --f:'Outfit',sans-serif;
+  --bg:#050d1a; --bg2:#080f1e; --bg3:#0c1830; --bg4:#111f3a;
+  --blue:#1a6af0; --blue2:#3d87ff; --cyan:#00cfff; --green:#22c55e;
+  --text:#dde6f5; --dim:#7a93b5; --dim2:#4e647e;
+  --border:rgba(255,255,255,.07); --border2:rgba(255,255,255,.13);
+  --glow:rgba(26,106,240,.22); --card:rgba(255,255,255,.025); --card2:rgba(255,255,255,.045);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--f);font-weight:400;line-height:1.65;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(255,255,255,.016) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.016) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0}
+.orb{position:fixed;border-radius:50%;filter:blur(130px);pointer-events:none;z-index:0}
+.orb1{width:650px;height:650px;background:rgba(26,106,240,.1);top:-220px;right:-180px}
+.orb2{width:450px;height:450px;background:rgba(0,207,255,.055);bottom:15%;left:-180px}
+
+/* ─── NAV ─── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;background:rgba(5,13,26,.85);backdrop-filter:blur(22px);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 max(2rem,calc(50vw - 620px))}
+.nl{font-size:1rem;font-weight:800;letter-spacing:-.01em;color:var(--text);text-decoration:none;margin-right:auto}
+.nl em{color:var(--cyan);font-style:normal}
+.nli{display:flex;gap:2rem;list-style:none;margin-right:2rem}
+.nli a{font-size:.875rem;font-weight:500;color:var(--dim);text-decoration:none;transition:color .2s}
+.nli a:hover{color:var(--text)}
+.ncta{font-size:.85rem;font-weight:600;color:#fff;background:var(--blue);padding:.45rem 1.25rem;border-radius:7px;text-decoration:none;transition:all .2s}
+.ncta:hover{background:var(--blue2);transform:translateY(-1px)}
+
+/* ─── LAYOUT ─── */
+.wrap{max-width:1240px;margin:0 auto;padding:0 2rem;position:relative;z-index:1}
+section{padding:96px 0}
+
+/* ─── BUTTONS ─── */
+.btn{display:inline-flex;align-items:center;gap:.5rem;border:none;cursor:pointer;font-family:var(--f);font-weight:600;font-size:.9rem;border-radius:8px;padding:.8rem 1.6rem;text-decoration:none;transition:all .25s}
+.btn-p{background:var(--blue);color:#fff}.btn-p:hover{background:var(--blue2);transform:translateY(-2px);box-shadow:0 10px 35px var(--glow)}
+.btn-g{background:transparent;color:var(--text);border:1px solid var(--border2)}.btn-g:hover{background:var(--card2);border-color:rgba(255,255,255,.22)}
+.btn-sm{font-size:.8rem;padding:.45rem 1rem;font-weight:500;border-radius:6px}
+.tag{display:inline-flex;align-items:center;font-size:.73rem;font-weight:500;padding:.22rem .68rem;border-radius:100px}
+.tag-b{background:rgba(26,106,240,.12);border:1px solid rgba(26,106,240,.3);color:var(--blue2)}
+.tag-c{background:rgba(0,207,255,.08);border:1px solid rgba(0,207,255,.25);color:var(--cyan)}
+.tag-d{background:var(--card);border:1px solid var(--border);color:var(--dim)}
+
+/* ─── SECTION HEAD ─── */
+.lbl{font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);display:block;margin-bottom:.75rem}
+.ttl{font-size:clamp(2rem,4vw,3rem);font-weight:700;line-height:1.1;letter-spacing:-.02em;margin-top:.5rem}
+.sub{font-size:1.05rem;font-weight:400;color:var(--dim);margin-top:1rem;max-width:550px;line-height:1.7}
+
+/* ─── HERO ─── */
+#hero{min-height:100vh;display:flex;align-items:center;padding:110px 0 80px}
+.hg{display:grid;grid-template-columns:1fr 400px;gap:4rem;align-items:center}
+.hbdg{display:inline-flex;align-items:center;gap:.5rem;font-size:.8rem;font-weight:500;background:rgba(0,207,255,.07);border:1px solid rgba(0,207,255,.22);border-radius:100px;padding:.35rem 1rem;color:var(--cyan);margin-bottom:1.5rem}
+.hbdot{width:7px;height:7px;background:var(--cyan);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
+.hname{font-size:clamp(3.5rem,8vw,6.5rem);font-weight:800;line-height:.93;letter-spacing:-.03em;margin-bottom:1rem}
+.hname span{background:linear-gradient(110deg,var(--text) 30%,var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hrole{font-size:1.05rem;font-weight:400;color:var(--dim);margin-bottom:1.75rem}
+.htag{font-size:1.1rem;font-weight:400;color:var(--dim);line-height:1.6;margin-bottom:2rem;border-left:3px solid var(--blue);padding-left:1.25rem}
+.hstats{display:grid;grid-template-columns:repeat(3,1fr);gap:.875rem;margin-bottom:2.5rem}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.1rem .875rem;text-align:center}
+.stn{font-size:1.9rem;font-weight:800;color:var(--cyan);line-height:1;letter-spacing:-.03em}
+.stl{font-size:.72rem;font-weight:500;color:var(--dim);margin-top:.2rem}
+.hact{display:flex;gap:1rem;flex-wrap:wrap}
+
+/* ─── AI CHAT ─── */
+.cc{background:var(--bg2);border:1px solid var(--border);border-radius:18px;overflow:hidden;box-shadow:0 30px 90px rgba(0,0,0,.55),0 0 0 1px rgba(26,106,240,.12)}
+.ch{background:rgba(26,106,240,.09);border-bottom:1px solid var(--border);padding:.875rem 1.25rem;display:flex;align-items:center;gap:.75rem}
+.cai{width:34px;height:34px;border-radius:9px;flex-shrink:0;background:linear-gradient(135deg,var(--blue),var(--cyan));display:flex;align-items:center;justify-content:center;font-size:1rem}
+.chn{font-size:.875rem;font-weight:700}
+.chs{font-size:.7rem;color:var(--cyan);font-weight:500}
+.cms{padding:1.1rem;display:flex;flex-direction:column;gap:.875rem;min-height:270px;max-height:340px;overflow-y:auto}
+.cm{display:flex;gap:.65rem;animation:mi .35s ease}
+@keyframes mi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.cav{width:28px;height:28px;border-radius:8px;background:rgba(26,106,240,.18);display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;margin-top:2px}
+.cb{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:.65rem .9rem;font-size:.83rem;font-weight:400;line-height:1.55;max-width:92%}
+.cb.ai{background:rgba(26,106,240,.08);border-color:rgba(26,106,240,.22)}
+.cb strong{color:var(--cyan);font-weight:600}
+.cdots{display:flex;gap:4px;padding:3px 0}
+.cdots span{width:6px;height:6px;background:var(--blue2);border-radius:50%;animation:dot 1.4s infinite}
+.cdots span:nth-child(2){animation-delay:.2s}.cdots span:nth-child(3){animation-delay:.4s}
+@keyframes dot{0%,80%,100%{opacity:.3;transform:scale(.8)}40%{opacity:1;transform:scale(1)}}
+.cq{padding:0 1.1rem .75rem;display:flex;flex-wrap:wrap;gap:.4rem}
+.cqb{background:rgba(26,106,240,.1);border:1px solid rgba(26,106,240,.25);border-radius:100px;padding:.22rem .72rem;font-size:.73rem;font-weight:500;color:var(--blue2);cursor:pointer;transition:background .2s}
+.cqb:hover{background:rgba(26,106,240,.22)}
+.cnotice{margin:0 1.1rem .875rem;padding:.6rem .875rem;background:rgba(255,180,0,.07);border:1px solid rgba(255,180,0,.22);border-radius:8px;font-size:.73rem;color:rgba(255,200,80,.9);display:none}
+.cinp{padding:.875rem 1.1rem;border-top:1px solid var(--border);display:flex;gap:.65rem}
+.ci{flex:1;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:.55rem .9rem;color:var(--text);font-family:var(--f);font-size:.83rem;font-weight:400;outline:none;transition:border-color .2s}
+.ci:focus{border-color:var(--blue)}
+.ci::placeholder{color:var(--dim2)}
+.csnd{width:36px;height:36px;background:var(--blue);border:none;border-radius:8px;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s}
+.csnd:hover{background:var(--blue2)}
+
+/* ─── WORKFLOW ─── */
+#workflow{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.wgrid{display:grid;grid-template-columns:repeat(5,1fr);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-top:2.5rem}
+.ws{padding:1.75rem 1.5rem;border-right:1px solid var(--border);transition:background .3s}
+.ws:last-child{border-right:none}
+.ws:hover{background:rgba(26,106,240,.05)}
+.wn{font-size:2.75rem;font-weight:900;color:rgba(26,106,240,.1);line-height:1;margin-bottom:.875rem;letter-spacing:-.04em}
+.wi{font-size:1.6rem;margin-bottom:.625rem}
+.wt{font-size:.95rem;font-weight:700;margin-bottom:.4rem}
+.wd{font-size:.78rem;font-weight:400;color:var(--dim);line-height:1.5}
+.wbar{margin-top:2rem;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem 2rem;display:flex;align-items:center;gap:2.5rem;flex-wrap:wrap}
+.wbs b{display:block;font-size:2.2rem;font-weight:900;color:var(--cyan);line-height:1;letter-spacing:-.04em}
+.wbs p{font-size:.78rem;font-weight:400;color:var(--dim);margin-top:.2rem}
+.warr{font-size:1.4rem;color:var(--dim2)}
+
+/* ─── CASES ─── */
+.cgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.ccard{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s;cursor:pointer}
+.ccard:hover{transform:translateY(-5px);border-color:rgba(26,106,240,.35);box-shadow:0 20px 60px rgba(0,0,0,.4),0 0 40px rgba(26,106,240,.08)}
+.cth{height:170px;display:flex;align-items:center;justify-content:center;font-size:3.2rem;position:relative}
+.ct1{background:linear-gradient(135deg,#0b2545,#1a4a8a)}
+.ct2{background:linear-gradient(135deg,#0b2e24,#165c42)}
+.ct3{background:linear-gradient(135deg,#1a1030,#3a1260)}
+.cbdg{position:absolute;top:.875rem;right:.875rem}
+.cbody{padding:1.4rem}
+.ccat{font-size:.68rem;font-weight:700;color:var(--cyan);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.4rem}
+.ctitle{font-size:1.05rem;font-weight:700;line-height:1.3;margin-bottom:.6rem;letter-spacing:-.01em}
+.cdesc{font-size:.82rem;font-weight:400;color:var(--dim);line-height:1.6;margin-bottom:1rem}
+.cmet{display:flex;gap:1rem;flex-wrap:wrap}
+.cm2{font-size:.8rem;font-weight:400}
+.cm2 strong{color:var(--blue2);font-weight:700}
+
+/* ─── YOUTUBE ─── */
+.ytcard{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-top:1.5rem}
+.ytop{padding:1.75rem;display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:start}
+.ytlbl{font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#ff5c5c;margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem}
+.ytlbl::before{content:'▶'}
+.yttitle{font-size:1.15rem;font-weight:700;letter-spacing:-.01em;margin-bottom:.5rem}
+.ytdesc{font-size:.85rem;font-weight:400;color:var(--dim);line-height:1.6}
+.ytera{display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,78,78,.08);border:1px solid rgba(255,78,78,.25);border-radius:100px;padding:.25rem .75rem;font-size:.75rem;font-weight:600;color:#ff6b6b;margin-top:.75rem}
+.ytplay{
+  position:relative;padding-bottom:56.25%;background:#000;cursor:pointer;overflow:hidden;
+}
+.ytph{
+  position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;
+  background-size:cover;background-position:center;transition:transform .3s;
+}
+.ytph::before{content:'';position:absolute;inset:0;background:rgba(5,13,26,.5);transition:background .3s}
+.ytplay:hover .ytph::before{background:rgba(5,13,26,.3)}
+.ytplay:hover .ytph{transform:scale(1.02)}
+.ytpbtn{position:relative;z-index:1;width:76px;height:76px;background:rgba(255,30,30,.9);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.9rem;transition:transform .3s,box-shadow .3s;box-shadow:0 0 0 6px rgba(255,30,30,.2)}
+.ytplay:hover .ytpbtn{transform:scale(1.12);box-shadow:0 0 0 10px rgba(255,30,30,.2),0 0 50px rgba(255,30,30,.45)}
+.ytptext{position:relative;z-index:1;text-align:center}
+.ytptext p{font-size:.95rem;font-weight:700;text-shadow:0 1px 8px rgba(0,0,0,.8)}
+.ytptext span{font-size:.78rem;font-weight:400;color:rgba(255,255,255,.75);text-shadow:0 1px 6px rgba(0,0,0,.8)}
+
+/* ─── SCORM CARDS ─── */
+#scorm{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.scgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;margin-top:2.5rem}
+.sccard{background:var(--bg3);border:1px solid var(--border);border-radius:18px;overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s;display:flex;flex-direction:column}
+.sccard:hover{transform:translateY(-4px);border-color:rgba(26,106,240,.4);box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 40px rgba(26,106,240,.1)}
+.sctop{padding:2rem;display:flex;align-items:flex-start;gap:1rem;flex:1}
+.scico{font-size:2.5rem;flex-shrink:0;margin-top:.1rem}
+.scinfo{flex:1}
+.scname{font-size:1.1rem;font-weight:700;letter-spacing:-.01em;margin-bottom:.35rem;line-height:1.25}
+.scsub{font-size:.8rem;font-weight:400;color:var(--dim);margin-bottom:.875rem;line-height:1.5}
+.sctags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.875rem}
+.sckpis{display:flex;gap:1.25rem}
+.sckpi b{display:block;font-size:1.4rem;font-weight:800;color:var(--green);line-height:1;letter-spacing:-.03em}
+.sckpi span{font-size:.68rem;font-weight:400;color:var(--dim);display:block;margin-top:.15rem}
+.scfoot{border-top:1px solid var(--border);padding:1.25rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.scfoot p{font-size:.78rem;font-weight:400;color:var(--dim);flex:1}
+.sc-launch{display:inline-flex;align-items:center;gap:.5rem;background:var(--blue);color:#fff;font-size:.85rem;font-weight:600;padding:.625rem 1.25rem;border-radius:8px;text-decoration:none;transition:all .25s;white-space:nowrap;border:none;cursor:pointer;font-family:var(--f)}
+.sc-launch:hover{background:var(--blue2);transform:translateY(-1px);box-shadow:0 8px 25px var(--glow)}
+.sc-launch.soon{background:var(--card2);border:1px solid var(--border2);color:var(--dim);cursor:default;pointer-events:none}
+
+/* ─── BUILT ─── */
+.built{background:rgba(26,106,240,.07);border:1px solid rgba(26,106,240,.2);border-radius:16px;padding:2.25rem;margin-top:3.5rem;display:grid;grid-template-columns:1fr 220px;gap:3rem;align-items:center}
+.bt{font-size:1.1rem;font-weight:700;margin-bottom:.6rem}
+.bd{font-size:.875rem;font-weight:400;color:var(--dim);line-height:1.65}
+.bstack{display:flex;flex-direction:column;gap:.45rem}
+.brow{font-size:.8rem;font-weight:400;display:flex;align-items:center;gap:.5rem;color:var(--dim)}
+.bdot{width:6px;height:6px;background:var(--cyan);border-radius:50%;flex-shrink:0}
+
+/* ─── SKILLS ─── */
+.sgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
+.sg{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.75rem}
+.sgi{font-size:1.9rem;margin-bottom:.7rem}
+.sgt{font-size:1rem;font-weight:700;margin-bottom:1.25rem;letter-spacing:-.01em}
+.stags{display:flex;flex-wrap:wrap;gap:.4rem}
+.stag{background:var(--card2);border:1px solid var(--border);border-radius:7px;padding:.28rem .72rem;font-size:.78rem;font-weight:500;color:var(--dim)}
+.stag.hot{background:rgba(26,106,240,.12);border-color:rgba(26,106,240,.3);color:var(--blue2)}
+
+/* ─── CONTACT ─── */
+#contact{background:var(--bg2);border-top:1px solid var(--border)}
+.kontakt{display:grid;grid-template-columns:1fr 1fr;gap:4.5rem;align-items:center}
+.knote{font-size:.9rem;font-weight:400;color:var(--dim);line-height:1.7;margin-bottom:2rem}
+.klinks{display:flex;flex-direction:column;gap:.875rem}
+.klink{display:flex;align-items:center;gap:1rem;padding:1rem 1.25rem;background:var(--card);border:1px solid var(--border);border-radius:11px;text-decoration:none;color:var(--text);transition:all .2s}
+.klink:hover{border-color:rgba(26,106,240,.4);background:rgba(26,106,240,.06)}
+.kico{font-size:1.25rem;width:38px;text-align:center;flex-shrink:0}
+.kname{font-size:.9rem;font-weight:600}
+.ksub{font-size:.78rem;font-weight:400;color:var(--dim);margin-top:.1rem}
+.salbox{background:linear-gradient(135deg,rgba(26,106,240,.15),rgba(0,207,255,.07));border:1px solid rgba(26,106,240,.3);border-radius:18px;padding:2.5rem;text-align:center}
+.sall{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:.75rem}
+.saln{font-size:3.5rem;font-weight:900;letter-spacing:-.05em;line-height:1;margin-bottom:.3rem}
+.sals{font-size:.8rem;font-weight:400;color:var(--dim);margin-bottom:1.75rem}
+.salp{display:flex;flex-direction:column;gap:.5rem;text-align:left}
+.salp div{font-size:.85rem;font-weight:400;display:flex;gap:.5rem}
+.salp div::before{content:'✓';color:var(--cyan);font-weight:700;flex-shrink:0}
+
+/* ─── FOOTER ─── */
+footer{border-top:1px solid var(--border);padding:1.75rem 0;text-align:center;font-size:.78rem;font-weight:400;color:var(--dim2)}
+footer a{color:var(--blue2);text-decoration:none}
+
+/* ─── ANIM ─── */
+[data-a]{opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease}
+[data-a].vis{opacity:1;transform:translateY(0)}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:10px}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:1060px){.hg{grid-template-columns:1fr}.cc{display:none}.wgrid{grid-template-columns:repeat(3,1fr)}.cgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:680px){.cgrid,.sgrid,.kontakt,.built,.scgrid,.ytop{grid-template-columns:1fr}.wgrid{grid-template-columns:1fr 1fr}.nli{display:none}.hstats{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
+<!-- =====================================================
+  ⚙️  КОНФИГУРАЦИЯ — РЕДАКТИРУЙТЕ ТОЛЬКО ЗДЕСЬ
+  ===================================================== -->
+<script>
+const C = {
+  // ── ЛИЧНЫЕ ДАННЫЕ ──────────────────────────────────
+  name:    'Юрий Канцурак',
+  role:    'Lead E-learning Developer',
+  city:    'Москва',
+  phone:   '+7 (968) 991-25-04',
+  email:   'kantsurak89@gmail.com',
+  hh:      'https://hh.ru',            // ← вставьте прямую ссылку на ваше резюме
+  salary:  '180 000',
+
+  // ── YOUTUBE ────────────────────────────────────────
+  // ID из ссылки youtube.com/watch?v=ВОТ_ЭТО
+  ytId:    'PrE9L6G5v7g',
+  ytTitle: 'PDF-скачивание через Articulate Storyline',
+  ytDesc:  'Кастомная реализация скачивания PDF-файла прямо из SCORM-курса — чистый JavaScript внутри Storyline, реализованный до эпохи AI-инструментов.',
+
+  // ── SCORM КУРСЫ ────────────────────────────────────
+  // url — прямая ссылка на курс (SCORM Cloud, свой хостинг и т.д.)
+  // Если url пустой ('') — кнопка покажет «По запросу»
+  // Как добавить/убрать курс: добавьте/удалите объект { } ниже
+  courses: [
+    {
+      icon:  '🔒',
+      name:  'Информационная безопасность',
+      sub:   'Работа с персональными данными',
+      url:   '',  // ← вставьте ссылку на курс
+      tags:  ['SCORM 1.2','Drag & Drop','Pick One','Custom JS','Видео'],
+      kpis:  [{v:'87%',l:'Completion'},{v:'19',l:'Слайдов'},{v:'≈25′',l:'Время'}],
+      desc:  'Compliance-курс для 2 400+ сотрудников банковской сети. Кастомная JS-логика ветвления по результатам промежуточных проверок.',
+      color: 'linear-gradient(135deg,#0b2545,#1a4a8a)',
+    },
+    {
+      icon:  '👟',
+      name:  'Завязываем шнурки',
+      sub:   'Интерактивное упражнение',
+      url:   '',  // ← вставьте ссылку на курс
+      tags:  ['Storyline 360','Drag & Drop','Пошаговая механика'],
+      kpis:  [{v:'6',l:'Шагов'},{v:'Drag',l:'Механика'},{v:'Навык',l:'Тип'}],
+      desc:  'Кастомный пошаговый drag-and-drop для отработки физического навыка. Демонстрирует возможности Storyline в геймификации.',
+      color: 'linear-gradient(135deg,#0b2e24,#165c42)',
+    },
+    {
+      icon:  '📊',
+      name:  'Название курса 3',
+      sub:   'Тема / тип',
+      url:   '',  // ← вставьте ссылку на курс
+      tags:  ['SCORM 1.2','Storyline 360'],
+      kpis:  [{v:'—',l:'Слайдов'},{v:'—',l:'Время'},{v:'—',l:'Completion'}],
+      desc:  'Описание курса — отредактируйте в блоке CONFIG выше.',
+      color: 'linear-gradient(135deg,#1a1030,#3a1260)',
+    },
+    {
+      icon:  '🎯',
+      name:  'Название курса 4',
+      sub:   'Тема / тип',
+      url:   '',  // ← вставьте ссылку на курс
+      tags:  ['SCORM 1.2','Storyline 360'],
+      kpis:  [{v:'—',l:'Слайдов'},{v:'—',l:'Время'},{v:'—',l:'Completion'}],
+      desc:  'Описание курса — отредактируйте в блоке CONFIG выше.',
+      color: 'linear-gradient(135deg,#1a1218,#2d1030)',
+    },
+  ],
+
+  // ── AI КЛЮЧ ────────────────────────────────────────
+  // Оставьте пустым если ключ настроен через Vercel (рекомендуется)
+  // Только для локальной разработки: anthropicKey: 'sk-ant-...'
+  anthropicKey: '',
+};
+</script>
+<!-- ===================================================== -->
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nl">ЮК<em>.</em></a>
+  <ul class="nli">
+    <li><a href="#workflow">AI-процесс</a></li>
+    <li><a href="#cases">Кейсы</a></li>
+    <li><a href="#scorm">Курсы</a></li>
+    <li><a href="#skills">Навыки</a></li>
+  </ul>
+  <a href="#contact" class="ncta">Связаться →</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+<div class="wrap">
+<div class="hg">
+  <div>
+    <div class="hbdg"><div class="hbdot"></div> Открыт к предложениям · Lead E-learning Developer</div>
+    <div class="hname" id="hname"></div>
+    <p class="hrole" id="hrole"></p>
+    <p class="htag">Делаю курсы, которые работают,<br>процессы — без бесконечных правок,<br>и показываю, как AI меняет e-learning.</p>
+    <div class="hstats">
+      <div class="stat" data-a><div class="stn">100<span style="font-size:1rem;color:var(--dim)">+</span></div><div class="stl">запущенных курсов</div></div>
+      <div class="stat" data-a><div class="stn">85<span style="font-size:1rem;color:var(--dim)">%</span></div><div class="stl">меньше правок</div></div>
+      <div class="stat" data-a><div class="stn">20</div><div class="stl">человек в команде</div></div>
+    </div>
+    <div class="hact">
+      <a href="#contact" class="btn btn-p">📬 Написать</a>
+      <a href="#scorm"   class="btn btn-g">▶ Демо-курсы</a>
+    </div>
+  </div>
+
+  <div class="cc">
+    <div class="ch">
+      <div class="cai">🤖</div>
+      <div><div class="chn">AI-помощник о Юрии</div><div class="chs">● отвечает по реальным кейсам</div></div>
+    </div>
+    <div class="cms" id="cms">
+      <div class="cm"><div class="cav">🤖</div><div class="cb ai">Привет! Спросите о навыках, опыте или кейсах Юрия — отвечу по фактам.</div></div>
+      <div class="cm"><div class="cav">💼</div><div class="cb">Умеет JS в Storyline?</div></div>
+      <div class="cm"><div class="cav">🤖</div><div class="cb ai">Да. Юрий пишет кастомный JavaScript прямо в Storyline — симуляции, аналитика, нестандартный drag&drop, и <strong>POST-запросы к LLM API</strong> прямо из SCORM-курса. Демо на этой странице.</div></div>
+    </div>
+    <div class="cq" id="cq">
+      <span class="cqb" onclick="ask(this)">Опыт управления командой?</span>
+      <span class="cqb" onclick="ask(this)">Как использует AI?</span>
+      <span class="cqb" onclick="ask(this)">Зарплата / условия?</span>
+      <span class="cqb" onclick="ask(this)">SCORM и LMS?</span>
+    </div>
+    <div class="cnotice" id="cnotice">ℹ️ Добавьте ANTHROPIC_API_KEY в Vercel → Settings → Environment Variables</div>
+    <div class="cinp">
+      <input class="ci" id="ci" placeholder="Задайте вопрос рекрутера…" onkeypress="if(event.key==='Enter')send()">
+      <button class="csnd" onclick="send()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+    </div>
+  </div>
+</div>
+</div>
+</section>
+
+<!-- AI WORKFLOW -->
+<section id="workflow">
+<div class="wrap">
+  <span class="lbl">AI + Production</span>
+  <h2 class="ttl">Как AI встроен<br>в мой рабочий процесс</h2>
+  <p class="sub">Не «пользуюсь ChatGPT». Собрал пайплайн — 5 этапов, 4 автоматизированы. Часовой курс за ≈18 часов вместо ≈60.</p>
+  <div class="wgrid">
+    <div class="ws" data-a><div class="wn">01</div><div class="wi">🗂️</div><div class="wt">Outline</div><div class="wd">LLM строит структуру модулей по теме и аудитории.</div><div style="margin-top:.75rem"><span class="tag tag-c">Claude / GPT-4o</span></div></div>
+    <div class="ws" data-a><div class="wn">02</div><div class="wi">✍️</div><div class="wt">Скрипты и тесты</div><div class="wd">Черновики диалогов и вопросов — за минуты. Финал — мой.</div><div style="margin-top:.75rem"><span class="tag tag-c">Prompt-инженеринг</span></div></div>
+    <div class="ws" data-a><div class="wn">03</div><div class="wi">🎨</div><div class="wt">Storyboard</div><div class="wd">Педагогическое решение и UX-логика — только я.</div><div style="margin-top:.75rem"><span class="tag tag-d">Только я</span></div></div>
+    <div class="ws" data-a><div class="wn">04</div><div class="wi">🖼️</div><div class="wt">Визуал</div><div class="wd">Иллюстрации и фоны — генеративные модели.</div><div style="margin-top:.75rem"><span class="tag tag-c">Midjourney / FLUX</span></div></div>
+    <div class="ws" data-a><div class="wn">05</div><div class="wi">🔊</div><div class="wt">Озвучка</div><div class="wd">AI-голоса для черновиков. Диктор — для premium.</div><div style="margin-top:.75rem"><span class="tag tag-c">ElevenLabs</span></div></div>
+  </div>
+  <div class="wbar">
+    <div class="wbs"><b>≈60ч</b><p>раньше</p></div><div class="warr">→</div>
+    <div class="wbs"><b>≈18ч</b><p>сейчас</p></div><div class="warr">→</div>
+    <div class="wbs"><b>×3.3</b><p>скорость</p></div><div class="warr">→</div>
+    <div class="wbs"><b>без ↓</b><p>качества</p></div>
+  </div>
+</div>
+</section>
+
+<!-- CASES + YOUTUBE -->
+<section id="cases">
+<div class="wrap">
+  <span class="lbl">Кейсы</span>
+  <h2 class="ttl">Проекты и видео-демо</h2>
+  <p class="sub">Реальные задачи — проблема, роль, результат в цифрах.</p>
+
+  <div class="cgrid" style="margin-top:2.5rem">
+    <div class="ccard" data-a>
+      <div class="cth ct1"><span>🏦</span><div class="cbdg"><span class="tag tag-d">Банковский сектор</span></div></div>
+      <div class="cbody"><div class="ccat">Compliance · Storyline 360</div><h3 class="ctitle">Обязательный курс для 2 400 сотрудников розничной сети</h3><p class="cdesc">Полный цикл: методология → интерактив → JS-механики → SCORM 1.2 → LMS. Кастомное ветвление по результатам проверок.</p><div class="cmet"><div class="cm2">Completion <strong>87%</strong></div><div class="cm2">Score <strong>4.6/5</strong></div><div class="cm2">Правок <strong>2 итер.</strong></div></div></div>
+    </div>
+    <div class="ccard" data-a>
+      <div class="cth ct2"><span>🤖</span><div class="cbdg"><span class="tag tag-c">AI-интеграция</span></div></div>
+      <div class="cbody"><div class="ccat">EdTech · JS + LLM API</div><h3 class="ctitle">AI-тьютор внутри SCORM — ответы на вопросы в курсе</h3><p class="cdesc">JS-триггеры Storyline → POST к LLM API → персонализированный ответ в контексте текущего раздела.</p><div class="cmet"><div class="cm2">Вовлечённость <strong>+41%</strong></div><div class="cm2">Время <strong>+28%</strong></div></div></div>
+    </div>
+    <div class="ccard" data-a>
+      <div class="cth ct3"><span>⚡</span><div class="cbdg"><span class="tag tag-b">AI-pipeline</span></div></div>
+      <div class="cbody"><div class="ccat">Внутренний проект</div><h3 class="ctitle">Сборка курса в 3× быстрее без потери качества</h3><p class="cdesc">LLM для outline, скриптов, тестов, контроля качества. Правки сократились с 8–10 до 1–2 итераций.</p><div class="cmet"><div class="cm2">Скорость <strong>×3.3</strong></div><div class="cm2">Правки <strong>−85%</strong></div></div></div>
+    </div>
+  </div>
+
+  <!-- YouTube -->
+  <div class="ytcard" data-a id="ytcard">
+    <div class="ytop">
+      <div>
+        <div class="ytlbl">Видео-демо</div>
+        <h3 class="yttitle" id="ytt"></h3>
+        <p class="ytdesc" id="ytd"></p>
+        <div class="ytera">🕐 До AI-эпохи · Чистый JavaScript в Storyline</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:.5rem;align-items:flex-end;min-width:150px">
+        <span class="tag tag-b">Articulate Storyline</span>
+        <span class="tag tag-d">Кастомный JS</span>
+        <span class="tag tag-d">PDF Workflow</span>
+      </div>
+    </div>
+    <div class="ytplay" id="ytpl" onclick="openYt()">
+      <div class="ytph" id="ytph">
+        <div class="ytpbtn">▶</div>
+        <div class="ytptext"><p>Смотреть на YouTube</p><span>Откроется в новой вкладке</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="built" data-a>
+    <div><p class="bt">🧠 Этот сайт — тоже часть портфолио</p><p class="bd">Одностраничник спроектирован с нуля: тёмная система, единый шрифт Outfit, AI-чат на Anthropic Claude API. Сборка — 2 вечера, хостинг — Vercel бесплатно.</p></div>
+    <div class="bstack">
+      <div class="brow"><div class="bdot"></div>Outfit (единый шрифт)</div>
+      <div class="brow"><div class="bdot"></div>HTML / CSS / Vanilla JS</div>
+      <div class="brow"><div class="bdot"></div>Anthropic Claude API</div>
+      <div class="brow"><div class="bdot"></div>Vercel (Edge deploy)</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- SCORM DEMO -->
+<section id="scorm">
+<div class="wrap">
+  <span class="lbl">Живые демо</span>
+  <h2 class="ttl">Реальные SCORM-курсы</h2>
+  <p class="sub">Четыре продакшн-курса — нажмите «Запустить» чтобы открыть интерактивный курс в новой вкладке.</p>
+  <div class="scgrid" id="scgrid"></div>
+</div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+<div class="wrap">
+  <span class="lbl">Инструменты</span>
+  <h2 class="ttl">Навыки и стек</h2>
+  <p class="sub">Реальный арсенал, который работает в production.</p>
+  <div class="sgrid" style="margin-top:2.5rem">
+    <div class="sg" data-a><div class="sgi">🎓</div><div class="sgt">E-learning разработка</div><div class="stags"><span class="stag hot">Articulate Storyline 360</span><span class="stag">Articulate Rise</span><span class="stag">Adobe Captivate</span><span class="stag">iSpring Suite</span><span class="stag hot">SCORM 1.2 / 2004</span><span class="stag">xAPI (cmi5)</span><span class="stag">WebTutor</span><span class="stag">Teachbase</span><span class="stag">Moodle</span></div></div>
+    <div class="sg" data-a><div class="sgi">🤖</div><div class="sgt">AI / Автоматизация</div><div class="stags"><span class="stag hot">Claude API (Anthropic)</span><span class="stag hot">GPT-4o</span><span class="stag hot">Prompt-инженеринг</span><span class="stag">RAG-системы</span><span class="stag">Midjourney / FLUX</span><span class="stag hot">ElevenLabs</span><span class="stag">LLM внутри Storyline</span></div></div>
+    <div class="sg" data-a><div class="sgi">⚙️</div><div class="sgt">Тех-стек и медиа</div><div class="stags"><span class="stag hot">JavaScript (Storyline)</span><span class="stag">HTML / CSS</span><span class="stag">REST API basics</span><span class="stag">Git</span><span class="stag">Figma (read)</span><span class="stag">Premiere Pro</span><span class="stag">After Effects</span><span class="stag">Audition</span></div></div>
+    <div class="sg" data-a><div class="sgi">🚀</div><div class="sgt">Управление и процессы</div><div class="stags"><span class="stag hot">Команда до 20 человек</span><span class="stag">Постановка задач</span><span class="stag">Менторинг</span><span class="stag">Работа с заказчиком</span><span class="stag">Контроль качества</span><span class="stag">Production-процессы</span></div></div>
+  </div>
+</div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+<div class="wrap">
+<div class="kontakt">
+  <div>
+    <span class="lbl">Контакты</span>
+    <h2 class="ttl" style="margin-bottom:1.25rem">Поговорим?</h2>
+    <p class="knote">Открыт к предложениям — удалённо или гибрид (Москва). Рассматриваю полную, частичную и проектную работу. Отвечаю в течение дня.</p>
+    <div class="klinks" id="klinks"></div>
+  </div>
+  <div class="salbox">
+    <p class="sall">Целевая зарплата</p>
+    <div class="saln" id="saln"></div>
+    <p class="sals">₽ в месяц на руки · готов обсуждать</p>
+    <div class="salp">
+      <div>8+ лет в корпоративном e-learning</div>
+      <div>100+ курсов в production</div>
+      <div>Команда до 20 человек</div>
+      <div>JavaScript-расширения в Storyline</div>
+      <div>AI-pipeline: ×3.3 к скорости</div>
+      <div>Полная / частичная / проектная</div>
+    </div>
+  </div>
+</div>
+</div>
+</section>
+
+<footer><div class="wrap"><p>© 2025 Юрий Канцурак · <a id="femail" href="#">kantsurak89@gmail.com</a> · Собрано с участием Claude (Anthropic AI)</p></div></footer>
+
+<script>
+(function(){
+// ─── FILL FROM CONFIG ──────────────────
+document.getElementById('hname').innerHTML =
+  '<span style="color:var(--dim);font-size:clamp(1.1rem,2vw,1.35rem);font-weight:500;display:block;letter-spacing:-.01em;margin-bottom:.1rem">'+C.role+'</span>'+
+  '<span style="background:linear-gradient(110deg,var(--text) 30%,var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">'+C.name+'</span>';
+document.getElementById('hrole').textContent = C.city + ' · удалённо или гибрид · 8+ лет в e-learning';
+document.getElementById('saln').textContent  = C.salary;
+document.getElementById('femail').href = 'mailto:'+C.email;
+document.getElementById('femail').textContent = C.email;
+
+// contact links
+document.getElementById('klinks').innerHTML = [
+  {h:'tel:'+C.phone.replace(/\D/g,''), i:'📞', n:C.phone,   s:'Звонок или мессенджер'},
+  {h:'mailto:'+C.email,               i:'✉️', n:C.email,   s:'Предпочтительный способ'},
+  {h:C.hh, i:'💼', n:'Резюме на hh.ru', s:'Полный опыт и достижения', t:true},
+].map(l=>`<a href="${l.h}" class="klink"${l.t?' target="_blank"':''}><div class="kico">${l.i}</div><div><div class="kname">${l.n}</div><div class="ksub">${l.s}</div></div></a>`).join('');
+
+// ─── YOUTUBE ───────────────────────────
+document.getElementById('ytt').textContent = C.ytTitle;
+document.getElementById('ytd').textContent = C.ytDesc;
+if(C.ytId){
+  const ph = document.getElementById('ytph');
+  ph.style.backgroundImage = `url('https://img.youtube.com/vi/${C.ytId}/maxresdefault.jpg')`;
+  const img = new Image();
+  img.onerror = ()=>{ ph.style.backgroundImage=`url('https://img.youtube.com/vi/${C.ytId}/hqdefault.jpg')`; };
+  img.src = `https://img.youtube.com/vi/${C.ytId}/maxresdefault.jpg`;
+}
+window.openYt = function(){
+  if(C.ytId) window.open('https://www.youtube.com/watch?v='+C.ytId,'_blank');
+};
+
+// ─── SCORM CARDS ───────────────────────
+document.getElementById('scgrid').innerHTML = C.courses.map(course=>{
+  const hasUrl = course.url && course.url.trim() !== '';
+  const btn = hasUrl
+    ? `<a href="${course.url}" target="_blank" class="sc-launch">Запустить курс →</a>`
+    : `<button class="sc-launch soon">Скоро / По запросу</button>`;
+  return `
+  <div class="sccard" data-a>
+    <div class="sctop">
+      <div class="scico">${course.icon}</div>
+      <div class="scinfo">
+        <div class="scname">${course.name}</div>
+        <div class="scsub">${course.sub}</div>
+        <div class="sctags">${course.tags.map(t=>`<span class="tag tag-b">${t}</span>`).join('')}</div>
+        <div class="sckpis">${course.kpis.map(k=>`<div class="sckpi"><b>${k.v}</b><span>${k.l}</span></div>`).join('')}</div>
+      </div>
+    </div>
+    <div class="scfoot">
+      <p>${course.desc}</p>
+      ${btn}
+    </div>
+  </div>`;
+}).join('');
+
+// ─── AI CHAT ───────────────────────────
+const KB = `Ты AI-помощник на портфолио Юрия Канцурака. Отвечай от 3-го лица, кратко (2-3 предложения), только по фактам ниже.
+Имя: ${C.name}, ${C.city}. Роль: ${C.role}, 8+ лет.
+Цифры: 100+ курсов в production, команда до 20 человек, правки -85%, AI-pipeline ×3.3.
+Ищет: Lead/Head of E-learning Dev, Senior E-learning Dev. Зарплата от ${C.salary} ₽. Удалённо / гибрид (${C.city}).
+Контакт: ${C.email}, ${C.phone}.
+Инструменты: Storyline 360 (advanced, custom JS), Rise, Captivate, iSpring, SCORM 1.2/2004, xAPI, WebTutor, Teachbase, Moodle. JavaScript (triggers+LLM API внутри курсов), HTML/CSS, Git. Claude API, GPT-4o, prompt-инженеринг, RAG, Midjourney, FLUX, ElevenLabs.
+Управление: команда до 20, постановка задач, менторинг.
+Кейсы: Compliance банк 2400+ (87% completion, 2 итерации правок). AI-тьютор внутри SCORM через JS+LLM (+41% вовлечённость). AI-pipeline: 18ч vs 60ч.`;
+
+const FB = {
+  'команд':  'Юрий руководил командой до 20 человек — дизайнеры, методологи, разработчики, монтажёры. Выстраивал процессы и вёл менторинг джунов.',
+  'ai':      'Юрий построил AI-pipeline: LLM для outline и скриптов, Midjourney для визуала, ElevenLabs для озвучки, и встроил LLM API прямо в SCORM через JavaScript. Сборка часового курса: 18ч вместо 60ч.',
+  'javascript':'Кастомный JS в Storyline — его специализация: нестандартные drag&drop, ветвление по сложной логике, аналитика и POST-запросы к внешним API прямо из курса.',
+  'зарплат': `Юрий рассматривает предложения от ${C.salary} ₽ на руки. При интересном функционале — готов обсуждать.`,
+  'правк':   'За счёт чек-листов и пересборки этапов согласования Юрий сократил правки с 8-10 до 1-2 итераций — экономия 85-90% времени.',
+  'scorm':   'Юрий работает со SCORM 1.2 и 2004 на уровне кода — JS напрямую взаимодействует с LMS API. Опыт: WebTutor, Teachbase, Moodle, iSpring Learn.',
+};
+function fb(q){const lq=q.toLowerCase();for(const[k,v] of Object.entries(FB))if(lq.includes(k))return v;return `Хороший вопрос! Свяжитесь с Юрием напрямую: ${C.email} или ${C.phone}.`;}
+
+const msgs=document.getElementById('cms');
+let busy=false;
+function addMsg(t,u){const d=document.createElement('div');d.className='cm';d.innerHTML=`<div class="cav">${u?'💼':'🤖'}</div><div class="cb${u?'':' ai'}">${t}</div>`;msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;}
+function showDots(){const d=document.createElement('div');d.className='cm';d.id='td';d.innerHTML='<div class="cav">🤖</div><div class="cb ai"><div class="cdots"><span></span><span></span><span></span></div></div>';msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;}
+function hideDots(){const t=document.getElementById('td');if(t)t.remove();}
+
+window.send=async function(){
+  const inp=document.getElementById('ci');
+  const q=inp.value.trim();if(!q||busy)return;
+  busy=true;inp.value='';
+  addMsg(q,true);
+  document.getElementById('cq').style.display='none';
+  showDots();
+  await new Promise(r=>setTimeout(r,500+Math.random()*400));
+  try{
+    if(C.anthropicKey){
+      const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':C.anthropicKey,'anthropic-version':'2023-06-01'},body:JSON.stringify({model:'claude-sonnet-4-5',max_tokens:280,system:KB,messages:[{role:'user',content:q}]})});
+      const d=await r.json();hideDots();addMsg(d.content?.[0]?.text||fb(q));
+    } else {
+      const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:q,kb:KB})});
+      if(r.ok){const d=await r.json();hideDots();addMsg(d.answer||fb(q));}
+      else{hideDots();addMsg(fb(q));document.getElementById('cnotice').style.display='block';}
+    }
+  }catch{hideDots();addMsg(fb(q));}
+  busy=false;
+};
+window.ask=function(el){document.getElementById('ci').value=el.textContent;send();};
+
+// ─── SCROLL ANIM ───────────────────────
+const ob=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis');});},{threshold:.1});
+document.querySelectorAll('[data-a]').forEach(el=>ob.observe(el));
+})();
+</script>
+</body>
+</html>
