@@ -419,6 +419,89 @@ footer a{color:var(--blue2);text-decoration:none}
   .cmc-metrics{grid-template-columns:repeat(3,1fr);gap:.5rem}
   .cmc-m b{font-size:1.3rem}
 }
+
+/* ─── YANDEX DISK CARD — comprehensive styles ─── */
+.demo-yadisk{
+  grid-column:1/-1;
+  border:1px solid rgba(255,197,0,.2);
+  border-radius:20px;
+  overflow:hidden;
+  background:linear-gradient(135deg,rgba(255,197,0,.02),rgba(255,160,0,.03));
+  opacity:0;
+  transform:translateY(28px);
+  transition:transform .35s,opacity .35s,border-color .3s,box-shadow .3s;
+  transition-delay:.1s;
+}
+.demo-yadisk.demo-vis{opacity:1;transform:translateY(0)}
+.demo-yadisk:hover{border-color:rgba(255,197,0,.4);box-shadow:0 16px 50px rgba(255,197,0,.06)}
+
+.yadisk-previews{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+}
+
+.yadisk-foot{
+  padding:1.5rem 2rem;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1.5rem;
+  flex-wrap:wrap;
+  border-top:1px solid rgba(255,197,0,.15);
+  background:rgba(255,197,0,.025);
+}
+.yadisk-info{flex:1;min-width:240px}
+.yadisk-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:.4rem;
+  background:rgba(255,197,0,.1);
+  border:1px solid rgba(255,197,0,.25);
+  border-radius:100px;
+  padding:.22rem .75rem;
+  font-size:.66rem;
+  font-weight:700;
+  color:rgba(255,210,50,.95);
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  margin-bottom:.55rem;
+}
+.yadisk-desc{
+  font-size:.85rem;
+  color:var(--dim);
+  line-height:1.5;
+}
+
+.ya-btn{
+  display:inline-flex !important;
+  align-items:center;
+  justify-content:center;
+  gap:.5rem;
+  background:rgba(255,197,0,.15);
+  border:1.5px solid rgba(255,197,0,.45);
+  color:rgba(255,215,50,1) !important;
+  font-size:.9rem;
+  font-weight:700;
+  padding:.75rem 1.75rem;
+  border-radius:10px;
+  white-space:nowrap;
+  flex-shrink:0;
+  font-family:'Outfit',sans-serif;
+  text-decoration:none !important;
+  cursor:pointer !important;
+  transition:background .25s,transform .2s,box-shadow .25s,border-color .25s;
+  position:relative;
+  z-index:5;
+}
+.ya-btn:hover{
+  background:rgba(255,197,0,.3);
+  border-color:rgba(255,197,0,.75);
+  transform:translateY(-2px);
+  box-shadow:0 10px 28px rgba(255,197,0,.22);
+  color:rgba(255,225,80,1) !important;
+}
+.ya-btn:active{transform:translateY(0)}
+
 </style>
 </head>
 <body>
@@ -968,21 +1051,13 @@ function buildDemos() {
     </div>`).join('');
 
   const yadisk = `<div class="demo-yadisk">
-    <div style="display:grid;grid-template-columns:repeat(3,1fr)" class="yadisk-previews">${previews}</div>
-    <div style="padding:1.25rem 2rem;display:flex;align-items:center;
-      justify-content:space-between;gap:2rem;
-      border-top:1px solid rgba(255,197,0,.15);
-      background:rgba(255,197,0,.025)">
-      <div>
-        <div style="display:inline-flex;align-items:center;gap:.4rem;
-          background:rgba(255,197,0,.1);border:1px solid rgba(255,197,0,.25);
-          border-radius:100px;padding:.2rem .75rem;font-size:.64rem;font-weight:700;
-          color:rgba(255,210,50,.9);letter-spacing:.08em;text-transform:uppercase;
-          margin-bottom:.5rem">☁️ Яндекс.Диск · Открытый доступ · Без NDA</div>
-        <div style="font-size:.85rem;color:var(--dim)">
-          Скачайте и запустите в своей LMS — или просто откройте в браузере</div>
+    <div class="yadisk-previews">${previews}</div>
+    <div class="yadisk-foot">
+      <div class="yadisk-info">
+        <div class="yadisk-badge">☁️ Яндекс.Диск · Открытый доступ · Без NDA</div>
+        <div class="yadisk-desc">Скачайте и запустите в своей LMS — или просто откройте в браузере</div>
       </div>
-      <a href="${YA}" target="_blank" onclick="event.stopPropagation()" class="ya-btn">Открыть каталог →</a>
+      <a href="https://disk.yandex.ru/d/H1Hxoqf9JsA0XQ" target="_blank" rel="noopener" class="ya-btn">Открыть каталог →</a>
     </div>
   </div>`;
 
