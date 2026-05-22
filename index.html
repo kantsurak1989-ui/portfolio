@@ -100,9 +100,19 @@ section{padding:96px 0}
 /* ─── WORKFLOW ─── */
 #workflow{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
 .wgrid{display:grid;grid-template-columns:repeat(5,1fr);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-top:2.5rem}
-.ws{padding:1.75rem 1.5rem;border-right:1px solid var(--border);transition:background .3s}
+.ws{padding:1.75rem 1.5rem;border-right:1px solid var(--border);transition:background .3s,border-color .3s;cursor:pointer;user-select:none;position:relative}
 .ws:last-child{border-right:none}
-.ws:hover{background:rgba(26,106,240,.05)}
+.ws:hover{background:rgba(26,106,240,.07)}
+.ws.wact{background:rgba(26,106,240,.12);border-bottom:3px solid var(--blue)}
+.ws.wact .wn{color:rgba(26,106,240,.35)}
+.wdetail{border:1px solid rgba(26,106,240,.3);border-radius:16px;background:var(--bg3);padding:2rem;margin-top:1rem;display:none;animation:wdin .3s ease}
+@keyframes wdin{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.wdetail.open{display:block}
+.wdt{font-size:1.1rem;font-weight:700;margin-bottom:.75rem;letter-spacing:-.01em}
+.wdd{font-size:.9rem;font-weight:400;color:var(--dim);line-height:1.7;margin-bottom:1.25rem}
+.wdtools{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.25rem}
+.wdbenefit{background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.25);border-radius:10px;padding:.875rem 1.1rem;font-size:.85rem;color:var(--green);font-weight:500}
+.wdbenefit span{color:rgba(34,197,94,.7);font-weight:400;display:block;font-size:.78rem;margin-top:.2rem}
 .wn{font-size:2.75rem;font-weight:900;color:rgba(26,106,240,.1);line-height:1;margin-bottom:.875rem;letter-spacing:-.04em}
 .wi{font-size:1.6rem;margin-bottom:.625rem}
 .wt{font-size:.95rem;font-weight:700;margin-bottom:.4rem}
@@ -114,72 +124,132 @@ section{padding:96px 0}
 
 /* ─── CASES ─── */
 .cgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
-.ccard{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s;cursor:pointer}
-.ccard:hover{transform:translateY(-5px);border-color:rgba(26,106,240,.35);box-shadow:0 20px 60px rgba(0,0,0,.4),0 0 40px rgba(26,106,240,.08)}
-.cth{height:170px;display:flex;align-items:center;justify-content:center;font-size:3.2rem;position:relative}
-.ct1{background:linear-gradient(135deg,#0b2545,#1a4a8a)}
-.ct2{background:linear-gradient(135deg,#0b2e24,#165c42)}
-.ct3{background:linear-gradient(135deg,#1a1030,#3a1260)}
-.cbdg{position:absolute;top:.875rem;right:.875rem}
-.cbody{padding:1.4rem}
-.ccat{font-size:.68rem;font-weight:700;color:var(--cyan);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.4rem}
-.ctitle{font-size:1.05rem;font-weight:700;line-height:1.3;margin-bottom:.6rem;letter-spacing:-.01em}
-.cdesc{font-size:.82rem;font-weight:400;color:var(--dim);line-height:1.6;margin-bottom:1rem}
-.cmet{display:flex;gap:1rem;flex-wrap:wrap}
-.cm2{font-size:.8rem;font-weight:400}
-.cm2 strong{color:var(--blue2);font-weight:700}
+.ccard{background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden;cursor:pointer;position:relative;transition:transform .35s,border-color .35s,box-shadow .35s}
+.ccard::after{content:'Подробнее →';position:absolute;bottom:1rem;right:1.25rem;font-size:.72rem;font-weight:600;color:var(--blue2);opacity:0;transition:opacity .3s,transform .3s;transform:translateX(-4px)}
+.ccard:hover{transform:translateY(-6px);border-color:rgba(26,106,240,.4);box-shadow:0 24px 70px rgba(0,0,0,.45),0 0 50px rgba(26,106,240,.1)}
+.ccard:hover::after{opacity:1;transform:translateX(0)}
+.cth{height:180px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;position:relative;overflow:hidden}
+.cth::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(0,0,0,.35));pointer-events:none}
+.ct1{background:linear-gradient(135deg,#0b2545,#1a4a8a)}.ct2{background:linear-gradient(135deg,#0b2e24,#165c42)}.ct3{background:linear-gradient(135deg,#1a1030,#3a1260)}
+.cbdg{position:absolute;top:.875rem;right:.875rem;z-index:1}
+.cbody{padding:1.5rem}
+.ccat{font-size:.68rem;font-weight:700;color:var(--cyan);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.5rem}
+.ctitle{font-size:1.05rem;font-weight:700;line-height:1.3;margin-bottom:.75rem;letter-spacing:-.01em}
+.cdesc{font-size:.82rem;color:var(--dim);line-height:1.6;margin-bottom:1.1rem}
+.cmet{display:flex;gap:1rem;flex-wrap:wrap;padding-top:.75rem;border-top:1px solid var(--border)}
+.cm2{font-size:.8rem}.cm2 strong{color:var(--blue2);font-weight:700}
+.cmodal{position:fixed;inset:0;z-index:600;background:rgba(5,13,26,.88);backdrop-filter:blur(14px);display:none;align-items:center;justify-content:center;padding:2rem}
+.cmodal.open{display:flex}
+.cmc{background:var(--bg3);border:1px solid var(--border2);border-radius:22px;max-width:700px;width:100%;max-height:88vh;overflow-y:auto;padding:2.5rem;position:relative;animation:modIn .3s cubic-bezier(.22,.68,0,1.2)}
+@keyframes modIn{from{opacity:0;transform:scale(.93) translateY(24px)}to{opacity:1;transform:none}}
+.cmc-x{position:absolute;top:1.25rem;right:1.25rem;width:36px;height:36px;background:var(--card2);border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.9rem;color:var(--dim);transition:all .2s}
+.cmc-x:hover{background:rgba(255,255,255,.1);color:var(--text)}
+.cmc-hdr{height:150px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:4rem;margin-bottom:2rem}
+.cmc-lbl{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);margin-bottom:.75rem}
+.cmc-title{font-size:1.5rem;font-weight:800;letter-spacing:-.02em;margin-bottom:1.5rem;line-height:1.2}
+.cmc-steps{display:flex;flex-direction:column;gap:1rem;margin-bottom:1.75rem}
+.cmc-step{display:flex;gap:1rem;align-items:flex-start}
+.cmc-sico{width:36px;height:36px;border-radius:10px;background:rgba(26,106,240,.15);border:1px solid rgba(26,106,240,.3);display:flex;align-items:center;justify-content:center;font-size:1.05rem;flex-shrink:0;margin-top:2px}
+.cmc-slbl{font-size:.68rem;font-weight:700;color:var(--cyan);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.2rem}
+.cmc-stxt{font-size:.875rem;color:var(--dim);line-height:1.6}
+.cmc-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:.875rem;margin-bottom:1.75rem}
+.cmc-m{background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.2);border-radius:12px;padding:1rem;text-align:center}
+.cmc-m b{display:block;font-size:1.7rem;font-weight:900;color:var(--green);letter-spacing:-.04em;line-height:1}
+.cmc-m span{font-size:.7rem;color:var(--dim);margin-top:.25rem;display:block}
 
 /* ─── YOUTUBE ─── */
-.ytcard{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-top:1.5rem}
-.ytop{padding:1.75rem;display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:start}
+.ytcard{background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden;margin-top:1.5rem}
+.ytop{padding:1.75rem 2rem;display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:start}
 .ytlbl{font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#ff5c5c;margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem}
 .ytlbl::before{content:'▶'}
 .yttitle{font-size:1.15rem;font-weight:700;letter-spacing:-.01em;margin-bottom:.5rem}
-.ytdesc{font-size:.85rem;font-weight:400;color:var(--dim);line-height:1.6}
+.ytdesc{font-size:.85rem;color:var(--dim);line-height:1.6}
 .ytera{display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,78,78,.08);border:1px solid rgba(255,78,78,.25);border-radius:100px;padding:.25rem .75rem;font-size:.75rem;font-weight:600;color:#ff6b6b;margin-top:.75rem}
-.ytplay{
-  position:relative;padding-bottom:56.25%;background:#000;cursor:pointer;overflow:hidden;
-}
-.ytph{
-  position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;
-  background-size:cover;background-position:center;transition:transform .3s;
-}
-.ytph::before{content:'';position:absolute;inset:0;background:rgba(5,13,26,.5);transition:background .3s}
-.ytplay:hover .ytph::before{background:rgba(5,13,26,.3)}
-.ytplay:hover .ytph{transform:scale(1.02)}
-.ytpbtn{position:relative;z-index:1;width:76px;height:76px;background:rgba(255,30,30,.9);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.9rem;transition:transform .3s,box-shadow .3s;box-shadow:0 0 0 6px rgba(255,30,30,.2)}
-.ytplay:hover .ytpbtn{transform:scale(1.12);box-shadow:0 0 0 10px rgba(255,30,30,.2),0 0 50px rgba(255,30,30,.45)}
+.ytplay{position:relative;padding-bottom:56.25%;background:#000;overflow:hidden}
+.ytph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;background-size:cover;background-position:center;cursor:pointer;transition:transform .4s}
+.ytph::before{content:'';position:absolute;inset:0;background:rgba(5,13,26,.48);transition:background .3s}
+.ytph:hover::before{background:rgba(5,13,26,.28)}
+.ytph:hover{transform:scale(1.02)}
+.ytpbtn{position:relative;z-index:1;width:80px;height:80px;background:rgba(255,30,30,.92);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2rem;transition:transform .3s,box-shadow .3s;box-shadow:0 0 0 7px rgba(255,30,30,.22)}
+.ytph:hover .ytpbtn{transform:scale(1.12);box-shadow:0 0 0 12px rgba(255,30,30,.18),0 0 55px rgba(255,30,30,.5)}
 .ytptext{position:relative;z-index:1;text-align:center}
-.ytptext p{font-size:.95rem;font-weight:700;text-shadow:0 1px 8px rgba(0,0,0,.8)}
-.ytptext span{font-size:.78rem;font-weight:400;color:rgba(255,255,255,.75);text-shadow:0 1px 6px rgba(0,0,0,.8)}
+.ytptext p{font-size:1rem;font-weight:700;text-shadow:0 1px 10px rgba(0,0,0,.9)}
+.ytptext span{font-size:.78rem;color:rgba(255,255,255,.75);text-shadow:0 1px 8px rgba(0,0,0,.9)}
+.ytframe{position:absolute;inset:0;width:100%;height:100%;border:none}
+.yt-ext{padding:.875rem 2rem;display:flex;justify-content:flex-end;border-top:1px solid var(--border)}
+.yt-ext a{font-size:.78rem;color:var(--dim);text-decoration:none;display:flex;align-items:center;gap:.4rem;transition:color .2s}.yt-ext a:hover{color:var(--text)}
 
-/* ─── SCORM CARDS ─── */
+/* ─── DEMO SECTION ─── */
 #scorm{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.scgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;margin-top:2.5rem}
-.sccard{background:var(--bg3);border:1px solid var(--border);border-radius:18px;overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s;display:flex;flex-direction:column}
-.sccard:hover{transform:translateY(-4px);border-color:rgba(26,106,240,.4);box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 40px rgba(26,106,240,.1)}
-.sctop{padding:2rem;display:flex;align-items:flex-start;gap:1rem;flex:1}
-.scico{font-size:2.5rem;flex-shrink:0;margin-top:.1rem}
-.scinfo{flex:1}
-.scname{font-size:1.1rem;font-weight:700;letter-spacing:-.01em;margin-bottom:.35rem;line-height:1.25}
-.scsub{font-size:.8rem;font-weight:400;color:var(--dim);margin-bottom:.875rem;line-height:1.5}
-.sctags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.875rem}
-.sckpis{display:flex;gap:1.25rem}
-.sckpi b{display:block;font-size:1.4rem;font-weight:800;color:var(--green);line-height:1;letter-spacing:-.03em}
-.sckpi span{font-size:.68rem;font-weight:400;color:var(--dim);display:block;margin-top:.15rem}
-.scfoot{border-top:1px solid var(--border);padding:1.25rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
-.scfoot p{font-size:.78rem;font-weight:400;color:var(--dim);flex:1}
-.sc-launch{display:inline-flex;align-items:center;gap:.5rem;background:var(--blue);color:#fff;font-size:.85rem;font-weight:600;padding:.625rem 1.25rem;border-radius:8px;text-decoration:none;transition:all .25s;white-space:nowrap;border:none;cursor:pointer;font-family:var(--f)}
-.sc-launch:hover{background:var(--blue2);transform:translateY(-1px);box-shadow:0 8px 25px var(--glow)}
-.sc-launch.soon{background:var(--card2);border:1px solid var(--border2);color:var(--dim);cursor:default;pointer-events:none}
+.demo-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:3rem}
+.demo-card{background:var(--bg3);border:1px solid var(--border);border-radius:20px;overflow:hidden;position:relative;cursor:pointer;transition:transform .35s,border-color .35s,box-shadow .4s;opacity:0;transform:translateY(30px)}
+.demo-card.demo-vis{opacity:1;transform:translateY(0)}
+.demo-card:hover{transform:translateY(-6px) scale(1.01);border-color:rgba(26,106,240,.45);box-shadow:0 28px 80px rgba(0,0,0,.5),0 0 60px rgba(26,106,240,.12)}
+.demo-hdr{height:200px;position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:1.5rem}
+.demo-hdr-bg{position:absolute;inset:0;transition:transform .5s}
+.demo-card:hover .demo-hdr-bg{transform:scale(1.05)}
+.demo-num{position:absolute;top:-.5rem;right:1rem;font-size:7rem;font-weight:900;line-height:1;color:rgba(255,255,255,.06);letter-spacing:-.05em;pointer-events:none;user-select:none}
+.demo-complexity{position:absolute;top:1rem;left:1.5rem;display:flex;gap:.3rem;align-items:center}
+.demo-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.2);transition:background .3s}
+.demo-dot.on{background:var(--cyan)}
+.demo-complexity-lbl{font-size:.68rem;font-weight:600;color:rgba(255,255,255,.5);margin-left:.3rem;letter-spacing:.05em}
+.demo-tags-hdr{position:relative;z-index:1;display:flex;gap:.4rem;flex-wrap:wrap}
+.demo-body{padding:1.5rem}
+.demo-cat{font-size:.68rem;font-weight:700;color:var(--cyan);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.5rem}
+.demo-title{font-size:1.1rem;font-weight:700;letter-spacing:-.01em;margin-bottom:.625rem;line-height:1.3}
+.demo-unique{background:rgba(0,207,255,.07);border:1px solid rgba(0,207,255,.2);border-radius:8px;padding:.6rem .875rem;font-size:.78rem;color:var(--cyan);line-height:1.5;margin-bottom:1.1rem}
+.demo-unique::before{content:'✦ ';font-size:.6rem}
+.demo-foot{border-top:1px solid var(--border);padding:1.1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.demo-metrics{display:flex;gap:1rem}
+.demo-met{font-size:.78rem}.demo-met strong{color:var(--green);font-weight:700}
+.demo-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--blue);color:#fff;font-size:.82rem;font-weight:600;padding:.55rem 1.1rem;border-radius:8px;text-decoration:none;border:none;cursor:pointer;font-family:var(--f);transition:all .25s;white-space:nowrap}
+.demo-btn:hover{background:var(--blue2);transform:translateY(-1px);box-shadow:0 6px 20px var(--glow)}
+.demo-btn.req{background:transparent;border:1px solid var(--border2);color:var(--dim);pointer-events:none}
+/* locked card */
+/* Yandex Disk card */
+.demo-yadisk{grid-column:1/-1;border:1px solid rgba(255,197,0,.2);border-radius:20px;overflow:hidden;opacity:0;transform:translateY(28px);transition:transform .35s,border-color .3s,box-shadow .3s,opacity .35s;transition-delay:0.36s}
+.demo-yadisk.demo-vis{opacity:1;transform:translateY(0)}
+.demo-yadisk:hover{border-color:rgba(255,197,0,.4);box-shadow:0 16px 50px rgba(255,197,0,.06)}
+.demo-yadisk::before{content:'';position:absolute;top:-60px;left:-60px;width:220px;height:220px;background:radial-gradient(circle,rgba(255,197,0,.07),transparent 70%);pointer-events:none}
+.dyd-left{flex:1}
+.dyd-badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,197,0,.1);border:1px solid rgba(255,197,0,.3);border-radius:100px;padding:.25rem .875rem;font-size:.7rem;font-weight:700;color:rgba(255,197,0,.9);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.875rem}
+.dyd-title{font-size:1.3rem;font-weight:800;letter-spacing:-.02em;margin-bottom:.5rem}
+.dyd-desc{font-size:.875rem;color:var(--dim);line-height:1.65;max-width:480px}
+.dyd-courses{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1rem}
+.dyd-course{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;padding:.3rem .75rem;font-size:.75rem;font-weight:500;color:var(--dim)}
+.dyd-right{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:1.25rem}
+.dyd-icon-wrap{width:72px;height:72px;border-radius:18px;background:rgba(255,197,0,.12);border:1px solid rgba(255,197,0,.25);display:flex;align-items:center;justify-content:center;font-size:2.25rem}
+.dyd-btn{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,197,0,.12);border:1.5px solid rgba(255,197,0,.4);color:rgba(255,220,50,1);font-size:.85rem;font-weight:700;padding:.7rem 1.5rem;border-radius:10px;text-decoration:none;transition:all .25s;white-space:nowrap;font-family:var(--f)}
+.dyd-btn:hover{background:rgba(255,197,0,.22);border-color:rgba(255,197,0,.7);transform:translateY(-2px);box-shadow:0 8px 25px rgba(255,197,0,.15)}
+.dyd-note{font-size:.72rem;color:var(--dim2);text-align:center}
+.demo-lock{grid-column:1/-1;border:1px dashed rgba(26,106,240,.3);border-radius:20px;background:linear-gradient(135deg,rgba(26,106,240,.04),rgba(0,207,255,.03));padding:3rem;display:flex;align-items:center;justify-content:space-between;gap:3rem;position:relative;overflow:hidden;opacity:0;transform:translateY(30px);transition:transform .35s,border-color .3s}
+.demo-lock.demo-vis{opacity:1;transform:translateY(0)}
+.demo-lock:hover{border-color:rgba(26,106,240,.5);background:linear-gradient(135deg,rgba(26,106,240,.07),rgba(0,207,255,.05))}
+.demo-lock::before{content:'';position:absolute;top:-60px;right:-60px;width:250px;height:250px;background:radial-gradient(circle,rgba(26,106,240,.12),transparent 70%);pointer-events:none}
+.dl-left{flex:1}
+.dl-num{font-size:3.5rem;font-weight:900;color:rgba(26,106,240,.15);line-height:1;letter-spacing:-.05em;margin-bottom:.5rem}
+.dl-title{font-size:1.4rem;font-weight:800;letter-spacing:-.02em;margin-bottom:.625rem}
+.dl-desc{font-size:.9rem;color:var(--dim);line-height:1.65;max-width:480px}
+.dl-right{flex-shrink:0;text-align:center}
+.dl-icon{font-size:3.5rem;margin-bottom:.875rem;display:block}
+.dl-badges{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.5rem;align-items:flex-end}
+.dl-badge{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:100px;padding:.25rem .875rem;font-size:.75rem;color:var(--dim)}
 
-/* ─── BUILT ─── */
-.built{background:rgba(26,106,240,.07);border:1px solid rgba(26,106,240,.2);border-radius:16px;padding:2.25rem;margin-top:3.5rem;display:grid;grid-template-columns:1fr 220px;gap:3rem;align-items:center}
-.bt{font-size:1.1rem;font-weight:700;margin-bottom:.6rem}
-.bd{font-size:.875rem;font-weight:400;color:var(--dim);line-height:1.65}
-.bstack{display:flex;flex-direction:column;gap:.45rem}
-.brow{font-size:.8rem;font-weight:400;display:flex;align-items:center;gap:.5rem;color:var(--dim)}
-.bdot{width:6px;height:6px;background:var(--cyan);border-radius:50%;flex-shrink:0}
+/* ─── BUILT REDESIGN ─── */
+.built{background:var(--bg2);border:1px solid rgba(26,106,240,.25);border-radius:20px;margin-top:3.5rem;overflow:hidden;position:relative}
+.built::before{content:'';position:absolute;top:-80px;right:-80px;width:300px;height:300px;background:radial-gradient(circle,rgba(26,106,240,.12),transparent 70%);pointer-events:none}
+.built-top{padding:2.5rem;display:grid;grid-template-columns:1fr 1fr;gap:2.5rem}
+.bt{font-size:1.3rem;font-weight:800;margin-bottom:.75rem;letter-spacing:-.02em}
+.bd{font-size:.88rem;color:var(--dim);line-height:1.7;margin-bottom:1.25rem}
+.built-meta{display:flex;flex-direction:column;gap:.75rem}
+.bm{display:flex;gap:.75rem;align-items:flex-start;padding:.875rem;background:var(--card);border:1px solid var(--border);border-radius:12px}
+.bm-ico{font-size:1.25rem;flex-shrink:0;width:28px;text-align:center}
+.bm-t{font-size:.82rem;font-weight:600;margin-bottom:.15rem}
+.bm-d{font-size:.75rem;color:var(--dim);line-height:1.5}
+.built-stack{border-top:1px solid var(--border);padding:1.25rem 2.5rem;display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
+.bslbl{font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--dim2);margin-right:.5rem;flex-shrink:0}
+.bstag{background:var(--card2);border:1px solid var(--border);border-radius:7px;padding:.3rem .8rem;font-size:.78rem;font-weight:500;color:var(--dim)}
+.bstag.hl{background:rgba(26,106,240,.12);border-color:rgba(26,106,240,.3);color:var(--blue2)}
 
 /* ─── SKILLS ─── */
 .sgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
@@ -189,6 +259,27 @@ section{padding:96px 0}
 .stags{display:flex;flex-wrap:wrap;gap:.4rem}
 .stag{background:var(--card2);border:1px solid var(--border);border-radius:7px;padding:.28rem .72rem;font-size:.78rem;font-weight:500;color:var(--dim)}
 .stag.hot{background:rgba(26,106,240,.12);border-color:rgba(26,106,240,.3);color:var(--blue2)}
+
+/* ─── SKILLS REDESIGN ─── */
+.sk-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+.sk-card{background:var(--bg3);border:1px solid var(--border);border-radius:18px;overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s}
+.sk-card:hover{transform:translateY(-4px);border-color:rgba(26,106,240,.35);box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.sk-primary{border-color:rgba(26,106,240,.2)}
+.sk-ai{border-color:rgba(0,207,255,.18)}
+.sk-hdr{padding:1.25rem 1.5rem;display:flex;align-items:center;gap:.875rem;border-bottom:1px solid var(--border)}
+.sk-hdr-ico{font-size:1.75rem;flex-shrink:0}
+.sk-hdr-cat{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.2rem}
+.sk-hdr-title{font-size:1rem;font-weight:700;letter-spacing:-.01em}
+.sk-ai-badge{margin-left:auto;flex-shrink:0;background:rgba(0,207,255,.1);border:1px solid rgba(0,207,255,.3);border-radius:100px;padding:.2rem .7rem;font-size:.68rem;font-weight:700;color:var(--cyan)}
+.sk-body{padding:1.25rem 1.5rem}
+.sk-group-lbl{font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim2);margin-bottom:.625rem}
+.sk-tags{display:flex;flex-wrap:wrap;gap:.4rem}
+.sk-tag{display:inline-flex;padding:.28rem .72rem;border-radius:7px;font-size:.78rem;font-weight:500;transition:all .2s}
+.sk-tag.expert{background:rgba(26,106,240,.18);border:1px solid rgba(26,106,240,.4);color:var(--blue2)}
+.sk-tag.strong{background:rgba(0,207,255,.07);border:1px solid rgba(0,207,255,.2);color:rgba(0,207,255,.85)}
+.sk-tag{background:var(--card2);border:1px solid var(--border);color:var(--dim)}
+.sk-tag:hover{border-color:rgba(26,106,240,.35);color:var(--text)}
+.sk-note{margin-top:1rem;padding:.625rem .875rem;background:rgba(26,106,240,.06);border-left:2px solid var(--blue);border-radius:0 8px 8px 0;font-size:.78rem;color:var(--dim);line-height:1.55;font-style:italic}
 
 /* ─── CONTACT ─── */
 #contact{background:var(--bg2);border-top:1px solid var(--border)}
@@ -304,7 +395,7 @@ const C = {
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nl">Портфолио<em>.</em></a>
+  <a href="#" class="nl" style="font-size:1rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;background:linear-gradient(90deg,var(--text) 60%,var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Портфолио</a>
   <ul class="nli">
     <li><a href="#workflow">AI-процесс</a></li>
     <li><a href="#cases">Кейсы</a></li>
@@ -365,19 +456,27 @@ const C = {
 <div class="wrap">
   <span class="lbl">AI + Production</span>
   <h2 class="ttl">Как AI встроен<br>в мой рабочий процесс</h2>
-  <p class="sub">Не «пользуюсь ChatGPT». Собрал пайплайн — 5 этапов, 4 автоматизированы. Часовой курс за ≈18 часов вместо ≈60.</p>
-  <div class="wgrid">
-    <div class="ws" data-a><div class="wn">01</div><div class="wi">🗂️</div><div class="wt">Outline</div><div class="wd">LLM строит структуру модулей по теме и аудитории.</div><div style="margin-top:.75rem"><span class="tag tag-c">Claude / GPT-4o</span></div></div>
-    <div class="ws" data-a><div class="wn">02</div><div class="wi">✍️</div><div class="wt">Скрипты и тесты</div><div class="wd">Черновики диалогов и вопросов — за минуты. Финал — мой.</div><div style="margin-top:.75rem"><span class="tag tag-c">Prompt-инженеринг</span></div></div>
-    <div class="ws" data-a><div class="wn">03</div><div class="wi">🎨</div><div class="wt">Storyboard</div><div class="wd">Педагогическое решение и UX-логика — только я.</div><div style="margin-top:.75rem"><span class="tag tag-d">Только я</span></div></div>
-    <div class="ws" data-a><div class="wn">04</div><div class="wi">🖼️</div><div class="wt">Визуал</div><div class="wd">Иллюстрации и фоны — генеративные модели.</div><div style="margin-top:.75rem"><span class="tag tag-c">Midjourney / FLUX</span></div></div>
-    <div class="ws" data-a><div class="wn">05</div><div class="wi">🔊</div><div class="wt">Озвучка</div><div class="wd">AI-голоса для черновиков. Диктор — для premium.</div><div style="margin-top:.75rem"><span class="tag tag-c">ElevenLabs</span></div></div>
+  <p class="sub">Все эти инструменты доступны — главное желание и доступ. Я использую полный стек сам и помогу выстроить его для вашей команды: подберу альтернативы, обойду ограничения, обучу процессу.</p>
+  <div class="wgrid" id="wgrid">
+    <div class="ws" data-a onclick="showStep(0)"><div class="wn">01</div><div class="wi">🗂️</div><div class="wt">Outline</div><div class="wd">LLM строит структуру модулей по теме и аудитории.</div><div style="margin-top:.75rem"><span class="tag tag-c">Claude / GPT-4o</span></div></div>
+    <div class="ws" data-a onclick="showStep(1)"><div class="wn">02</div><div class="wi">✍️</div><div class="wt">Скрипты и тесты</div><div class="wd">Черновики диалогов и вопросов — за минуты. Финал — мой.</div><div style="margin-top:.75rem"><span class="tag tag-c">Prompt-инженеринг</span></div></div>
+    <div class="ws" data-a onclick="showStep(2)"><div class="wn">03</div><div class="wi">🎨</div><div class="wt">Storyboard</div><div class="wd">Педагогическое решение и UX-логика — только я.</div><div style="margin-top:.75rem"><span class="tag tag-d">Только я</span></div></div>
+    <div class="ws" data-a onclick="showStep(3)"><div class="wn">04</div><div class="wi">🖼️</div><div class="wt">Визуал</div><div class="wd">Иллюстрации и фоны — генеративные модели.</div><div style="margin-top:.75rem"><span class="tag tag-c">Midjourney / FLUX</span></div></div>
+    <div class="ws" data-a onclick="showStep(4)"><div class="wn">05</div><div class="wi">🔊</div><div class="wt">Озвучка</div><div class="wd">AI-голоса для черновиков. Диктор — для premium.</div><div style="margin-top:.75rem"><span class="tag tag-c">ElevenLabs</span></div></div>
   </div>
+
+  <!-- Detail panel — появляется при клике на карточку -->
+  <div class="wdetail" id="wdetail"></div>
+
+  <!-- Quality bar -->
   <div class="wbar">
-    <div class="wbs"><b>≈60ч</b><p>раньше</p></div><div class="warr">→</div>
-    <div class="wbs"><b>≈18ч</b><p>сейчас</p></div><div class="warr">→</div>
-    <div class="wbs"><b>×3.3</b><p>скорость</p></div><div class="warr">→</div>
-    <div class="wbs"><b>без ↓</b><p>качества</p></div>
+    <div class="wbs"><b>87%</b><p>avg completion rate</p></div>
+    <div class="warr">·</div>
+    <div class="wbs"><b>4.6<span style="font-size:1.2rem">/5</span></b><p>средняя оценка курсов</p></div>
+    <div class="warr">·</div>
+    <div class="wbs"><b>1–2</b><p>итерации правок вместо 10</p></div>
+    <div class="warr">·</div>
+    <div class="wbs" style="border-left:2px solid var(--cyan);padding-left:1.5rem"><b style="color:var(--green)">≠ быстрее</b><p>качественнее и точнее</p></div>
   </div>
 </div>
 </section>
@@ -387,25 +486,25 @@ const C = {
 <div class="wrap">
   <span class="lbl">Кейсы</span>
   <h2 class="ttl">Проекты и видео-демо</h2>
-  <p class="sub">Реальные задачи — проблема, роль, результат в цифрах.</p>
+  <p class="sub">Реальные задачи — проблема, роль, результат. Нажмите на карточку чтобы увидеть полный разбор.</p>
 
   <div class="cgrid" style="margin-top:2.5rem">
-    <div class="ccard" data-a>
-      <div class="cth ct1"><span>🏦</span><div class="cbdg"><span class="tag tag-d">Банковский сектор</span></div></div>
-      <div class="cbody"><div class="ccat">Compliance · Storyline 360</div><h3 class="ctitle">Обязательный курс для 2 400 сотрудников розничной сети</h3><p class="cdesc">Полный цикл: методология → интерактив → JS-механики → SCORM 1.2 → LMS. Кастомное ветвление по результатам проверок.</p><div class="cmet"><div class="cm2">Completion <strong>87%</strong></div><div class="cm2">Score <strong>4.6/5</strong></div><div class="cm2">Правок <strong>2 итер.</strong></div></div></div>
+    <div class="ccard" data-a onclick="openCase(0)">
+      <div class="cth ct1"><span>🏛️</span><div class="cbdg"><span class="tag tag-d">Качество обучения</span></div></div>
+      <div class="cbody"><div class="ccat">Compliance · Storyline 360 · 8+ лет опыта</div><h3 class="ctitle">Когда «достаточно хорошо» — недостаточно</h3><p class="cdesc">Обязательный курс для 2 400 сотрудников, который реально учит — не имитирует обучение. Адаптивная логика, три типа интерактивов, живые сценарии.</p><div class="cmet"><div class="cm2">Completion <strong>87%</strong></div><div class="cm2">Оценка <strong>4.6/5</strong></div><div class="cm2">Правок <strong>2 итер.</strong></div></div></div>
     </div>
-    <div class="ccard" data-a>
-      <div class="cth ct2"><span>🤖</span><div class="cbdg"><span class="tag tag-c">AI-интеграция</span></div></div>
-      <div class="cbody"><div class="ccat">EdTech · JS + LLM API</div><h3 class="ctitle">AI-тьютор внутри SCORM — ответы на вопросы в курсе</h3><p class="cdesc">JS-триггеры Storyline → POST к LLM API → персонализированный ответ в контексте текущего раздела.</p><div class="cmet"><div class="cm2">Вовлечённость <strong>+41%</strong></div><div class="cm2">Время <strong>+28%</strong></div></div></div>
+    <div class="ccard" data-a onclick="openCase(1)">
+      <div class="cth ct2"><span>🔭</span><div class="cbdg"><span class="tag tag-c">Нестандартное решение</span></div></div>
+      <div class="cbody"><div class="ccat">EdTech · JavaScript глубокий уровень</div><h3 class="ctitle">Там, где инструмент говорит «нельзя» — я ищу как иначе</h3><p class="cdesc">AI-тьютор внутри SCORM-курса: вопрос учащегося → LLM API → ответ прямо в Storyline. Без выхода из курса. Первая такая реализация у заказчика.</p><div class="cmet"><div class="cm2">Вовлечённость <strong>+41%</strong></div><div class="cm2">Поддержка <strong>−3×</strong></div></div></div>
     </div>
-    <div class="ccard" data-a>
-      <div class="cth ct3"><span>⚡</span><div class="cbdg"><span class="tag tag-b">AI-pipeline</span></div></div>
-      <div class="cbody"><div class="ccat">Внутренний проект</div><h3 class="ctitle">Сборка курса в 3× быстрее без потери качества</h3><p class="cdesc">LLM для outline, скриптов, тестов, контроля качества. Правки сократились с 8–10 до 1–2 итераций.</p><div class="cmet"><div class="cm2">Скорость <strong>×3.3</strong></div><div class="cm2">Правки <strong>−85%</strong></div></div></div>
+    <div class="ccard" data-a onclick="openCase(2)">
+      <div class="cth ct3"><span>⚗️</span><div class="cbdg"><span class="tag tag-b">О скорости и качестве</span></div></div>
+      <div class="cbody"><div class="ccat">AI-pipeline · Честно о компромиссах</div><h3 class="ctitle">Быстрее — не значит хуже.<br>Если знаешь, где нельзя срезать</h3><p class="cdesc">AI автоматизирует рутину. Педагогическое мышление — только человек. Именно это разделение даёт ×3.3 к скорости без потери качества.</p><div class="cmet"><div class="cm2">Скорость <strong>×3.3</strong></div><div class="cm2">Правки <strong>−85%</strong></div></div></div>
     </div>
   </div>
 
-  <!-- YouTube -->
-  <div class="ytcard" data-a id="ytcard">
+  <!-- YouTube embedded -->
+  <div class="ytcard" data-a>
     <div class="ytop">
       <div>
         <div class="ytlbl">Видео-демо</div>
@@ -419,47 +518,213 @@ const C = {
         <span class="tag tag-d">PDF Workflow</span>
       </div>
     </div>
-    <div class="ytplay" id="ytpl" onclick="openYt()">
-      <div class="ytph" id="ytph">
+    <div class="ytplay" id="ytpl">
+      <div class="ytph" id="ytph" onclick="embedYt()">
         <div class="ytpbtn">▶</div>
-        <div class="ytptext"><p>Смотреть на YouTube</p><span>Откроется в новой вкладке</span></div>
+        <div class="ytptext"><p>Смотреть видео</p><span>Откроется в новой вкладке</span></div>
       </div>
+    </div>
+    <div class="yt-ext">
+      <a href="#" id="yt-link" target="_blank">↗ Открыть на YouTube</a>
     </div>
   </div>
 
+  <!-- This site = portfolio -->
   <div class="built" data-a>
-    <div><p class="bt">🧠 Этот сайт — тоже часть портфолио</p><p class="bd">Одностраничник спроектирован с нуля: тёмная система, единый шрифт Outfit, AI-чат на Anthropic Claude API. Сборка — 2 вечера, хостинг — Vercel бесплатно.</p></div>
-    <div class="bstack">
-      <div class="brow"><div class="bdot"></div>Outfit (единый шрифт)</div>
-      <div class="brow"><div class="bdot"></div>HTML / CSS / Vanilla JS</div>
-      <div class="brow"><div class="bdot"></div>Anthropic Claude API</div>
-      <div class="brow"><div class="bdot"></div>Vercel (Edge deploy)</div>
+    <div class="built-top">
+      <div>
+        <div style="font-size:2.25rem;margin-bottom:.75rem">🧠</div>
+        <p class="bt">Этот сайт —<br>тоже часть портфолио</p>
+        <p class="bd">Одностраничник спроектирован и собран с нуля за 2 вечера. Это не шаблон — это демонстрация подхода к проектированию пользовательского опыта. Каждый элемент — осознанное решение.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.25rem">
+          <span class="tag tag-c">AI-assisted</span>
+          <span class="tag tag-b">2 вечера</span>
+          <span class="tag tag-d">Vercel · бесплатно</span>
+        </div>
+      </div>
+      <div class="built-meta">
+        <div class="bm">
+          <div class="bm-ico">🏗️</div>
+          <div><div class="bm-t">Zero dependencies. Буквально.</div><div class="bm-d">Нет npm, нет webpack, нет React. Чистый HTML/CSS/JS — грузится за 200 мс, работает в любом браузере. Знать инструмент до дна — не нужны костыли.</div></div>
+        </div>
+        <div class="bm">
+          <div class="bm-ico">🔐</div>
+          <div><div class="bm-t">API-ключ никогда не попадает в браузер</div><div class="bm-d">Serverless-прокси на Vercel Edge: ключ хранится на сервере, в коде сайта — его нет. Безопасность как принцип, не как галочка.</div></div>
+        </div>
+        <div class="bm">
+          <div class="bm-ico">🧠</div>
+          <div><div class="bm-t">AI отвечает по фактам, не галлюцинирует</div><div class="bm-d">RAG-промпт: система знает только реальные кейсы и данные. Если не знает — говорит об этом. Это глубже, чем просто «использую ChatGPT».</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="built-stack">
+      <span class="bslbl">Стек:</span>
+      <span class="bstag hl">Outfit</span>
+      <span class="bstag hl">HTML / CSS</span>
+      <span class="bstag hl">Vanilla JS</span>
+      <span class="bstag hl">Gemini API</span>
+      <span class="bstag">Vercel</span>
+      <span class="bstag">GitHub</span>
+      <span class="bstag">Claude (сборка)</span>
     </div>
   </div>
 </div>
 </section>
 
+<!-- Case Modal -->
+<div class="cmodal" id="cmodal" onclick="if(event.target===this)closeCase()">
+  <div class="cmc" id="cmc-inner">
+    <div class="cmc-x" onclick="closeCase()">✕</div>
+    <div id="cmc-content"></div>
+  </div>
+</div>
+
 <!-- SCORM DEMO -->
 <section id="scorm">
 <div class="wrap">
-  <span class="lbl">Живые демо</span>
-  <h2 class="ttl">Реальные SCORM-курсы</h2>
-  <p class="sub">Четыре продакшн-курса — нажмите «Запустить» чтобы открыть интерактивный курс в новой вкладке.</p>
-  <div class="scgrid" id="scgrid"></div>
+  <span class="lbl">Демо-каталог</span>
+  <h2 class="ttl">Избранные работы</h2>
+  <p class="sub">Три открытых демо — чтобы вы почувствовали подход. Остальные проекты — только для тех, кто готов к диалогу.</p>
+
+  <div class="demo-grid" id="demo-grid">
+    <!-- Cards built by JS below -->
+  </div>
 </div>
 </section>
 
 <!-- SKILLS -->
 <section id="skills">
 <div class="wrap">
-  <span class="lbl">Инструменты</span>
-  <h2 class="ttl">Навыки и стек</h2>
-  <p class="sub">Реальный арсенал, который работает в production.</p>
-  <div class="sgrid" style="margin-top:2.5rem">
-    <div class="sg" data-a><div class="sgi">🎓</div><div class="sgt">E-learning разработка</div><div class="stags"><span class="stag hot">Articulate Storyline 360</span><span class="stag">Articulate Rise</span><span class="stag">Adobe Captivate</span><span class="stag">iSpring Suite</span><span class="stag hot">SCORM 1.2 / 2004</span><span class="stag">xAPI (cmi5)</span><span class="stag">WebTutor</span><span class="stag">Teachbase</span><span class="stag">Moodle</span></div></div>
-    <div class="sg" data-a><div class="sgi">🤖</div><div class="sgt">AI / Автоматизация</div><div class="stags"><span class="stag hot">Claude API (Anthropic)</span><span class="stag hot">GPT-4o</span><span class="stag hot">Prompt-инженеринг</span><span class="stag">RAG-системы</span><span class="stag">Midjourney / FLUX</span><span class="stag hot">ElevenLabs</span><span class="stag">LLM внутри Storyline</span></div></div>
-    <div class="sg" data-a><div class="sgi">⚙️</div><div class="sgt">Тех-стек и медиа</div><div class="stags"><span class="stag hot">JavaScript (Storyline)</span><span class="stag">HTML / CSS</span><span class="stag">REST API basics</span><span class="stag">Git</span><span class="stag">Figma (read)</span><span class="stag">Premiere Pro</span><span class="stag">After Effects</span><span class="stag">Audition</span></div></div>
-    <div class="sg" data-a><div class="sgi">🚀</div><div class="sgt">Управление и процессы</div><div class="stags"><span class="stag hot">Команда до 20 человек</span><span class="stag">Постановка задач</span><span class="stag">Менторинг</span><span class="stag">Работа с заказчиком</span><span class="stag">Контроль качества</span><span class="stag">Production-процессы</span></div></div>
+  <span class="lbl">Арсенал</span>
+  <h2 class="ttl">Чем работаю<br>и что умею</h2>
+  <p class="sub">Инструменты — следствие задач, не самоцель. Вот что реально применяю в production уже 8+ лет.</p>
+
+  <!-- Stat bar -->
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;border:1px solid var(--border);border-radius:14px;overflow:hidden;margin:2.5rem 0 2rem;background:var(--border)" data-a>
+    <div style="background:var(--bg2);padding:1.25rem 1.5rem;text-align:center">
+      <div style="font-size:1.75rem;font-weight:900;color:var(--cyan);letter-spacing:-.04em">8+</div>
+      <div style="font-size:.72rem;color:var(--dim);margin-top:.2rem;font-weight:500">лет в e-learning</div>
+    </div>
+    <div style="background:var(--bg2);padding:1.25rem 1.5rem;text-align:center">
+      <div style="font-size:1.75rem;font-weight:900;color:var(--cyan);letter-spacing:-.04em">100+</div>
+      <div style="font-size:.72rem;color:var(--dim);margin-top:.2rem;font-weight:500">курсов в production</div>
+    </div>
+    <div style="background:var(--bg2);padding:1.25rem 1.5rem;text-align:center">
+      <div style="font-size:1.75rem;font-weight:900;color:var(--cyan);letter-spacing:-.04em">15+</div>
+      <div style="font-size:.72rem;color:var(--dim);margin-top:.2rem;font-weight:500">инструментов в стеке</div>
+    </div>
+    <div style="background:var(--bg2);padding:1.25rem 1.5rem;text-align:center">
+      <div style="font-size:1.75rem;font-weight:900;color:var(--cyan);letter-spacing:-.04em">∞</div>
+      <div style="font-size:.72rem;color:var(--dim);margin-top:.2rem;font-weight:500">интерес к профессии</div>
+    </div>
+  </div>
+
+  <div class="sk-grid">
+
+    <!-- E-learning — основа -->
+    <div class="sk-card sk-primary" data-a>
+      <div class="sk-hdr" style="background:linear-gradient(135deg,rgba(26,106,240,.15),rgba(0,207,255,.08))">
+        <div class="sk-hdr-ico">🎓</div>
+        <div>
+          <div class="sk-hdr-cat">Основная экспертиза</div>
+          <div class="sk-hdr-title">E-learning разработка</div>
+        </div>
+      </div>
+      <div class="sk-body">
+        <div class="sk-group-lbl">Разработка курсов</div>
+        <div class="sk-tags">
+          <span class="sk-tag expert">Articulate Storyline 360</span>
+          <span class="sk-tag expert">SCORM 1.2 / 2004</span>
+          <span class="sk-tag strong">Articulate Rise</span>
+          <span class="sk-tag strong">Adobe Captivate</span>
+          <span class="sk-tag">iSpring Suite</span>
+          <span class="sk-tag">xAPI (cmi5)</span>
+        </div>
+        <div class="sk-group-lbl" style="margin-top:1rem">LMS-платформы</div>
+        <div class="sk-tags">
+          <span class="sk-tag strong">WebTutor</span>
+          <span class="sk-tag strong">Teachbase</span>
+          <span class="sk-tag">Moodle</span>
+          <span class="sk-tag">iSpring Learn</span>
+        </div>
+        <div class="sk-note">Storyline — advanced уровень: кастомные JS-триггеры, нестандартные интеракции, адаптивная логика</div>
+      </div>
+    </div>
+
+    <!-- AI — дифференциатор -->
+    <div class="sk-card sk-ai" data-a>
+      <div class="sk-hdr" style="background:linear-gradient(135deg,rgba(0,207,255,.12),rgba(26,106,240,.08))">
+        <div class="sk-hdr-ico">🤖</div>
+        <div>
+          <div class="sk-hdr-cat">Дифференциатор · 2024–2025</div>
+          <div class="sk-hdr-title">AI / Автоматизация</div>
+        </div>
+        <div class="sk-ai-badge">↑ Тренд</div>
+      </div>
+      <div class="sk-body">
+        <div class="sk-group-lbl">LLM и генерация</div>
+        <div class="sk-tags">
+          <span class="sk-tag expert">Prompt-инженеринг</span>
+          <span class="sk-tag expert">Claude API</span>
+          <span class="sk-tag strong">GPT-4o</span>
+          <span class="sk-tag strong">RAG-системы</span>
+          <span class="sk-tag">LLM внутри Storyline (JS)</span>
+        </div>
+        <div class="sk-group-lbl" style="margin-top:1rem">Генерация контента и медиа</div>
+        <div class="sk-tags">
+          <span class="sk-tag strong">Midjourney / FLUX</span>
+          <span class="sk-tag strong">ElevenLabs</span>
+          <span class="sk-tag">AI-озвучка и видео</span>
+        </div>
+        <div class="sk-note">Собственный AI-pipeline: сборка часового курса за 18 ч вместо 60 ч</div>
+      </div>
+    </div>
+
+    <!-- Tech -->
+    <div class="sk-card" data-a>
+      <div class="sk-hdr" style="background:linear-gradient(135deg,rgba(100,80,200,.12),rgba(60,40,160,.08))">
+        <div class="sk-hdr-ico">⚙️</div>
+        <div>
+          <div class="sk-hdr-cat">Под капотом</div>
+          <div class="sk-hdr-title">Тех-стек и медиа</div>
+        </div>
+      </div>
+      <div class="sk-body">
+        <div class="sk-tags">
+          <span class="sk-tag expert">JavaScript (Storyline triggers)</span>
+          <span class="sk-tag strong">HTML / CSS</span>
+          <span class="sk-tag">REST API basics</span>
+          <span class="sk-tag">Git</span>
+          <span class="sk-tag">Figma (read)</span>
+          <span class="sk-tag strong">Adobe Premiere Pro</span>
+          <span class="sk-tag">After Effects</span>
+          <span class="sk-tag">Audition</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Management -->
+    <div class="sk-card" data-a>
+      <div class="sk-hdr" style="background:linear-gradient(135deg,rgba(34,197,94,.1),rgba(20,140,60,.06))">
+        <div class="sk-hdr-ico">🚀</div>
+        <div>
+          <div class="sk-hdr-cat">Лидерство · до 20 человек</div>
+          <div class="sk-hdr-title">Управление и процессы</div>
+        </div>
+      </div>
+      <div class="sk-body">
+        <div class="sk-tags">
+          <span class="sk-tag expert">Команда до 20 человек</span>
+          <span class="sk-tag strong">Постановка задач</span>
+          <span class="sk-tag strong">Менторинг</span>
+          <span class="sk-tag">Работа с заказчиком</span>
+          <span class="sk-tag">Контроль качества</span>
+          <span class="sk-tag">Production-процессы</span>
+          <span class="sk-tag">Снижение правок −85%</span>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 </section>
@@ -521,35 +786,231 @@ if(C.ytId){
   img.onerror = ()=>{ ph.style.backgroundImage=`url('https://img.youtube.com/vi/${C.ytId}/hqdefault.jpg')`; };
   img.src = `https://img.youtube.com/vi/${C.ytId}/maxresdefault.jpg`;
 }
-window.openYt = function(){
+// ─── YOUTUBE LINK ──────────────────────
+const ytLink = document.getElementById('yt-link');
+if(ytLink && C.ytId) ytLink.href = 'https://www.youtube.com/watch?v='+C.ytId;
+
+window.embedYt = function(){
+  // Open in new tab — most reliable across all browsers and networks
   if(C.ytId) window.open('https://www.youtube.com/watch?v='+C.ytId,'_blank');
 };
 
-// ─── SCORM CARDS ───────────────────────
-document.getElementById('scgrid').innerHTML = C.courses.map(course=>{
-  const hasUrl = course.url && course.url.trim() !== '';
-  const btn = hasUrl
-    ? `<a href="${course.url}" target="_blank" class="sc-launch">Запустить курс →</a>`
-    : `<button class="sc-launch soon">Скоро / По запросу</button>`;
-  return `
-  <div class="sccard" data-a>
-    <div class="sctop">
-      <div class="scico">${course.icon}</div>
-      <div class="scinfo">
-        <div class="scname">${course.name}</div>
-        <div class="scsub">${course.sub}</div>
-        <div class="sctags">${course.tags.map(t=>`<span class="tag tag-b">${t}</span>`).join('')}</div>
-        <div class="sckpis">${course.kpis.map(k=>`<div class="sckpi"><b>${k.v}</b><span>${k.l}</span></div>`).join('')}</div>
-      </div>
+// ─── CASE MODAL ────────────────────────
+const CASES=[
+  {
+    emoji:'🏛️',bg:'linear-gradient(135deg,#0b2545,#1a4a8a)',
+    lbl:'Compliance · Storyline 360 · Банковский сектор',
+    title:'Когда «достаточно хорошо» — недостаточно: курс для 2 400 сотрудников',
+    steps:[
+      {ico:'⚖️',lbl:'Суть проблемы',txt:'Обязательное обучение по информационной безопасности превратилось в формальность: сотрудники кликали «далее», не читая. Completion rate 58% — но реального усвоения ноль. А на кону — персональные данные клиентов.'},
+      {ico:'🎓',lbl:'Позиция',txt:'Я убеждён: если обучение существует только для галочки — лучше его не делать вовсе. Взял полный цикл: методология, сценарий, UX, разработка в Storyline. Цель — курс, который реально учит, а не имитирует обучение.'},
+      {ico:'🔬',lbl:'Нестандартное решение',txt:'Кастомная JS-логика ветвления: курс подстраивается под каждого. Тот, кто ошибается — получает глубину и упражнения. Тот, кто знает — идёт коротким путём. Три типа интерактивов, диалоговые симуляции реальных ситуаций. Не «ответь на 5 вопросов», а «разыграй сценарий».'},
+      {ico:'📊',lbl:'Что получилось',txt:'87% completion — и это осознанное прохождение, а не принудительное. Оценка 4.6 из 5. Правок потребовалось 2 итерации вместо стандартных 8–10 — потому что методология была продумана до начала разработки, а не во время.'},
+    ],
+    metrics:[{v:'87%',l:'Completion Rate'},{v:'4.6/5',l:'Оценка от учащихся'},{v:'2',l:'Итерации правок'}],
+    tags:['SCORM 1.2','Storyline 360','Custom JS','Диалоговые симуляции','Adaptive Learning'],
+  },
+  {
+    emoji:'🔭',bg:'linear-gradient(135deg,#0b2e24,#165c42)',
+    lbl:'EdTech · JavaScript + LLM API · Нестандартное решение',
+    title:'Там, где инструмент говорит «нельзя» — я ищу как сделать иначе',
+    steps:[
+      {ico:'🧩',lbl:'Ограничение системы',txt:'LMS не поддерживает вопросы внутри курса. Учащиеся терялись, задавали вопросы по email, выбивались из потока. Стандартное решение — «добавьте FAQ». Неинтересно.'},
+      {ico:'🔍',lbl:'Моя позиция',txt:'8 лет в профессии дают насмотренность: я знаю, что Articulate Storyline — это не просто слайды. Это полноценная среда с JavaScript-доступом. Если инструмент знаешь глубоко — находишь возможности, которые другие не видят.'},
+      {ico:'⚡',lbl:'Что придумал',txt:'JavaScript-триггер внутри Storyline собирает вопрос учащегося → отправляет POST-запрос к LLM API → получает ответ в контексте конкретного модуля → показывает его прямо в курсе. Без выхода. Без поддержки. Без дополнительных инструментов. Первая такая реализация у этого заказчика.'},
+      {ico:'🌱',lbl:'Результат',txt:'Вовлечённость выросла на 41% — потому что учащийся чувствует: его вопрос важен, система с ним работает. Время в курсе +28%. Обращений в поддержку стало меньше в 3 раза.'},
+    ],
+    metrics:[{v:'+41%',l:'Вовлечённость'},{v:'+28%',l:'Время в курсе'},{v:'−3×',l:'Нагрузка на поддержку'}],
+    tags:['JavaScript','LLM API','Articulate Storyline','Нестандартное решение','AI-интеграция'],
+  },
+  {
+    emoji:'⚗️',bg:'linear-gradient(135deg,#1a1030,#3a1260)',
+    lbl:'Внутренний проект · AI-pipeline · О скорости и качестве',
+    title:'Быстрее — не значит хуже. Но только если знаешь, где нельзя срезать углы',
+    steps:[
+      {ico:'⏳',lbl:'Честно о скорости',txt:'Когда говорят «быстро и дёшево» — обычно жертвуют качеством. Я долго не брался за автоматизацию, пока не понял: можно ускорить рутину и освободить время для того, что требует настоящего профессионального суждения.'},
+      {ico:'🎯',lbl:'Принцип',txt:'AI умеет генерировать структуры и черновики. Он не умеет принимать педагогические решения — понять, где нужна симуляция, а где — рефлексия. Где упростить, а где — добавить сложности. Это остаётся за мной. Всегда.'},
+      {ico:'🔧',lbl:'Как выстроен процесс',txt:'Claude строит outline по брифу → генерирует черновики скриптов → предлагает тестовые вопросы → делает автопроверку на соответствие целям обучения. Storyboard, педагогическая логика и финальный контент — только человек. AI экономит время на механике, не на мышлении.'},
+      {ico:'✅',lbl:'Что это даёт',txt:'18 часов вместо 60 на часовой курс. При этом качество выросло: больше времени на то, что действительно важно — на педагогическое решение. Правок 1–2 вместо 8–10. Потому что структура продумана до разработки, а не переделывается в процессе.'},
+    ],
+    metrics:[{v:'×3.3',l:'Скорость на рутине'},{v:'−85%',l:'Правок в производстве'},{v:'↑',l:'Качество педагогики'}],
+    tags:['AI как инструмент','Prompt-инженеринг','Claude API','Методология','Команда'],
+  },
+];
+window.openCase=function(i){
+  const c=CASES[i];
+  document.getElementById('cmc-content').innerHTML=`
+    <div class="cmc-hdr" style="background:${c.bg}">${c.emoji}</div>
+    <div class="cmc-lbl">${c.lbl}</div>
+    <div class="cmc-title">${c.title}</div>
+    <div class="cmc-steps">${c.steps.map(s=>`
+      <div class="cmc-step">
+        <div class="cmc-sico">${s.ico}</div>
+        <div><div class="cmc-slbl">${s.lbl}</div><div class="cmc-stxt">${s.txt}</div></div>
+      </div>`).join('')}
     </div>
-    <div class="scfoot">
-      <p>${course.desc}</p>
-      ${btn}
+    <div class="cmc-metrics">${c.metrics.map(m=>`<div class="cmc-m"><b>${m.v}</b><span>${m.l}</span></div>`).join('')}</div>
+    <div style="display:flex;flex-wrap:wrap;gap:.4rem">${c.tags.map(t=>`<span class="tag tag-b">${t}</span>`).join('')}</div>`;
+  document.getElementById('cmodal').classList.add('open');
+  document.body.style.overflow='hidden';
+};
+window.closeCase=function(){
+  document.getElementById('cmodal').classList.remove('open');
+  document.body.style.overflow='';
+};
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeCase();});
+
+// ─── DEMO CARDS ──────────────────────────
+const DEMOS = [
+  {
+    num:'01', cat:'SCORM 1.2 · Compliance · Storyline 360',
+    icon:'🔒',
+    bg:'linear-gradient(135deg,#0b2545 0%,#1a3a6e 60%,#0d2d55 100%)',
+    title:'Основы информационной безопасности',
+    unique:'Адаптивная логика: курс меняет маршрут в зависимости от ответов учащегося — через кастомный JavaScript',
+    complexity:5,
+    tags:['Drag & Drop','Pick One','Видео + аудио','Custom JS'],
+    metrics:[{v:'87%',l:'Completion'},{v:'19',l:'слайдов'}],
+    url: C.courses[0]?.url || '',
+  },
+  {
+    num:'02', cat:'Storyline 360 · Интерактивная механика',
+    icon:'👟',
+    bg:'linear-gradient(135deg,#0b2e24 0%,#12472e 60%,#0e3526 100%)',
+    title:'Завязываем шнурки',
+    unique:'Пошаговый drag-and-drop с валидацией каждого этапа — показывает, как Storyline может имитировать физические действия',
+    complexity:3,
+    tags:['Drag & Drop','Пошаговая механика','Геймификация'],
+    metrics:[{v:'6',l:'шагов'},{v:'100%',l:'интерактив'}],
+    url: C.courses[1]?.url || '',
+  },
+  {
+    num:'03', cat:'JavaScript · Нестандартное решение',
+    icon:'📄',
+    bg:'linear-gradient(135deg,#1a1418 0%,#2d1830 60%,#1a0f22 100%)',
+    title:'PDF-скачивание из Storyline',
+    unique:'Кнопка скачивания PDF прямо внутри SCORM — без LMS, через чистый JavaScript ещё до эпохи AI-инструментов',
+    complexity:4,
+    tags:['Custom JS','PDF Workflow','До AI-эпохи','Нестандартно'],
+    metrics:[{v:'JS',l:'only'},{v:'0',l:'зависимостей'}],
+    url: '',
+    isVideo: true,
+    videoId: C.ytId,
+  },
+];
+
+function buildDemos() {
+  const grid = document.getElementById('demo-grid');
+  if (!grid) return;
+
+  // ── 3 demo cards ──────────────────────────────────
+  const cards = DEMOS.map((d, i) => {
+    const hasUrl  = d.url && d.url.trim() !== '';
+    const isVideo = d.isVideo && d.videoId;
+    const btnHref = isVideo
+      ? `https://www.youtube.com/watch?v=${d.videoId}`
+      : hasUrl ? d.url : '#';
+    const btnLabel = isVideo ? '▶ Смотреть демо' : hasUrl ? 'Открыть демо →' : 'Скоро';
+    const btnDisabled = (!hasUrl && !isVideo) ? 'style="opacity:.4;pointer-events:none"' : '';
+    const dots = Array.from({length:5},(_,j)=>`<div class="demo-dot${j<d.complexity?' on':''}"></div>`).join('');
+    return `<div class="demo-card" style="transition-delay:${i*0.12}s">
+      <div class="demo-hdr">
+        <div class="demo-hdr-bg" style="background:${d.bg};position:absolute;inset:0"></div>
+        <div class="demo-num">${d.num}</div>
+        <div class="demo-complexity">${dots}<span class="demo-complexity-lbl">сложность</span></div>
+        <div class="demo-tags-hdr">${d.tags.slice(0,2).map(t=>`<span class="tag tag-c" style="font-size:.68rem">${t}</span>`).join('')}</div>
+      </div>
+      <div class="demo-body">
+        <div class="demo-cat">${d.cat}</div>
+        <div class="demo-title">${d.icon} ${d.title}</div>
+        <div class="demo-unique">${d.unique}</div>
+      </div>
+      <div class="demo-foot">
+        <div class="demo-metrics">${d.metrics.map(m=>`<div class="demo-met"><strong>${m.v}</strong> ${m.l}</div>`).join('')}</div>
+        <a href="${btnHref}" target="_blank" class="demo-btn" ${btnDisabled}>${btnLabel}</a>
+      </div>
+    </div>`;
+  }).join('');
+
+  // ── Yandex Disk card — div + onclick (no nested anchors) ──────
+  const YA_URL = 'https://disk.yandex.ru/d/H1Hxoqf9JsA0XQ';
+  const courses = [
+    {num:'01',accent:'rgba(255,120,0',icon:'🎬',lbl:'Интерактивное кино',name:'СИБУР',desc:'Нелинейный сторителлинг — учащийся управляет историей'},
+    {num:'02',accent:'rgba(220,30,30',icon:'🏙️',lbl:'Прохождение локаций',name:'АЛЬФА-БАНК',desc:'Диалоги с персонажами, выборы и ветвление'},
+    {num:'03',accent:'rgba(30,180,80',icon:'👟',lbl:'Drag & Drop',name:'ШНУРКИ',desc:'Пошаговая симуляция физического навыка'},
+  ];
+  const previews = courses.map(c=>`
+    <div style="position:relative;height:185px;overflow:hidden;
+      background:linear-gradient(135deg,#080c18,#0d1528);
+      display:flex;flex-direction:column;justify-content:flex-end;
+      padding:1.25rem 1.5rem;border-right:1px solid rgba(255,255,255,.06)">
+      <div style="position:absolute;inset:0;background:linear-gradient(135deg,${c.accent},.07),transparent);pointer-events:none"></div>
+      <div style="position:absolute;top:.75rem;right:.875rem;width:36px;height:36px;
+        background:${c.accent},.15);border:1px solid ${c.accent},.3);
+        border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.1rem">${c.icon}</div>
+      <div style="position:absolute;top:.5rem;left:1rem;font-size:5rem;font-weight:900;
+        color:rgba(255,255,255,.03);line-height:1;pointer-events:none">${c.num}</div>
+      <div style="position:relative;z-index:1">
+        <div style="font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+          color:${c.accent},.9);margin-bottom:.3rem">${c.lbl}</div>
+        <div style="font-size:.95rem;font-weight:800;color:#fff;margin-bottom:.3rem">${c.name}</div>
+        <div style="font-size:.7rem;color:rgba(255,255,255,.45);line-height:1.4">${c.desc}</div>
+      </div>
+    </div>`).join('');
+
+  const yadisk = `<div class="demo-yadisk" onclick="window.open('${YA_URL}','_blank')" style="cursor:pointer">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr)">${previews}</div>
+    <div style="padding:1.25rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;
+      border-top:1px solid rgba(255,197,0,.15);background:rgba(255,197,0,.025)">
+      <div>
+        <div style="display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,197,0,.1);
+          border:1px solid rgba(255,197,0,.25);border-radius:100px;padding:.2rem .75rem;
+          font-size:.64rem;font-weight:700;color:rgba(255,210,50,.9);letter-spacing:.08em;
+          text-transform:uppercase;margin-bottom:.5rem">☁️ Яндекс.Диск · Открытый доступ · Без NDA</div>
+        <div style="font-size:.85rem;color:var(--dim)">Скачайте и запустите в своей LMS — или просто откройте в браузере</div>
+      </div>
+      <a href="https://disk.yandex.ru/d/H1Hxoqf9JsA0XQ" target="_blank"
+        onclick="event.stopPropagation()"
+        style="display:inline-flex;align-items:center;gap:.5rem;
+        background:rgba(255,197,0,.15);border:1.5px solid rgba(255,197,0,.4);
+        color:rgba(255,215,50,1);font-size:.85rem;font-weight:700;
+        padding:.7rem 1.5rem;border-radius:10px;white-space:nowrap;flex-shrink:0;
+        font-family:inherit;text-decoration:none;cursor:pointer;
+        transition:background .2s,transform .2s">
+        Открыть каталог →</a>
     </div>
   </div>`;
-}).join('');
 
-// ─── AI CHAT ───────────────────────────
+  // ── Locked card ───────────────────────────────────────────────
+  const locked = `<div class="demo-lock" style="transition-delay:0.55s">
+    <div class="dl-left">
+      <div class="dl-num">∞</div>
+      <div class="dl-title">Закрытый каталог — от простого к сложному</div>
+      <div class="dl-desc">Много проектов разного уровня: от коротких упражнений до многомодульных курсов со сложной логикой и AI-интеграциями. Показываю индивидуально — под конкретный запрос, в нужной последовательности. Только тогда, когда между нами есть реальные точки пересечения.</div>
+    </div>
+    <div class="dl-right">
+      <span class="dl-icon">🔑</span>
+      <div class="dl-badges">
+        <div class="dl-badge">Простые упражнения</div>
+        <div class="dl-badge">Диалоговые симуляции</div>
+        <div class="dl-badge">AI-интеграции</div>
+        <div class="dl-badge">Мультиязычность</div>
+      </div>
+      <a href="#contact" class="btn btn-p" style="font-size:.85rem">Написать и договориться →</a>
+    </div>
+  </div>`;
+
+  grid.innerHTML = cards + yadisk + locked;
+
+  // Animate on scroll
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('demo-vis'); });
+  }, {threshold: 0.08});
+  grid.querySelectorAll('.demo-card, .demo-yadisk, .demo-lock').forEach(el => obs.observe(el));
+}
+buildDemos();
+
+// ─── AI CHAT ───────────────────────────// ─── AI CHAT ───────────────────────────
 const KB = `Ты AI-помощник на портфолио Юрия Канцурака. Отвечай от 3-го лица, кратко (2-3 предложения), только по фактам ниже.
 Имя: ${C.name}, ${C.city}. Роль: ${C.role}, 8+ лет.
 Цифры: 100+ курсов в production, команда до 20 человек, правки -85%, AI-pipeline ×3.3.
@@ -606,7 +1067,90 @@ window.send=async function(){
 };
 window.ask=function(el){document.getElementById('ci').value=el.textContent;send();};
 
-// ─── SCROLL ANIM ───────────────────────
+// ─── WORKFLOW INTERACTIVE CARDS ───────────────────
+const STEPS = [
+  {
+    icon:'🗂️', title:'Outline & структура модулей',
+    desc:'Описываю тему, аудиторию и цели обучения — LLM предлагает структуру разделов, модулей, последовательности. Я корректирую под педагогические требования и специфику клиента. Результат: готовое содержание за 20–30 минут вместо нескольких часов черновой работы.',
+    tools:['Claude Sonnet','GPT-4o','Кастомные system-промпты','Итеративное уточнение'],
+    benefit:'Экономия 3–4 часов на старте каждого проекта',
+    detail:'Ключевой навык — не просто «попросить AI», а задать правильный контекст: цель, аудитория, формат курса, ограничения. Именно это определяет качество структуры.',
+    tags:['tag-c','tag-c','tag-b','tag-b'],
+  },
+  {
+    icon:'✍️', title:'Скрипты диалогов и тестовые вопросы',
+    desc:'По готовой структуре AI генерирует черновики скриптов для слайдов, диалоговых симуляций и вопросов оценки. Финальный текст всегда редактирую сам — AI даёт 70–80% работы, я довожу до нужного качества и тона заказчика.',
+    tools:['Claude API','GPT-4o','Prompt-шаблоны для e-learning','Контроль качества текста'],
+    benefit:'Итоговое время написания скриптов сокращается в 4–5 раз',
+    detail:'Хотите посмотреть живой пример курса, сценарий которого написан совместно с AI? Скоро появится SCORM-демо прямо на этой странице.',
+    tags:['tag-c','tag-c','tag-b','tag-b'],
+  },
+  {
+    icon:'🎨', title:'Storyboard и педагогическое решение',
+    desc:'Единственный этап без AI — и намеренно. Здесь принимаются профессиональные решения: как организовать поток обучения, где поставить интерактив, как выстроить feedback и проверку знаний. AI здесь делает ошибки, которые заметны только опытному специалисту.',
+    tools:['8+ лет экспертизы','Instructional Design','UX-логика','Педагогические паттерны'],
+    benefit:'Именно здесь опыт имеет значение — AI не заменит это',
+    detail:'Я умею отличать то, что можно делегировать машине, от того, где нужен человеческий профессиональный суждение. Это и есть ценность Lead-разработчика.',
+    tags:['tag-d','tag-d','tag-d','tag-d'],
+  },
+  {
+    icon:'🖼️', title:'Визуал и иллюстрации',
+    desc:'Midjourney или FLUX генерирует иллюстрации по авторским промптам в едином визуальном стиле курса. Иконки, схемы и UI-элементы делаю вручную. Итог: профессиональный дизайн за треть стоимости студийного производства.',
+    tools:['Midjourney','FLUX','Adobe Photoshop','Figma','Adobe Illustrator'],
+    benefit:'Полный комплект иллюстраций к курсу — за 1 день вместо 1–2 недель',
+    detail:'Ключевое — авторские промпты для единого стиля. Без этого AI даёт «мешанину». С правильным подходом — полноценный визуальный брендинг курса.',
+    tags:['tag-c','tag-c','tag-b','tag-b'],
+  },
+  {
+    icon:'🔊', title:'Озвучка и аудиопроизводство',
+    desc:'Для черновиков и бюджетных курсов — AI-голоса ElevenLabs: реалистичная русская речь, несколько персонажей, быстрая перезапись при правках текста. Для premium-проектов — живой диктор с обработкой в Adobe Audition.',
+    tools:['ElevenLabs','Adobe Audition','Профессиональный диктор','Аудиообработка'],
+    benefit:'Пересказ 60 слайдов при правке текста — за 10 минут, не за 2 дня',
+    detail:'AI-озвучка особенно выгодна при частых обновлениях курса — не нужно пересобирать студийную сессию при каждой правке.',
+    tags:['tag-c','tag-b','tag-d','tag-b'],
+  },
+];
+
+const tagLabels = [
+  ['Claude / GPT-4o','Кастомные промпты','Итеративный подход','Контекст = качество'],
+  ['Claude API','GPT-4o','Prompt-шаблоны','Контроль качества'],
+  ['Instructional Design','UX-логика','Педагогика','8+ лет опыта'],
+  ['Midjourney','FLUX','Figma','Adobe Suite'],
+  ['ElevenLabs','Adobe Audition','Диктор','Аудиообработка'],
+];
+
+let activeStep = -1;
+window.showStep = function(i) {
+  const steps = document.querySelectorAll('.ws');
+  const detail = document.getElementById('wdetail');
+  if (activeStep === i) {
+    steps[i].classList.remove('wact');
+    detail.classList.remove('open');
+    activeStep = -1;
+    return;
+  }
+  steps.forEach(s=>s.classList.remove('wact'));
+  steps[i].classList.add('wact');
+  activeStep = i;
+  const s = STEPS[i];
+  const tl = tagLabels[i];
+  detail.innerHTML = `
+    <div style="display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:start">
+      <div>
+        <div style="font-size:2rem;margin-bottom:.5rem">${s.icon}</div>
+        <div class="wdt">${s.title}</div>
+        <div class="wdd">${s.desc}</div>
+        <div style="font-size:.8rem;font-weight:400;color:var(--dim);font-style:italic;margin-bottom:1.25rem">${s.detail}</div>
+        <div class="wdtools">${tl.map((t,idx)=>`<span class="tag ${s.tags[idx]||'tag-d'}">${t}</span>`).join('')}</div>
+      </div>
+      <div class="wdbenefit" style="min-width:220px;flex-shrink:0">
+        ✓ ${s.benefit}
+        <span>Кликните на другой шаг чтобы переключить</span>
+      </div>
+    </div>`;
+  detail.classList.add('open');
+  detail.scrollIntoView({behavior:'smooth',block:'nearest'});
+};
 const ob=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis');});},{threshold:.1});
 document.querySelectorAll('[data-a]').forEach(el=>ob.observe(el));
 })();
