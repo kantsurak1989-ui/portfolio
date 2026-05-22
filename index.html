@@ -140,7 +140,7 @@ section{padding:96px 0}
 .cm2{font-size:.8rem}.cm2 strong{color:var(--blue2);font-weight:700}
 .cmodal{position:fixed;inset:0;z-index:600;background:rgba(5,13,26,.88);backdrop-filter:blur(14px);display:none;align-items:center;justify-content:center;padding:2rem}
 .cmodal.open{display:flex}
-.cmc{background:var(--bg3);border:1px solid var(--border2);border-radius:22px;max-width:700px;width:100%;max-height:88vh;overflow-y:auto;padding:2.5rem;position:relative;animation:modIn .3s cubic-bezier(.22,.68,0,1.2)}
+.cmc{background:var(--bg3);border:1px solid var(--border2);border-radius:22px;max-width:min(700px,calc(100vw - 2rem));width:100%;max-height:88vh;overflow-y:auto;padding:2.5rem;position:relative;animation:modIn .3s cubic-bezier(.22,.68,0,1.2)}
 @keyframes modIn{from{opacity:0;transform:scale(.93) translateY(24px)}to{opacity:1;transform:none}}
 .cmc-x{position:absolute;top:1.25rem;right:1.25rem;width:36px;height:36px;background:var(--card2);border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.9rem;color:var(--dim);transition:all .2s}
 .cmc-x:hover{background:rgba(255,255,255,.1);color:var(--text)}
@@ -181,7 +181,7 @@ section{padding:96px 0}
 
 /* ─── DEMO SECTION ─── */
 #scorm{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.demo-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:3rem}
+.demo-grid{display:grid;grid-template-columns:1fr;gap:1.25rem;margin-top:3rem}
 .demo-card{background:var(--bg3);border:1px solid var(--border);border-radius:20px;overflow:hidden;position:relative;cursor:pointer;transition:transform .35s,border-color .35s,box-shadow .4s;opacity:0;transform:translateY(30px)}
 .demo-card.demo-vis{opacity:1;transform:translateY(0)}
 .demo-card:hover{transform:translateY(-6px) scale(1.01);border-color:rgba(26,106,240,.45);box-shadow:0 28px 80px rgba(0,0,0,.5),0 0 60px rgba(26,106,240,.12)}
@@ -281,6 +281,18 @@ section{padding:96px 0}
 .sk-tag:hover{border-color:rgba(26,106,240,.35);color:var(--text)}
 .sk-note{margin-top:1rem;padding:.625rem .875rem;background:rgba(26,106,240,.06);border-left:2px solid var(--blue);border-radius:0 8px 8px 0;font-size:.78rem;color:var(--dim);line-height:1.55;font-style:italic}
 
+/* ─── STRENGTHS ─── */
+.str-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+.str-card{background:var(--bg3);border:1px solid var(--border);border-radius:18px;padding:2rem;display:flex;gap:1.25rem;align-items:flex-start;position:relative;overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s}
+.str-card:hover{transform:translateY(-4px);border-color:rgba(26,106,240,.35);box-shadow:0 20px 50px rgba(0,0,0,.4),0 0 40px rgba(26,106,240,.07)}
+.str-wide{grid-column:1/-1;flex-direction:row;align-items:center}
+.str-num{position:absolute;top:.5rem;right:1rem;font-size:5rem;font-weight:900;color:rgba(255,255,255,.04);line-height:1;letter-spacing:-.05em;pointer-events:none;user-select:none}
+.str-ico{font-size:2.25rem;flex-shrink:0;width:54px;height:54px;background:rgba(26,106,240,.1);border:1px solid rgba(26,106,240,.2);border-radius:14px;display:flex;align-items:center;justify-content:center}
+.str-body{flex:1}
+.str-title{font-size:1.15rem;font-weight:800;letter-spacing:-.02em;margin-bottom:.625rem;line-height:1.2}
+.str-desc{font-size:.875rem;color:var(--dim);line-height:1.7;margin-bottom:.875rem}
+.str-tag{display:inline-flex;background:rgba(0,207,255,.07);border:1px solid rgba(0,207,255,.2);border-radius:100px;padding:.22rem .875rem;font-size:.72rem;font-weight:600;color:var(--cyan);letter-spacing:.03em}
+
 /* ─── CONTACT ─── */
 #contact{background:var(--bg2);border-top:1px solid var(--border)}
 .kontakt{display:grid;grid-template-columns:1fr 1fr;gap:4.5rem;align-items:center}
@@ -310,7 +322,103 @@ footer a{color:var(--blue2);text-decoration:none}
 
 /* ─── RESPONSIVE ─── */
 @media(max-width:1060px){.hg{grid-template-columns:1fr}.cc{display:none}.wgrid{grid-template-columns:repeat(3,1fr)}.cgrid{grid-template-columns:1fr 1fr}}
-@media(max-width:680px){.cgrid,.sgrid,.kontakt,.built,.scgrid,.ytop{grid-template-columns:1fr}.wgrid{grid-template-columns:1fr 1fr}.nli{display:none}.hstats{grid-template-columns:repeat(3,1fr)}}
+/* ═══════════════════════════════════
+   RESPONSIVE — mobile first approach
+   ═══════════════════════════════════ */
+
+/* Orbs — don't overflow */
+.orb1,.orb2{opacity:.6}
+
+/* Clamp all headings */
+.ttl{font-size:clamp(1.75rem,5vw,3rem)}
+.display{font-size:clamp(2.5rem,9vw,6.5rem)}
+
+/* ── 1060px ── */
+@media(max-width:1060px){
+  .hg{grid-template-columns:1fr}
+  .cc{display:none}
+  .wgrid{grid-template-columns:repeat(3,1fr)}
+  .cgrid{grid-template-columns:1fr 1fr}
+}
+
+/* ── 768px ── */
+@media(max-width:768px){
+  .nli{display:none}
+  .hg,.cgrid,.kontakt,.str-grid,.sk-grid,.ytop{grid-template-columns:1fr!important}
+  .wgrid{grid-template-columns:1fr 1fr}
+  .built-top{grid-template-columns:1fr!important}
+  .str-wide{flex-direction:column}
+  .yadisk-previews{grid-template-columns:1fr!important}
+  .demo-lock{flex-direction:column;padding:1.75rem}
+  .dl-right{align-items:flex-start;width:100%}
+  .dl-badges{align-items:flex-start}
+}
+
+/* ── 480px ── */
+@media(max-width:480px){
+  section{padding:60px 0}
+  .wrap{padding:0 1rem}
+  nav{padding:0 1rem;height:54px}
+  .ncta{font-size:.78rem;padding:.4rem .875rem}
+
+  /* Hero */
+  .display{font-size:clamp(2.2rem,11vw,3.5rem)!important}
+  .htag{font-size:.95rem}
+  .hstats{grid-template-columns:repeat(3,1fr);gap:.5rem}
+  .stat{padding:.875rem .5rem}
+  .stn{font-size:1.5rem}
+  .stl{font-size:.62rem}
+  .hact{flex-direction:column;gap:.75rem}
+  .hact .btn{width:100%;justify-content:center}
+
+  /* Workflow */
+  .wgrid{grid-template-columns:1fr 1fr}
+  .wbar{flex-direction:column;gap:.75rem;align-items:flex-start}
+  .wdetail{padding:1.25rem}
+
+  /* Cases */
+  .cgrid{grid-template-columns:1fr!important}
+  .cth{height:130px}
+
+  /* YT header */
+  .ytop{grid-template-columns:1fr!important;padding:1.25rem!important}
+  .ytop>div:last-child{display:none}
+
+  /* Demo section */
+  .yadisk-previews{grid-template-columns:1fr!important}
+  .demo-yadisk>div:last-child{flex-direction:column;gap:.875rem;padding:1.1rem}
+  .ya-btn{width:100%;justify-content:center;text-align:center}
+  .demo-lock{flex-direction:column;padding:1.25rem;gap:1.25rem}
+  .dl-right{width:100%;align-items:flex-start}
+  .dl-num{font-size:2.25rem}
+  .dl-badges{align-items:flex-start}
+
+  /* Built */
+  .built-top{grid-template-columns:1fr!important;padding:1.5rem!important}
+
+  /* Strengths */
+  .str-grid{grid-template-columns:1fr!important}
+  .str-wide{flex-direction:column}
+  .str-card{padding:1.5rem}
+  .str-ico{width:40px;height:40px;font-size:1.5rem}
+  .str-title{font-size:1rem}
+
+  /* Skills */
+  .sk-grid{grid-template-columns:1fr!important}
+  .sk-hdr{padding:1rem 1.25rem}
+
+  /* Contact */
+  .kontakt{grid-template-columns:1fr!important}
+  .salbox{padding:1.5rem}
+  .saln{font-size:2.5rem}
+
+  /* Modal */
+  .cmc{padding:1.25rem;margin:.5rem}
+  .cmc-hdr{height:110px}
+  .cmc-title{font-size:1.1rem}
+  .cmc-metrics{grid-template-columns:repeat(3,1fr);gap:.5rem}
+  .cmc-m b{font-size:1.3rem}
+}
 </style>
 </head>
 <body>
@@ -584,7 +692,7 @@ const C = {
 <div class="wrap">
   <span class="lbl">Демо-каталог</span>
   <h2 class="ttl">Избранные работы</h2>
-  <p class="sub">Три открытых демо — чтобы вы почувствовали подход. Остальные проекты — только для тех, кто готов к диалогу.</p>
+  <p class="sub">Откройте демо-каталог на Яндекс.Диске — три реальных курса без NDA. Остальное — индивидуально, когда есть точки пересечения.</p>
 
   <div class="demo-grid" id="demo-grid">
     <!-- Cards built by JS below -->
@@ -595,137 +703,66 @@ const C = {
 <!-- SKILLS -->
 <section id="skills">
 <div class="wrap">
-  <span class="lbl">Арсенал</span>
-  <h2 class="ttl">Чем работаю<br>и что умею</h2>
-  <p class="sub">Инструменты — следствие задач, не самоцель. Вот что реально применяю в production уже 8+ лет.</p>
+  <span class="lbl">Как я работаю</span>
+  <h2 class="ttl">Сильные стороны</h2>
+  <p class="sub">Инструменты можно выучить. Характер — нет. Вот что я привношу в любой проект вне зависимости от задачи.</p>
 
-  <!-- Stat bar -->
-  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;border:1px solid var(--border);border-radius:14px;overflow:hidden;margin:2.5rem 0 2rem;background:var(--border)" data-a>
-    <div style="background:var(--bg2);padding:1.25rem 1.5rem;text-align:center">
-      <div style="font-size:1.75rem;font-weight:900;color:var(--cyan);letter-spacing:-.04em">8+</div>
-      <div style="font-size:.72rem;color:var(--dim);margin-top:.2rem;font-weight:500">лет в e-learning</div>
-    </div>
-    <div style="background:var(--bg2);padding:1.25rem 1.5rem;text-align:center">
-      <div style="font-size:1.75rem;font-weight:900;color:var(--cyan);letter-spacing:-.04em">100+</div>
-      <div style="font-size:.72rem;color:var(--dim);margin-top:.2rem;font-weight:500">курсов в production</div>
-    </div>
-    <div style="background:var(--bg2);padding:1.25rem 1.5rem;text-align:center">
-      <div style="font-size:1.75rem;font-weight:900;color:var(--cyan);letter-spacing:-.04em">15+</div>
-      <div style="font-size:.72rem;color:var(--dim);margin-top:.2rem;font-weight:500">инструментов в стеке</div>
-    </div>
-    <div style="background:var(--bg2);padding:1.25rem 1.5rem;text-align:center">
-      <div style="font-size:1.75rem;font-weight:900;color:var(--cyan);letter-spacing:-.04em">∞</div>
-      <div style="font-size:.72rem;color:var(--dim);margin-top:.2rem;font-weight:500">интерес к профессии</div>
-    </div>
-  </div>
+  <div class="str-grid" style="margin-top:3rem">
 
-  <div class="sk-grid">
-
-    <!-- E-learning — основа -->
-    <div class="sk-card sk-primary" data-a>
-      <div class="sk-hdr" style="background:linear-gradient(135deg,rgba(26,106,240,.15),rgba(0,207,255,.08))">
-        <div class="sk-hdr-ico">🎓</div>
-        <div>
-          <div class="sk-hdr-cat">Основная экспертиза</div>
-          <div class="sk-hdr-title">E-learning разработка</div>
-        </div>
-      </div>
-      <div class="sk-body">
-        <div class="sk-group-lbl">Разработка курсов</div>
-        <div class="sk-tags">
-          <span class="sk-tag expert">Articulate Storyline 360</span>
-          <span class="sk-tag expert">SCORM 1.2 / 2004</span>
-          <span class="sk-tag strong">Articulate Rise</span>
-          <span class="sk-tag strong">Adobe Captivate</span>
-          <span class="sk-tag">iSpring Suite</span>
-          <span class="sk-tag">xAPI (cmi5)</span>
-        </div>
-        <div class="sk-group-lbl" style="margin-top:1rem">LMS-платформы</div>
-        <div class="sk-tags">
-          <span class="sk-tag strong">WebTutor</span>
-          <span class="sk-tag strong">Teachbase</span>
-          <span class="sk-tag">Moodle</span>
-          <span class="sk-tag">iSpring Learn</span>
-        </div>
-        <div class="sk-note">Storyline — advanced уровень: кастомные JS-триггеры, нестандартные интеракции, адаптивная логика</div>
+    <div class="str-card" data-a>
+      <div class="str-num">01</div>
+      <div class="str-ico">🔍</div>
+      <div class="str-body">
+        <div class="str-title">Дотошность</div>
+        <div class="str-desc">Не успокаиваюсь, пока не разобрался до основания. Если что-то не работает или выглядит «не так» — это сигнал копать глубже, а не принять как есть.</div>
+        <div class="str-tag">Качество без компромиссов</div>
       </div>
     </div>
 
-    <!-- AI — дифференциатор -->
-    <div class="sk-card sk-ai" data-a>
-      <div class="sk-hdr" style="background:linear-gradient(135deg,rgba(0,207,255,.12),rgba(26,106,240,.08))">
-        <div class="sk-hdr-ico">🤖</div>
-        <div>
-          <div class="sk-hdr-cat">Дифференциатор · 2024–2025</div>
-          <div class="sk-hdr-title">AI / Автоматизация</div>
-        </div>
-        <div class="sk-ai-badge">↑ Тренд</div>
-      </div>
-      <div class="sk-body">
-        <div class="sk-group-lbl">LLM и генерация</div>
-        <div class="sk-tags">
-          <span class="sk-tag expert">Prompt-инженеринг</span>
-          <span class="sk-tag expert">Claude API</span>
-          <span class="sk-tag strong">GPT-4o</span>
-          <span class="sk-tag strong">RAG-системы</span>
-          <span class="sk-tag">LLM внутри Storyline (JS)</span>
-        </div>
-        <div class="sk-group-lbl" style="margin-top:1rem">Генерация контента и медиа</div>
-        <div class="sk-tags">
-          <span class="sk-tag strong">Midjourney / FLUX</span>
-          <span class="sk-tag strong">ElevenLabs</span>
-          <span class="sk-tag">AI-озвучка и видео</span>
-        </div>
-        <div class="sk-note">Собственный AI-pipeline: сборка часового курса за 18 ч вместо 60 ч</div>
+    <div class="str-card" data-a>
+      <div class="str-num">02</div>
+      <div class="str-ico">💡</div>
+      <div class="str-body">
+        <div class="str-title">Решаю. Всегда.</div>
+        <div class="str-desc">Выход из ситуации есть практически всегда — иногда он просто нестандартный. Вместо «это невозможно» я задаю вопрос: «как именно это сделать».</div>
+        <div class="str-tag">Solution-first мышление</div>
       </div>
     </div>
 
-    <!-- Tech -->
-    <div class="sk-card" data-a>
-      <div class="sk-hdr" style="background:linear-gradient(135deg,rgba(100,80,200,.12),rgba(60,40,160,.08))">
-        <div class="sk-hdr-ico">⚙️</div>
-        <div>
-          <div class="sk-hdr-cat">Под капотом</div>
-          <div class="sk-hdr-title">Тех-стек и медиа</div>
-        </div>
-      </div>
-      <div class="sk-body">
-        <div class="sk-tags">
-          <span class="sk-tag expert">JavaScript (Storyline triggers)</span>
-          <span class="sk-tag strong">HTML / CSS</span>
-          <span class="sk-tag">REST API basics</span>
-          <span class="sk-tag">Git</span>
-          <span class="sk-tag">Figma (read)</span>
-          <span class="sk-tag strong">Adobe Premiere Pro</span>
-          <span class="sk-tag">After Effects</span>
-          <span class="sk-tag">Audition</span>
-        </div>
+    <div class="str-card" data-a>
+      <div class="str-num">03</div>
+      <div class="str-ico">⚡</div>
+      <div class="str-body">
+        <div class="str-title">Обучаемость</div>
+        <div class="str-desc">Новый инструмент, технология или область — не барьер, а вызов. Разбираюсь быстро, внедряю сразу в практику. Именно так AI-инструменты стали частью рабочего процесса.</div>
+        <div class="str-tag">Новое — это интересно</div>
       </div>
     </div>
 
-    <!-- Management -->
-    <div class="sk-card" data-a>
-      <div class="sk-hdr" style="background:linear-gradient(135deg,rgba(34,197,94,.1),rgba(20,140,60,.06))">
-        <div class="sk-hdr-ico">🚀</div>
-        <div>
-          <div class="sk-hdr-cat">Лидерство · до 20 человек</div>
-          <div class="sk-hdr-title">Управление и процессы</div>
-        </div>
+    <div class="str-card" data-a>
+      <div class="str-num">04</div>
+      <div class="str-ico">🎯</div>
+      <div class="str-body">
+        <div class="str-title">Упорство</div>
+        <div class="str-desc">Упрямый в хорошем смысле. Если взялся — довожу до результата. Не сдаюсь на этапе «почти готово» и не считаю нормой сдать что-то вполсилы.</div>
+        <div class="str-tag">Доводит до конца</div>
       </div>
-      <div class="sk-body">
-        <div class="sk-tags">
-          <span class="sk-tag expert">Команда до 20 человек</span>
-          <span class="sk-tag strong">Постановка задач</span>
-          <span class="sk-tag strong">Менторинг</span>
-          <span class="sk-tag">Работа с заказчиком</span>
-          <span class="sk-tag">Контроль качества</span>
-          <span class="sk-tag">Production-процессы</span>
-          <span class="sk-tag">Снижение правок −85%</span>
-        </div>
+    </div>
+
+    <div class="str-card str-wide" data-a>
+      <div class="str-num">05</div>
+      <div class="str-ico">🚀</div>
+      <div class="str-body">
+        <div class="str-title">Беру управление. Когда это нужно.</div>
+        <div class="str-desc">Должность — это не ограничитель. Если вижу, что проект буксует, команда теряет направление или решение принимается неверно — включаюсь и веду. Не ради должности, а ради результата. Потом отпускаю обратно.</div>
+        <div class="str-tag">Лидерство по ситуации</div>
       </div>
     </div>
 
   </div>
+
+
+
 </div>
 </section>
 
@@ -770,11 +807,16 @@ document.getElementById('femail').href = 'mailto:'+C.email;
 document.getElementById('femail').textContent = C.email;
 
 // contact links
+// ─── CONTACTS ─────────────────────────────
 document.getElementById('klinks').innerHTML = [
-  {h:'tel:'+C.phone.replace(/\D/g,''), i:'📞', n:C.phone,   s:'Звонок или мессенджер'},
-  {h:'mailto:'+C.email,               i:'✉️', n:C.email,   s:'Предпочтительный способ'},
-  {h:C.hh, i:'💼', n:'Резюме на hh.ru', s:'Полный опыт и достижения', t:true},
-].map(l=>`<a href="${l.h}" class="klink"${l.t?' target="_blank"':''}><div class="kico">${l.i}</div><div><div class="kname">${l.n}</div><div class="ksub">${l.s}</div></div></a>`).join('');
+  {h:'tel:'+C.phone.replace(/\D/g,''),  i:'📞', n:C.phone,          s:'Звонок или мессенджер',        t:false},
+  {h:'https://t.me/YuriyKants',          i:'💬', n:'@YuriyKants',    s:'Telegram — отвечу быстро',     t:true },
+  {h:'mailto:'+C.email,                  i:'📧', n:C.email,          s:'Email',                         t:false},
+  {h:C.hh,                               i:'💼', n:'Резюме на hh.ru', s:'Полный опыт и достижения',     t:true },
+].map(l=>'<a href="'+l.h+'" class="klink"'+(l.t?' target="_blank"':'')+'>'+
+  '<div class="cl-ico">'+l.i+'</div>'+
+  '<div><div class="kname">'+l.n+'</div><div class="ksub">'+l.s+'</div></div></a>'
+).join('');
 
 // ─── YOUTUBE ───────────────────────────
 document.getElementById('ytt').textContent = C.ytTitle;
@@ -863,39 +905,31 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeCase();});
 // ─── DEMO CARDS ──────────────────────────
 const DEMOS = [
   {
-    num:'01', cat:'SCORM 1.2 · Compliance · Storyline 360',
-    icon:'🔒',
-    bg:'linear-gradient(135deg,#0b2545 0%,#1a3a6e 60%,#0d2d55 100%)',
-    title:'Основы информационной безопасности',
-    unique:'Адаптивная логика: курс меняет маршрут в зависимости от ответов учащегося — через кастомный JavaScript',
-    complexity:5,
-    tags:['Drag & Drop','Pick One','Видео + аудио','Custom JS'],
+    num:'01', cat:'SCORM 1.2 · Compliance',
+    icon:'🔒', title:'Основы информационной безопасности',
+    unique:'Адаптивная логика: курс меняет маршрут в зависимости от ответов — кастомный JavaScript',
+    complexity:5, tags:['Drag & Drop','Pick One','Custom JS'],
     metrics:[{v:'87%',l:'Completion'},{v:'19',l:'слайдов'}],
-    url: C.courses[0]?.url || '',
+    url:'https://disk.yandex.ru/d/H1Hxoqf9JsA0XQ', isVideo:false,
+    gradient:'135deg,#0b2545,#1a4a8a',
   },
   {
-    num:'02', cat:'Storyline 360 · Интерактивная механика',
-    icon:'👟',
-    bg:'linear-gradient(135deg,#0b2e24 0%,#12472e 60%,#0e3526 100%)',
-    title:'Завязываем шнурки',
-    unique:'Пошаговый drag-and-drop с валидацией каждого этапа — показывает, как Storyline может имитировать физические действия',
-    complexity:3,
-    tags:['Drag & Drop','Пошаговая механика','Геймификация'],
+    num:'02', cat:'Storyline 360 · Механика',
+    icon:'👟', title:'Завязываем шнурки',
+    unique:'Пошаговый drag-and-drop с валидацией каждого этапа',
+    complexity:3, tags:['Drag & Drop','Пошаговая механика'],
     metrics:[{v:'6',l:'шагов'},{v:'100%',l:'интерактив'}],
-    url: C.courses[1]?.url || '',
+    url:'https://disk.yandex.ru/d/H1Hxoqf9JsA0XQ', isVideo:false,
+    gradient:'135deg,#0b2e24,#165c42',
   },
   {
     num:'03', cat:'JavaScript · Нестандартное решение',
-    icon:'📄',
-    bg:'linear-gradient(135deg,#1a1418 0%,#2d1830 60%,#1a0f22 100%)',
-    title:'PDF-скачивание из Storyline',
-    unique:'Кнопка скачивания PDF прямо внутри SCORM — без LMS, через чистый JavaScript ещё до эпохи AI-инструментов',
-    complexity:4,
-    tags:['Custom JS','PDF Workflow','До AI-эпохи','Нестандартно'],
-    metrics:[{v:'JS',l:'only'},{v:'0',l:'зависимостей'}],
-    url: '',
-    isVideo: true,
-    videoId: C.ytId,
+    icon:'📄', title:'PDF-скачивание из Storyline',
+    unique:'Кнопка скачивания PDF внутри SCORM — чистый JS ещё до AI-инструментов',
+    complexity:4, tags:['Custom JS','PDF Workflow'],
+    metrics:[{v:'JS only',l:''},{v:'0',l:'зависимостей'}],
+    url:'', isVideo:true, videoId:C.ytId,
+    gradient:'135deg,#1a1030,#3a1260',
   },
 ];
 
@@ -903,51 +937,26 @@ function buildDemos() {
   const grid = document.getElementById('demo-grid');
   if (!grid) return;
 
-  // ── 3 demo cards ──────────────────────────────────
-  const cards = DEMOS.map((d, i) => {
-    const hasUrl  = d.url && d.url.trim() !== '';
-    const isVideo = d.isVideo && d.videoId;
-    const btnHref = isVideo
-      ? `https://www.youtube.com/watch?v=${d.videoId}`
-      : hasUrl ? d.url : '#';
-    const btnLabel = isVideo ? '▶ Смотреть демо' : hasUrl ? 'Открыть демо →' : 'Скоро';
-    const btnDisabled = (!hasUrl && !isVideo) ? 'style="opacity:.4;pointer-events:none"' : '';
-    const dots = Array.from({length:5},(_,j)=>`<div class="demo-dot${j<d.complexity?' on':''}"></div>`).join('');
-    return `<div class="demo-card" style="transition-delay:${i*0.12}s">
-      <div class="demo-hdr">
-        <div class="demo-hdr-bg" style="background:${d.bg};position:absolute;inset:0"></div>
-        <div class="demo-num">${d.num}</div>
-        <div class="demo-complexity">${dots}<span class="demo-complexity-lbl">сложность</span></div>
-        <div class="demo-tags-hdr">${d.tags.slice(0,2).map(t=>`<span class="tag tag-c" style="font-size:.68rem">${t}</span>`).join('')}</div>
-      </div>
-      <div class="demo-body">
-        <div class="demo-cat">${d.cat}</div>
-        <div class="demo-title">${d.icon} ${d.title}</div>
-        <div class="demo-unique">${d.unique}</div>
-      </div>
-      <div class="demo-foot">
-        <div class="demo-metrics">${d.metrics.map(m=>`<div class="demo-met"><strong>${m.v}</strong> ${m.l}</div>`).join('')}</div>
-        <a href="${btnHref}" target="_blank" class="demo-btn" ${btnDisabled}>${btnLabel}</a>
-      </div>
-    </div>`;
-  }).join('');
+  const YA = 'https://disk.yandex.ru/d/H1Hxoqf9JsA0XQ';
 
-  // ── Yandex Disk card — div + onclick (no nested anchors) ──────
-  const YA_URL = 'https://disk.yandex.ru/d/H1Hxoqf9JsA0XQ';
   const courses = [
     {num:'01',accent:'rgba(255,120,0',icon:'🎬',lbl:'Интерактивное кино',name:'СИБУР',desc:'Нелинейный сторителлинг — учащийся управляет историей'},
     {num:'02',accent:'rgba(220,30,30',icon:'🏙️',lbl:'Прохождение локаций',name:'АЛЬФА-БАНК',desc:'Диалоги с персонажами, выборы и ветвление'},
     {num:'03',accent:'rgba(30,180,80',icon:'👟',lbl:'Drag & Drop',name:'ШНУРКИ',desc:'Пошаговая симуляция физического навыка'},
   ];
+
   const previews = courses.map(c=>`
     <div style="position:relative;height:185px;overflow:hidden;
       background:linear-gradient(135deg,#080c18,#0d1528);
       display:flex;flex-direction:column;justify-content:flex-end;
       padding:1.25rem 1.5rem;border-right:1px solid rgba(255,255,255,.06)">
-      <div style="position:absolute;inset:0;background:linear-gradient(135deg,${c.accent},.07),transparent);pointer-events:none"></div>
+      <div style="position:absolute;inset:0;
+        background:linear-gradient(135deg,${c.accent},.07),transparent);
+        pointer-events:none"></div>
       <div style="position:absolute;top:.75rem;right:.875rem;width:36px;height:36px;
         background:${c.accent},.15);border:1px solid ${c.accent},.3);
-        border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.1rem">${c.icon}</div>
+        border-radius:9px;display:flex;align-items:center;justify-content:center;
+        font-size:1.1rem">${c.icon}</div>
       <div style="position:absolute;top:.5rem;left:1rem;font-size:5rem;font-weight:900;
         color:rgba(255,255,255,.03);line-height:1;pointer-events:none">${c.num}</div>
       <div style="position:relative;z-index:1">
@@ -958,31 +967,26 @@ function buildDemos() {
       </div>
     </div>`).join('');
 
-  const yadisk = `<div class="demo-yadisk" onclick="window.open('${YA_URL}','_blank')" style="cursor:pointer">
-    <div style="display:grid;grid-template-columns:repeat(3,1fr)">${previews}</div>
-    <div style="padding:1.25rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;
-      border-top:1px solid rgba(255,197,0,.15);background:rgba(255,197,0,.025)">
+  const yadisk = `<div class="demo-yadisk">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr)" class="yadisk-previews">${previews}</div>
+    <div style="padding:1.25rem 2rem;display:flex;align-items:center;
+      justify-content:space-between;gap:2rem;
+      border-top:1px solid rgba(255,197,0,.15);
+      background:rgba(255,197,0,.025)">
       <div>
-        <div style="display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,197,0,.1);
-          border:1px solid rgba(255,197,0,.25);border-radius:100px;padding:.2rem .75rem;
-          font-size:.64rem;font-weight:700;color:rgba(255,210,50,.9);letter-spacing:.08em;
-          text-transform:uppercase;margin-bottom:.5rem">☁️ Яндекс.Диск · Открытый доступ · Без NDA</div>
-        <div style="font-size:.85rem;color:var(--dim)">Скачайте и запустите в своей LMS — или просто откройте в браузере</div>
+        <div style="display:inline-flex;align-items:center;gap:.4rem;
+          background:rgba(255,197,0,.1);border:1px solid rgba(255,197,0,.25);
+          border-radius:100px;padding:.2rem .75rem;font-size:.64rem;font-weight:700;
+          color:rgba(255,210,50,.9);letter-spacing:.08em;text-transform:uppercase;
+          margin-bottom:.5rem">☁️ Яндекс.Диск · Открытый доступ · Без NDA</div>
+        <div style="font-size:.85rem;color:var(--dim)">
+          Скачайте и запустите в своей LMS — или просто откройте в браузере</div>
       </div>
-      <a href="https://disk.yandex.ru/d/H1Hxoqf9JsA0XQ" target="_blank"
-        onclick="event.stopPropagation()"
-        style="display:inline-flex;align-items:center;gap:.5rem;
-        background:rgba(255,197,0,.15);border:1.5px solid rgba(255,197,0,.4);
-        color:rgba(255,215,50,1);font-size:.85rem;font-weight:700;
-        padding:.7rem 1.5rem;border-radius:10px;white-space:nowrap;flex-shrink:0;
-        font-family:inherit;text-decoration:none;cursor:pointer;
-        transition:background .2s,transform .2s">
-        Открыть каталог →</a>
+      <a href="${YA}" target="_blank" onclick="event.stopPropagation()" class="ya-btn">Открыть каталог →</a>
     </div>
   </div>`;
 
-  // ── Locked card ───────────────────────────────────────────────
-  const locked = `<div class="demo-lock" style="transition-delay:0.55s">
+  const locked = `<div class="demo-lock">
     <div class="dl-left">
       <div class="dl-num">∞</div>
       <div class="dl-title">Закрытый каталог — от простого к сложному</div>
@@ -996,17 +1000,16 @@ function buildDemos() {
         <div class="dl-badge">AI-интеграции</div>
         <div class="dl-badge">Мультиязычность</div>
       </div>
-      <a href="#contact" class="btn btn-p" style="font-size:.85rem">Написать и договориться →</a>
+
     </div>
   </div>`;
 
-  grid.innerHTML = cards + yadisk + locked;
+  grid.innerHTML = yadisk + locked;
 
-  // Animate on scroll
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('demo-vis'); });
-  }, {threshold: 0.08});
-  grid.querySelectorAll('.demo-card, .demo-yadisk, .demo-lock').forEach(el => obs.observe(el));
+  const obs = new IntersectionObserver(es=>{
+    es.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('demo-vis'); });
+  },{threshold:.08});
+  grid.querySelectorAll('.demo-yadisk,.demo-lock').forEach(el=>obs.observe(el));
 }
 buildDemos();
 
