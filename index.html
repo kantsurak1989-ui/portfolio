@@ -10,7 +10,7 @@
 <style>
 :root{
   --f:'Outfit',sans-serif;
-  --bg:#050d1a; --bg2:#080f1e; --bg3:#0c1830; --bg4:#111f3a;
+  --bg:#0a1428; --bg2:#0d1830; --bg3:#102038; --bg4:#16284a;
   --blue:#1a6af0; --blue2:#3d87ff; --cyan:#00cfff; --green:#22c55e;
   --text:#dde6f5; --dim:#7a93b5; --dim2:#4e647e;
   --border:rgba(255,255,255,.07); --border2:rgba(255,255,255,.13);
@@ -18,11 +18,24 @@
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:var(--f);font-weight:400;line-height:1.65;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body{
+  background:
+    radial-gradient(ellipse 95% 65% at 15% -10%, rgba(61,135,255,.28), transparent 64%),
+    radial-gradient(ellipse 75% 55% at 105% 12%, rgba(0,207,255,.19), transparent 64%),
+    radial-gradient(ellipse 85% 65% at 50% 105%, rgba(124,77,255,.18), transparent 64%),
+    radial-gradient(ellipse 65% 45% at 82% 78%, rgba(34,197,94,.09), transparent 62%),
+    radial-gradient(ellipse 55% 40% at 5% 60%, rgba(255,197,0,.05), transparent 60%),
+    linear-gradient(165deg, #142a4e 0%, #112340 45%, #132646 100%);
+  color:var(--text);font-family:var(--f);font-weight:400;line-height:1.65;overflow-x:hidden;-webkit-font-smoothing:antialiased
+}
 body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(255,255,255,.016) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.016) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0}
 .orb{position:fixed;border-radius:50%;filter:blur(130px);pointer-events:none;z-index:0}
-.orb1{width:650px;height:650px;background:rgba(26,106,240,.1);top:-220px;right:-180px}
-.orb2{width:450px;height:450px;background:rgba(0,207,255,.055);bottom:15%;left:-180px}
+.orb1{width:680px;height:680px;background:rgba(61,135,255,.16);top:-220px;right:-180px;animation:orbFloat1 22s ease-in-out infinite}
+.orb2{width:480px;height:480px;background:rgba(0,207,255,.09);bottom:15%;left:-180px;animation:orbFloat2 26s ease-in-out infinite}
+.orb3{width:420px;height:420px;background:rgba(124,77,255,.10);top:45%;right:8%;animation:orbFloat3 30s ease-in-out infinite}
+@keyframes orbFloat1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-30px,40px) scale(1.08)}}
+@keyframes orbFloat2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(40px,-30px) scale(1.05)}}
+@keyframes orbFloat3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-25px,-35px) scale(1.1)}}
 
 /* ─── NAV ─── */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;background:rgba(5,13,26,.85);backdrop-filter:blur(22px);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 max(2rem,calc(50vw - 620px))}
@@ -97,66 +110,6 @@ section{padding:96px 0}
 .csnd{width:36px;height:36px;background:var(--blue);border:none;border-radius:8px;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s}
 .csnd:hover{background:var(--blue2)}
 
-/* ─── WORKFLOW ─── */
-#workflow{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.wgrid{display:grid;grid-template-columns:repeat(5,1fr);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-top:2.5rem}
-.ws{padding:1.75rem 1.5rem;border-right:1px solid var(--border);transition:background .3s,border-color .3s;cursor:pointer;user-select:none;position:relative}
-.ws:last-child{border-right:none}
-.ws:hover{background:rgba(26,106,240,.07)}
-.ws.wact{background:rgba(26,106,240,.12);border-bottom:3px solid var(--blue)}
-.ws.wact .wn{color:rgba(26,106,240,.35)}
-.wdetail{border:1px solid rgba(26,106,240,.3);border-radius:16px;background:var(--bg3);padding:2rem;margin-top:1rem;display:none;animation:wdin .3s ease}
-@keyframes wdin{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
-.wdetail.open{display:block}
-.wdt{font-size:1.1rem;font-weight:700;margin-bottom:.75rem;letter-spacing:-.01em}
-.wdd{font-size:.9rem;font-weight:400;color:var(--dim);line-height:1.7;margin-bottom:1.25rem}
-.wdtools{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.25rem}
-.wdbenefit{background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.25);border-radius:10px;padding:.875rem 1.1rem;font-size:.85rem;color:var(--green);font-weight:500}
-.wdbenefit span{color:rgba(34,197,94,.7);font-weight:400;display:block;font-size:.78rem;margin-top:.2rem}
-.wn{font-size:2.75rem;font-weight:900;color:rgba(26,106,240,.1);line-height:1;margin-bottom:.875rem;letter-spacing:-.04em}
-.wi{font-size:1.6rem;margin-bottom:.625rem}
-.wt{font-size:.95rem;font-weight:700;margin-bottom:.4rem}
-.wd{font-size:.78rem;font-weight:400;color:var(--dim);line-height:1.5}
-.wbar{margin-top:2rem;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem 2rem;display:flex;align-items:center;gap:2.5rem;flex-wrap:wrap}
-.wbs b{display:block;font-size:2.2rem;font-weight:900;color:var(--cyan);line-height:1;letter-spacing:-.04em}
-.wbs p{font-size:.78rem;font-weight:400;color:var(--dim);margin-top:.2rem}
-.warr{font-size:1.4rem;color:var(--dim2)}
-
-/* ─── CASES ─── */
-.cgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
-.ccard{background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden;cursor:pointer;position:relative;transition:transform .35s,border-color .35s,box-shadow .35s}
-.ccard::after{content:'Подробнее →';position:absolute;bottom:1rem;right:1.25rem;font-size:.72rem;font-weight:600;color:var(--blue2);opacity:0;transition:opacity .3s,transform .3s;transform:translateX(-4px)}
-.ccard:hover{transform:translateY(-6px);border-color:rgba(26,106,240,.4);box-shadow:0 24px 70px rgba(0,0,0,.45),0 0 50px rgba(26,106,240,.1)}
-.ccard:hover::after{opacity:1;transform:translateX(0)}
-.cth{height:180px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;position:relative;overflow:hidden}
-.cth::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(0,0,0,.35));pointer-events:none}
-.ct1{background:linear-gradient(135deg,#0b2545,#1a4a8a)}.ct2{background:linear-gradient(135deg,#0b2e24,#165c42)}.ct3{background:linear-gradient(135deg,#1a1030,#3a1260)}
-.cbdg{position:absolute;top:.875rem;right:.875rem;z-index:1}
-.cbody{padding:1.5rem}
-.ccat{font-size:.68rem;font-weight:700;color:var(--cyan);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.5rem}
-.ctitle{font-size:1.05rem;font-weight:700;line-height:1.3;margin-bottom:.75rem;letter-spacing:-.01em}
-.cdesc{font-size:.82rem;color:var(--dim);line-height:1.6;margin-bottom:1.1rem}
-.cmet{display:flex;gap:1rem;flex-wrap:wrap;padding-top:.75rem;border-top:1px solid var(--border)}
-.cm2{font-size:.8rem}.cm2 strong{color:var(--blue2);font-weight:700}
-.cmodal{position:fixed;inset:0;z-index:600;background:rgba(5,13,26,.88);backdrop-filter:blur(14px);display:none;align-items:center;justify-content:center;padding:2rem}
-.cmodal.open{display:flex}
-.cmc{background:var(--bg3);border:1px solid var(--border2);border-radius:22px;max-width:min(700px,calc(100vw - 2rem));width:100%;max-height:88vh;overflow-y:auto;padding:2.5rem;position:relative;animation:modIn .3s cubic-bezier(.22,.68,0,1.2)}
-@keyframes modIn{from{opacity:0;transform:scale(.93) translateY(24px)}to{opacity:1;transform:none}}
-.cmc-x{position:absolute;top:1.25rem;right:1.25rem;width:36px;height:36px;background:var(--card2);border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.9rem;color:var(--dim);transition:all .2s}
-.cmc-x:hover{background:rgba(255,255,255,.1);color:var(--text)}
-.cmc-hdr{height:150px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:4rem;margin-bottom:2rem}
-.cmc-lbl{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);margin-bottom:.75rem}
-.cmc-title{font-size:1.5rem;font-weight:800;letter-spacing:-.02em;margin-bottom:1.5rem;line-height:1.2}
-.cmc-steps{display:flex;flex-direction:column;gap:1rem;margin-bottom:1.75rem}
-.cmc-step{display:flex;gap:1rem;align-items:flex-start}
-.cmc-sico{width:36px;height:36px;border-radius:10px;background:rgba(26,106,240,.15);border:1px solid rgba(26,106,240,.3);display:flex;align-items:center;justify-content:center;font-size:1.05rem;flex-shrink:0;margin-top:2px}
-.cmc-slbl{font-size:.68rem;font-weight:700;color:var(--cyan);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.2rem}
-.cmc-stxt{font-size:.875rem;color:var(--dim);line-height:1.6}
-.cmc-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:.875rem;margin-bottom:1.75rem}
-.cmc-m{background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.2);border-radius:12px;padding:1rem;text-align:center}
-.cmc-m b{display:block;font-size:1.7rem;font-weight:900;color:var(--green);letter-spacing:-.04em;line-height:1}
-.cmc-m span{font-size:.7rem;color:var(--dim);margin-top:.25rem;display:block}
-
 /* ─── YOUTUBE ─── */
 .ytcard{background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden;margin-top:1.5rem}
 .ytop{padding:1.75rem 2rem;display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:start}
@@ -207,10 +160,7 @@ section{padding:96px 0}
 .demo-btn.req{background:transparent;border:1px solid var(--border2);color:var(--dim);pointer-events:none}
 /* locked card */
 /* Yandex Disk card */
-.demo-yadisk{grid-column:1/-1;border:1px solid rgba(255,197,0,.2);border-radius:20px;overflow:hidden;opacity:0;transform:translateY(28px);transition:transform .35s,border-color .3s,box-shadow .3s,opacity .35s;transition-delay:0.36s}
-.demo-yadisk.demo-vis{opacity:1;transform:translateY(0)}
-.demo-yadisk:hover{border-color:rgba(255,197,0,.4);box-shadow:0 16px 50px rgba(255,197,0,.06)}
-.demo-yadisk::before{content:'';position:absolute;top:-60px;left:-60px;width:220px;height:220px;background:radial-gradient(circle,rgba(255,197,0,.07),transparent 70%);pointer-events:none}
+
 .dyd-left{flex:1}
 .dyd-badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,197,0,.1);border:1px solid rgba(255,197,0,.3);border-radius:100px;padding:.25rem .875rem;font-size:.7rem;font-weight:700;color:rgba(255,197,0,.9);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.875rem}
 .dyd-title{font-size:1.3rem;font-weight:800;letter-spacing:-.02em;margin-bottom:.5rem}
@@ -222,6 +172,53 @@ section{padding:96px 0}
 .dyd-btn{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,197,0,.12);border:1.5px solid rgba(255,197,0,.4);color:rgba(255,220,50,1);font-size:.85rem;font-weight:700;padding:.7rem 1.5rem;border-radius:10px;text-decoration:none;transition:all .25s;white-space:nowrap;font-family:var(--f)}
 .dyd-btn:hover{background:rgba(255,197,0,.22);border-color:rgba(255,197,0,.7);transform:translateY(-2px);box-shadow:0 8px 25px rgba(255,197,0,.15)}
 .dyd-note{font-size:.72rem;color:var(--dim2);text-align:center}
+.proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.25rem}
+.proj-card{
+  position:relative;
+  display:flex;flex-direction:column;
+  background:var(--bg3);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:1.75rem;
+  text-decoration:none;
+  color:var(--text);
+  overflow:hidden;
+  opacity:0;transform:translateY(28px);
+  transition:transform .4s cubic-bezier(.22,.68,0,1.1),opacity .4s,border-color .3s,box-shadow .4s;
+}
+.proj-card.demo-vis{opacity:1;transform:translateY(0)}
+.proj-card:hover{
+  transform:translateY(-7px);
+  border-color:rgba(255,255,255,.22);
+  box-shadow:0 26px 70px rgba(0,0,0,.5);
+}
+.proj-card::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.06) 50%,transparent 60%);
+  transform:translateX(-120%);transition:transform .7s ease;pointer-events:none;
+}
+.proj-card:hover::after{transform:translateX(120%)}
+.proj-glow{
+  position:absolute;top:-40%;right:-30%;width:70%;height:140%;
+  pointer-events:none;opacity:0;transition:opacity .4s;
+}
+.proj-card:hover .proj-glow{opacity:1}
+.proj-top{display:flex;align-items:center;justify-content:space-between;gap:.75rem;margin-bottom:1.1rem;position:relative;z-index:1}
+.proj-ico{
+  width:52px;height:52px;border-radius:14px;border:1px solid;
+  display:flex;align-items:center;justify-content:center;font-size:1.6rem;
+  transition:transform .35s cubic-bezier(.22,.68,0,1.4);flex-shrink:0;
+}
+.proj-card:hover .proj-ico{transform:scale(1.12) rotate(-4deg)}
+.proj-badge{font-size:.66rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:.28rem .7rem;border-radius:100px;border:1px solid;white-space:nowrap}
+.proj-title{font-size:1.15rem;font-weight:800;letter-spacing:-.015em;margin-bottom:.625rem;line-height:1.3;position:relative;z-index:1}
+.proj-desc{font-size:.85rem;color:var(--dim);line-height:1.65;margin-bottom:1.1rem;flex:1;position:relative;z-index:1}
+.proj-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.1rem;position:relative;z-index:1}
+.proj-foot{display:flex;align-items:center;justify-content:space-between;gap:.5rem;padding-top:1rem;border-top:1px solid var(--border);position:relative;z-index:1}
+.proj-cta{font-size:.85rem;font-weight:700}
+.proj-arrow{transition:transform .3s;color:var(--dim)}
+.proj-card:hover .proj-arrow{transform:translate(3px,-3px);color:inherit}
+
 .demo-lock{grid-column:1/-1;border:1px dashed rgba(26,106,240,.3);border-radius:20px;background:linear-gradient(135deg,rgba(26,106,240,.04),rgba(0,207,255,.03));padding:3rem;display:flex;align-items:center;justify-content:space-between;gap:3rem;position:relative;overflow:hidden;opacity:0;transform:translateY(30px);transition:transform .35s,border-color .3s}
 .demo-lock.demo-vis{opacity:1;transform:translateY(0)}
 .demo-lock:hover{border-color:rgba(26,106,240,.5);background:linear-gradient(135deg,rgba(26,106,240,.07),rgba(0,207,255,.05))}
@@ -321,7 +318,7 @@ footer a{color:var(--blue2);text-decoration:none}
 ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:10px}
 
 /* ─── RESPONSIVE ─── */
-@media(max-width:1060px){.hg{grid-template-columns:1fr}.cc{display:none}.wgrid{grid-template-columns:repeat(3,1fr)}.cgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:1060px){.hg{grid-template-columns:1fr}.cc{display:none}}
 /* ═══════════════════════════════════
    RESPONSIVE — mobile first approach
    ═══════════════════════════════════ */
@@ -337,18 +334,15 @@ footer a{color:var(--blue2);text-decoration:none}
 @media(max-width:1060px){
   .hg{grid-template-columns:1fr}
   .cc{display:none}
-  .wgrid{grid-template-columns:repeat(3,1fr)}
-  .cgrid{grid-template-columns:1fr 1fr}
 }
 
 /* ── 768px ── */
 @media(max-width:768px){
   .nli{display:none}
-  .hg,.cgrid,.kontakt,.str-grid,.sk-grid,.ytop{grid-template-columns:1fr!important}
-  .wgrid{grid-template-columns:1fr 1fr}
+  .hg,.kontakt,.str-grid,.sk-grid,.ytop{grid-template-columns:1fr!important}
   .built-top{grid-template-columns:1fr!important}
   .str-wide{flex-direction:column}
-  .yadisk-previews{grid-template-columns:1fr!important}
+  .proj-grid{grid-template-columns:1fr!important}
   .demo-lock{flex-direction:column;padding:1.75rem}
   .dl-right{align-items:flex-start;width:100%}
   .dl-badges{align-items:flex-start}
@@ -371,23 +365,12 @@ footer a{color:var(--blue2);text-decoration:none}
   .hact{flex-direction:column;gap:.75rem}
   .hact .btn{width:100%;justify-content:center}
 
-  /* Workflow */
-  .wgrid{grid-template-columns:1fr 1fr}
-  .wbar{flex-direction:column;gap:.75rem;align-items:flex-start}
-  .wdetail{padding:1.25rem}
-
-  /* Cases */
-  .cgrid{grid-template-columns:1fr!important}
   .cth{height:130px}
-
   /* YT header */
   .ytop{grid-template-columns:1fr!important;padding:1.25rem!important}
   .ytop>div:last-child{display:none}
 
   /* Demo section */
-  .yadisk-previews{grid-template-columns:1fr!important}
-  .demo-yadisk>div:last-child{flex-direction:column;gap:.875rem;padding:1.1rem}
-  .ya-btn{width:100%;justify-content:center;text-align:center}
   .demo-lock{flex-direction:column;padding:1.25rem;gap:1.25rem}
   .dl-right{width:100%;align-items:flex-start}
   .dl-num{font-size:2.25rem}
@@ -420,119 +403,14 @@ footer a{color:var(--blue2);text-decoration:none}
   .cmc-m b{font-size:1.3rem}
 }
 
-/* ─── YANDEX DISK CARD — comprehensive styles ─── */
-.demo-yadisk{
-  grid-column:1/-1;
-  border:1px solid rgba(255,197,0,.2);
-  border-radius:20px;
-  overflow:hidden;
-  background:linear-gradient(135deg,rgba(255,197,0,.02),rgba(255,160,0,.03));
-  opacity:0;
-  transform:translateY(28px);
-  transition:transform .35s,opacity .35s,border-color .3s,box-shadow .3s;
-  transition-delay:.1s;
-}
-.demo-yadisk.demo-vis{opacity:1;transform:translateY(0)}
-.demo-yadisk:hover{border-color:rgba(255,197,0,.4);box-shadow:0 16px 50px rgba(255,197,0,.06)}
-
-.yadisk-previews{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-}
-
-.yadisk-foot{
-  padding:1.5rem 2rem;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:1.5rem;
-  flex-wrap:wrap;
-  border-top:1px solid rgba(255,197,0,.15);
-  background:rgba(255,197,0,.025);
-}
-.yadisk-info{flex:1;min-width:240px}
-.yadisk-badge{
-  display:inline-flex;
-  align-items:center;
-  gap:.4rem;
-  background:rgba(255,197,0,.1);
-  border:1px solid rgba(255,197,0,.25);
-  border-radius:100px;
-  padding:.22rem .75rem;
-  font-size:.66rem;
-  font-weight:700;
-  color:rgba(255,210,50,.95);
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  margin-bottom:.55rem;
-}
-.yadisk-desc{
-  font-size:.85rem;
-  color:var(--dim);
-  line-height:1.5;
-}
-
-.ya-btn{
-  display:inline-flex !important;
-  align-items:center;
-  justify-content:center;
-  gap:.5rem;
-  background:rgba(255,197,0,.15);
-  border:1.5px solid rgba(255,197,0,.45);
-  color:rgba(255,215,50,1) !important;
-  font-size:.9rem;
-  font-weight:700;
-  padding:.75rem 1.75rem;
-  border-radius:10px;
-  white-space:nowrap;
-  flex-shrink:0;
-  font-family:'Outfit',sans-serif;
-  text-decoration:none !important;
-  cursor:pointer !important;
-  transition:background .25s,transform .2s,box-shadow .25s,border-color .25s;
-  position:relative;
-  z-index:5;
-}
-.ya-btn:hover{
-  background:rgba(255,197,0,.3);
-  border-color:rgba(255,197,0,.75);
-  transform:translateY(-2px);
-  box-shadow:0 10px 28px rgba(255,197,0,.22);
-  color:rgba(255,225,80,1) !important;
-}
-.ya-btn:active{transform:translateY(0)}
-
-
 /* ─── EXTRA MOBILE OVERRIDES ─── */
 @media(max-width:768px){
-  /* Workflow detail panel — stack columns */
-  .wdetail > div{grid-template-columns:1fr !important;gap:1.25rem !important}
-  .wdbenefit{min-width:0 !important;width:100%}
-
-  /* All inline grids that need stacking */
-  .demo-yadisk > div:first-child{grid-template-columns:1fr !important}
-
-  /* Long titles shouldn't break per word */
-  .wdt,.ctitle,.dl-title,.str-title,.cmc-title{word-break:normal;overflow-wrap:break-word}
-
-  /* Ensure flex children can shrink */
-  .demo-card>div,.sk-card>div,.str-card>*,.wdetail>*,.built>*,.demo-lock>*{min-width:0}
-
-  /* Yadisk foot — wrap properly */
-  .yadisk-foot{flex-direction:column;align-items:stretch;gap:1rem}
-  .ya-btn{width:100%}
+  .ctitle,.dl-title,.str-title,.cmc-title{word-break:normal;overflow-wrap:break-word}
+  .proj-card>*,.str-card>*,.built>*,.demo-lock>*{min-width:0}
 }
 
 @media(max-width:480px){
-  /* Smaller inner padding for tight screens */
-  .wdetail{padding:1.25rem}
-  .wdetail .wdt{font-size:1rem}
-  .cmodal{padding:1rem}
   .cmc{padding:1.25rem;max-height:90vh}
-
-  /* Yadisk previews — keep wide enough */
-  .yadisk-previews{grid-template-columns:1fr !important}
-  .yadisk-previews > div{min-height:140px}
 
   /* Stats narrower */
   .hstats{gap:.4rem}
@@ -540,7 +418,6 @@ footer a{color:var(--blue2);text-decoration:none}
   .stl{font-size:.6rem}
 
   /* Workflow bar on mobile */
-  .wbar{padding:1rem 1.25rem;gap:.5rem !important}
   .warr{display:none}
   .wbs{flex:1 1 45%}
   .wbs b{font-size:1.4rem}
@@ -558,13 +435,7 @@ html,body{overflow-x:hidden;max-width:100vw}
 img,iframe,video{max-width:100%;height:auto}
 
 
-/* ─── Workflow Detail Inner Grid ─── */
-.wdetail-inner{
-  display:grid;
-  grid-template-columns:1fr 240px;
-  gap:2rem;
-  align-items:start;
-}
+
 .wdbenefit{
   background:rgba(34,197,94,.07);
   border:1px solid rgba(34,197,94,.25);
@@ -585,14 +456,56 @@ img,iframe,video{max-width:100%;height:auto}
 
 /* Mobile: stack detail columns */
 @media(max-width:900px){
-  .wdetail-inner{grid-template-columns:1fr !important}
   .wdbenefit{width:100%}
 }
-@media(max-width:480px){
-  .wdetail{padding:1.25rem}
-  .wdetail-inner{gap:1rem}
-  .wdt{font-size:1rem !important}
+
+
+/* ─── WOW: staggered entrance + shine effects ─── */
+.hstats .stat:nth-child(1){transition-delay:.05s}
+.hstats .stat:nth-child(2){transition-delay:.14s}
+.hstats .stat:nth-child(3){transition-delay:.23s}
+
+.str-grid .str-card:nth-child(1){transition-delay:.04s}
+.str-grid .str-card:nth-child(2){transition-delay:.12s}
+.str-grid .str-card:nth-child(3){transition-delay:.20s}
+.str-grid .str-card:nth-child(4){transition-delay:.28s}
+.str-grid .str-card:nth-child(5){transition-delay:.36s}
+
+.klinks .klink:nth-child(1){transition-delay:.05s}
+.klinks .klink:nth-child(2){transition-delay:.12s}
+.klinks .klink:nth-child(3){transition-delay:.19s}
+.klinks .klink:nth-child(4){transition-delay:.26s}
+
+/* shine sweep on primary CTA — mirrors proj-card effect */
+.btn-p{position:relative;overflow:hidden}
+.btn-p::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.35) 50%,transparent 60%);
+  transform:translateX(-130%);transition:transform .6s ease;pointer-events:none;
 }
+.btn-p:hover::after{transform:translateX(130%)}
+
+/* salary box gentle glow pulse */
+.salbox{position:relative}
+.salbox::before{
+  content:'';position:absolute;inset:-1px;border-radius:18px;
+  background:linear-gradient(135deg,rgba(0,207,255,.3),rgba(26,106,240,.3),rgba(124,77,255,.3));
+  z-index:-1;opacity:.5;filter:blur(14px);
+  animation:salGlow 4s ease-in-out infinite;
+}
+@keyframes salGlow{0%,100%{opacity:.35}50%{opacity:.65}}
+
+/* str-ico subtle bounce on card hover */
+.str-card:hover .str-ico{transform:scale(1.1) rotate(-3deg);transition:transform .35s cubic-bezier(.22,.68,0,1.4)}
+.str-ico{transition:transform .35s cubic-bezier(.22,.68,0,1.4)}
+
+/* hero stat number tick-in feel */
+.stat{transition:transform .3s,border-color .3s,box-shadow .3s}
+.stat:hover{transform:translateY(-3px);border-color:rgba(0,207,255,.3);box-shadow:0 12px 30px rgba(0,207,255,.08)}
+
+/* nav logo subtle shimmer on load */
+@keyframes navShimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+.nl{background-size:200% auto;animation:navShimmer 6s linear infinite}
 
 </style>
 </head>
@@ -600,6 +513,7 @@ img,iframe,video{max-width:100%;height:auto}
 
 <div class="orb orb1"></div>
 <div class="orb orb2"></div>
+<div class="orb orb3"></div>
 
 <!-- =====================================================
   ⚙️  КОНФИГУРАЦИЯ — РЕДАКТИРУЙТЕ ТОЛЬКО ЗДЕСЬ
@@ -613,7 +527,7 @@ const C = {
   phone:   '+7 (968) 991-25-04',
   email:   'kantsurak89@gmail.com',
   hh:      'https://hh.ru',            // ← вставьте прямую ссылку на ваше резюме
-  salary:  '180 000',
+  salary:  '130 000',
 
   // ── YOUTUBE ────────────────────────────────────────
   // ID из ссылки youtube.com/watch?v=ВОТ_ЭТО
@@ -680,8 +594,7 @@ const C = {
 <nav>
   <a href="#" class="nl" style="font-size:1rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;background:linear-gradient(90deg,var(--text) 60%,var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Портфолио</a>
   <ul class="nli">
-    <li><a href="#workflow">AI-процесс</a></li>
-    <li><a href="#cases">Кейсы</a></li>
+    <li><a href="#cases">Видео</a></li>
     <li><a href="#scorm">Курсы</a></li>
     <li><a href="#skills">Навыки</a></li>
   </ul>
@@ -734,57 +647,12 @@ const C = {
 </div>
 </section>
 
-<!-- AI WORKFLOW -->
-<section id="workflow">
-<div class="wrap">
-  <span class="lbl">AI + Production</span>
-  <h2 class="ttl">Как AI встроен<br>в мой рабочий процесс</h2>
-  <p class="sub">Все эти инструменты доступны — главное желание и доступ. Я использую полный стек сам и помогу выстроить его для вашей команды: подберу альтернативы, обойду ограничения, обучу процессу.</p>
-  <div class="wgrid" id="wgrid">
-    <div class="ws" data-a onclick="showStep(0)"><div class="wn">01</div><div class="wi">🗂️</div><div class="wt">Outline</div><div class="wd">LLM строит структуру модулей по теме и аудитории.</div><div style="margin-top:.75rem"><span class="tag tag-c">Claude / GPT-4o</span></div></div>
-    <div class="ws" data-a onclick="showStep(1)"><div class="wn">02</div><div class="wi">✍️</div><div class="wt">Скрипты и тесты</div><div class="wd">Черновики диалогов и вопросов — за минуты. Финал — мой.</div><div style="margin-top:.75rem"><span class="tag tag-c">Prompt-инженеринг</span></div></div>
-    <div class="ws" data-a onclick="showStep(2)"><div class="wn">03</div><div class="wi">🎨</div><div class="wt">Storyboard</div><div class="wd">Педагогическое решение и UX-логика — только я.</div><div style="margin-top:.75rem"><span class="tag tag-d">Только я</span></div></div>
-    <div class="ws" data-a onclick="showStep(3)"><div class="wn">04</div><div class="wi">🖼️</div><div class="wt">Визуал</div><div class="wd">Иллюстрации и фоны — генеративные модели.</div><div style="margin-top:.75rem"><span class="tag tag-c">Midjourney / FLUX</span></div></div>
-    <div class="ws" data-a onclick="showStep(4)"><div class="wn">05</div><div class="wi">🔊</div><div class="wt">Озвучка</div><div class="wd">AI-голоса для черновиков. Диктор — для premium.</div><div style="margin-top:.75rem"><span class="tag tag-c">ElevenLabs</span></div></div>
-  </div>
-
-  <!-- Detail panel — появляется при клике на карточку -->
-  <div class="wdetail" id="wdetail"></div>
-
-  <!-- Quality bar -->
-  <div class="wbar">
-    <div class="wbs"><b>87%</b><p>avg completion rate</p></div>
-    <div class="warr">·</div>
-    <div class="wbs"><b>4.6<span style="font-size:1.2rem">/5</span></b><p>средняя оценка курсов</p></div>
-    <div class="warr">·</div>
-    <div class="wbs"><b>1–2</b><p>итерации правок вместо 10</p></div>
-    <div class="warr">·</div>
-    <div class="wbs" style="border-left:2px solid var(--cyan);padding-left:1.5rem"><b style="color:var(--green)">≠ быстрее</b><p>качественнее и точнее</p></div>
-  </div>
-</div>
-</section>
-
 <!-- CASES + YOUTUBE -->
 <section id="cases">
 <div class="wrap">
-  <span class="lbl">Кейсы</span>
-  <h2 class="ttl">Проекты и видео-демо</h2>
-  <p class="sub">Реальные задачи — проблема, роль, результат. Нажмите на карточку чтобы увидеть полный разбор.</p>
-
-  <div class="cgrid" style="margin-top:2.5rem">
-    <div class="ccard" data-a onclick="openCase(0)">
-      <div class="cth ct1"><span>🏛️</span><div class="cbdg"><span class="tag tag-d">Качество обучения</span></div></div>
-      <div class="cbody"><div class="ccat">Compliance · Storyline 360 · 8+ лет опыта</div><h3 class="ctitle">Когда «достаточно хорошо» — недостаточно</h3><p class="cdesc">Обязательный курс для 2 400 сотрудников, который реально учит — не имитирует обучение. Адаптивная логика, три типа интерактивов, живые сценарии.</p><div class="cmet"><div class="cm2">Completion <strong>87%</strong></div><div class="cm2">Оценка <strong>4.6/5</strong></div><div class="cm2">Правок <strong>2 итер.</strong></div></div></div>
-    </div>
-    <div class="ccard" data-a onclick="openCase(1)">
-      <div class="cth ct2"><span>🔭</span><div class="cbdg"><span class="tag tag-c">Нестандартное решение</span></div></div>
-      <div class="cbody"><div class="ccat">EdTech · JavaScript глубокий уровень</div><h3 class="ctitle">Там, где инструмент говорит «нельзя» — я ищу как иначе</h3><p class="cdesc">AI-тьютор внутри SCORM-курса: вопрос учащегося → LLM API → ответ прямо в Storyline. Без выхода из курса. Первая такая реализация у заказчика.</p><div class="cmet"><div class="cm2">Вовлечённость <strong>+41%</strong></div><div class="cm2">Поддержка <strong>−3×</strong></div></div></div>
-    </div>
-    <div class="ccard" data-a onclick="openCase(2)">
-      <div class="cth ct3"><span>⚗️</span><div class="cbdg"><span class="tag tag-b">О скорости и качестве</span></div></div>
-      <div class="cbody"><div class="ccat">AI-pipeline · Честно о компромиссах</div><h3 class="ctitle">Быстрее — не значит хуже.<br>Если знаешь, где нельзя срезать</h3><p class="cdesc">AI автоматизирует рутину. Педагогическое мышление — только человек. Именно это разделение даёт ×3.3 к скорости без потери качества.</p><div class="cmet"><div class="cm2">Скорость <strong>×3.3</strong></div><div class="cm2">Правки <strong>−85%</strong></div></div></div>
-    </div>
-  </div>
+  <span class="lbl">Видео</span>
+  <h2 class="ttl">Демо в деле</h2>
+  <p class="sub">Короткое видео о том, как я решаю задачи нестандартно — плюс взгляд за кулисы этого самого сайта.</p>
 
   <!-- YouTube embedded -->
   <div class="ytcard" data-a>
@@ -854,20 +722,12 @@ const C = {
 </div>
 </section>
 
-<!-- Case Modal -->
-<div class="cmodal" id="cmodal" onclick="if(event.target===this)closeCase()">
-  <div class="cmc" id="cmc-inner">
-    <div class="cmc-x" onclick="closeCase()">✕</div>
-    <div id="cmc-content"></div>
-  </div>
-</div>
-
 <!-- SCORM DEMO -->
 <section id="scorm">
 <div class="wrap">
   <span class="lbl">Демо-каталог</span>
   <h2 class="ttl">Избранные работы</h2>
-  <p class="sub">Откройте демо-каталог на Яндекс.Диске — три реальных курса без NDA. Остальное — индивидуально, когда есть точки пересечения.</p>
+  <p class="sub">Открытые проекты — кликните, чтобы посмотреть. Остальное показываю индивидуально, когда есть точки пересечения.</p>
 
   <div class="demo-grid" id="demo-grid">
     <!-- Cards built by JS below -->
@@ -1012,71 +872,6 @@ window.embedYt = function(){
   if(C.ytId) window.open('https://www.youtube.com/watch?v='+C.ytId,'_blank');
 };
 
-// ─── CASE MODAL ────────────────────────
-const CASES=[
-  {
-    emoji:'🏛️',bg:'linear-gradient(135deg,#0b2545,#1a4a8a)',
-    lbl:'Compliance · Storyline 360 · Банковский сектор',
-    title:'Когда «достаточно хорошо» — недостаточно: курс для 2 400 сотрудников',
-    steps:[
-      {ico:'⚖️',lbl:'Суть проблемы',txt:'Обязательное обучение по информационной безопасности превратилось в формальность: сотрудники кликали «далее», не читая. Completion rate 58% — но реального усвоения ноль. А на кону — персональные данные клиентов.'},
-      {ico:'🎓',lbl:'Позиция',txt:'Я убеждён: если обучение существует только для галочки — лучше его не делать вовсе. Взял полный цикл: методология, сценарий, UX, разработка в Storyline. Цель — курс, который реально учит, а не имитирует обучение.'},
-      {ico:'🔬',lbl:'Нестандартное решение',txt:'Кастомная JS-логика ветвления: курс подстраивается под каждого. Тот, кто ошибается — получает глубину и упражнения. Тот, кто знает — идёт коротким путём. Три типа интерактивов, диалоговые симуляции реальных ситуаций. Не «ответь на 5 вопросов», а «разыграй сценарий».'},
-      {ico:'📊',lbl:'Что получилось',txt:'87% completion — и это осознанное прохождение, а не принудительное. Оценка 4.6 из 5. Правок потребовалось 2 итерации вместо стандартных 8–10 — потому что методология была продумана до начала разработки, а не во время.'},
-    ],
-    metrics:[{v:'87%',l:'Completion Rate'},{v:'4.6/5',l:'Оценка от учащихся'},{v:'2',l:'Итерации правок'}],
-    tags:['SCORM 1.2','Storyline 360','Custom JS','Диалоговые симуляции','Adaptive Learning'],
-  },
-  {
-    emoji:'🔭',bg:'linear-gradient(135deg,#0b2e24,#165c42)',
-    lbl:'EdTech · JavaScript + LLM API · Нестандартное решение',
-    title:'Там, где инструмент говорит «нельзя» — я ищу как сделать иначе',
-    steps:[
-      {ico:'🧩',lbl:'Ограничение системы',txt:'LMS не поддерживает вопросы внутри курса. Учащиеся терялись, задавали вопросы по email, выбивались из потока. Стандартное решение — «добавьте FAQ». Неинтересно.'},
-      {ico:'🔍',lbl:'Моя позиция',txt:'8 лет в профессии дают насмотренность: я знаю, что Articulate Storyline — это не просто слайды. Это полноценная среда с JavaScript-доступом. Если инструмент знаешь глубоко — находишь возможности, которые другие не видят.'},
-      {ico:'⚡',lbl:'Что придумал',txt:'JavaScript-триггер внутри Storyline собирает вопрос учащегося → отправляет POST-запрос к LLM API → получает ответ в контексте конкретного модуля → показывает его прямо в курсе. Без выхода. Без поддержки. Без дополнительных инструментов. Первая такая реализация у этого заказчика.'},
-      {ico:'🌱',lbl:'Результат',txt:'Вовлечённость выросла на 41% — потому что учащийся чувствует: его вопрос важен, система с ним работает. Время в курсе +28%. Обращений в поддержку стало меньше в 3 раза.'},
-    ],
-    metrics:[{v:'+41%',l:'Вовлечённость'},{v:'+28%',l:'Время в курсе'},{v:'−3×',l:'Нагрузка на поддержку'}],
-    tags:['JavaScript','LLM API','Articulate Storyline','Нестандартное решение','AI-интеграция'],
-  },
-  {
-    emoji:'⚗️',bg:'linear-gradient(135deg,#1a1030,#3a1260)',
-    lbl:'Внутренний проект · AI-pipeline · О скорости и качестве',
-    title:'Быстрее — не значит хуже. Но только если знаешь, где нельзя срезать углы',
-    steps:[
-      {ico:'⏳',lbl:'Честно о скорости',txt:'Когда говорят «быстро и дёшево» — обычно жертвуют качеством. Я долго не брался за автоматизацию, пока не понял: можно ускорить рутину и освободить время для того, что требует настоящего профессионального суждения.'},
-      {ico:'🎯',lbl:'Принцип',txt:'AI умеет генерировать структуры и черновики. Он не умеет принимать педагогические решения — понять, где нужна симуляция, а где — рефлексия. Где упростить, а где — добавить сложности. Это остаётся за мной. Всегда.'},
-      {ico:'🔧',lbl:'Как выстроен процесс',txt:'Claude строит outline по брифу → генерирует черновики скриптов → предлагает тестовые вопросы → делает автопроверку на соответствие целям обучения. Storyboard, педагогическая логика и финальный контент — только человек. AI экономит время на механике, не на мышлении.'},
-      {ico:'✅',lbl:'Что это даёт',txt:'18 часов вместо 60 на часовой курс. При этом качество выросло: больше времени на то, что действительно важно — на педагогическое решение. Правок 1–2 вместо 8–10. Потому что структура продумана до разработки, а не переделывается в процессе.'},
-    ],
-    metrics:[{v:'×3.3',l:'Скорость на рутине'},{v:'−85%',l:'Правок в производстве'},{v:'↑',l:'Качество педагогики'}],
-    tags:['AI как инструмент','Prompt-инженеринг','Claude API','Методология','Команда'],
-  },
-];
-window.openCase=function(i){
-  const c=CASES[i];
-  document.getElementById('cmc-content').innerHTML=`
-    <div class="cmc-hdr" style="background:${c.bg}">${c.emoji}</div>
-    <div class="cmc-lbl">${c.lbl}</div>
-    <div class="cmc-title">${c.title}</div>
-    <div class="cmc-steps">${c.steps.map(s=>`
-      <div class="cmc-step">
-        <div class="cmc-sico">${s.ico}</div>
-        <div><div class="cmc-slbl">${s.lbl}</div><div class="cmc-stxt">${s.txt}</div></div>
-      </div>`).join('')}
-    </div>
-    <div class="cmc-metrics">${c.metrics.map(m=>`<div class="cmc-m"><b>${m.v}</b><span>${m.l}</span></div>`).join('')}</div>
-    <div style="display:flex;flex-wrap:wrap;gap:.4rem">${c.tags.map(t=>`<span class="tag tag-b">${t}</span>`).join('')}</div>`;
-  document.getElementById('cmodal').classList.add('open');
-  document.body.style.overflow='hidden';
-};
-window.closeCase=function(){
-  document.getElementById('cmodal').classList.remove('open');
-  document.body.style.overflow='';
-};
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeCase();});
-
 // ─── DEMO CARDS ──────────────────────────
 const DEMOS = [
   {
@@ -1112,48 +907,44 @@ function buildDemos() {
   const grid = document.getElementById('demo-grid');
   if (!grid) return;
 
-  const YA = 'https://disk.yandex.ru/d/H1Hxoqf9JsA0XQ';
-
-  const courses = [
-    {num:'01',accent:'rgba(255,120,0',icon:'🎬',lbl:'Интерактивное кино',name:'СИБУР',desc:'Нелинейный сторителлинг — учащийся управляет историей'},
-    {num:'02',accent:'rgba(220,30,30',icon:'🏙️',lbl:'Прохождение локаций',name:'АЛЬФА-БАНК',desc:'Диалоги с персонажами, выборы и ветвление'},
-    {num:'03',accent:'rgba(30,180,80',icon:'👟',lbl:'Drag & Drop',name:'ШНУРКИ',desc:'Пошаговая симуляция физического навыка'},
+  const PROJECTS = [
+    {
+      icon:'☁️', accent:'255,197,0',
+      badge:'Яндекс.Диск · Без NDA',
+      title:'SCORM демо-каталог',
+      desc:'Три реальных курса: интерактивное кино СИБУР, диалоговые локации АЛЬФА-БАНК, drag&drop тренажёр ШНУРКИ. Скачайте и запустите в своей LMS.',
+      tags:['SCORM 1.2','Storyline 360','3 курса'],
+      url:'https://disk.yandex.ru/d/H1Hxoqf9JsA0XQ',
+      cta:'Открыть каталог →',
+    },
+    {
+      icon:'🚀', accent:'61,135,255',
+      badge:'Vibe-coding · Claude Code',
+      title:'Yandex Pet Day — сайт конференции',
+      desc:'Лендинг конференции собран через агентное программирование на Claude Code — от брифа до деплоя. Показывает, как я работаю с AI на уровне полноценной разработки, не только e-learning.',
+      tags:['Claude Code','Vercel','Frontend'],
+      url:'https://yandex-pet-day-conference.vercel.app/',
+      cta:'Смотреть проект →',
+    },
   ];
 
-  const previews = courses.map(c=>`
-    <div style="position:relative;height:185px;overflow:hidden;
-      background:linear-gradient(135deg,#080c18,#0d1528);
-      display:flex;flex-direction:column;justify-content:flex-end;
-      padding:1.25rem 1.5rem;border-right:1px solid rgba(255,255,255,.06)">
-      <div style="position:absolute;inset:0;
-        background:linear-gradient(135deg,${c.accent},.07),transparent);
-        pointer-events:none"></div>
-      <div style="position:absolute;top:.75rem;right:.875rem;width:36px;height:36px;
-        background:${c.accent},.15);border:1px solid ${c.accent},.3);
-        border-radius:9px;display:flex;align-items:center;justify-content:center;
-        font-size:1.1rem">${c.icon}</div>
-      <div style="position:absolute;top:.5rem;left:1rem;font-size:5rem;font-weight:900;
-        color:rgba(255,255,255,.03);line-height:1;pointer-events:none">${c.num}</div>
-      <div style="position:relative;z-index:1">
-        <div style="font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-          color:${c.accent},.9);margin-bottom:.3rem">${c.lbl}</div>
-        <div style="font-size:.95rem;font-weight:800;color:#fff;margin-bottom:.3rem">${c.name}</div>
-        <div style="font-size:.7rem;color:rgba(255,255,255,.45);line-height:1.4">${c.desc}</div>
+  const cards = PROJECTS.map((p,i)=>`
+    <a href="${p.url}" target="_blank" rel="noopener" class="proj-card" style="transition-delay:${i*0.12}s">
+      <div class="proj-glow" style="background:radial-gradient(circle,rgba(${p.accent},.25),transparent 70%)"></div>
+      <div class="proj-top">
+        <div class="proj-ico" style="background:rgba(${p.accent},.14);border-color:rgba(${p.accent},.32)">${p.icon}</div>
+        <div class="proj-badge" style="color:rgba(${p.accent},1);background:rgba(${p.accent},.1);border-color:rgba(${p.accent},.28)">${p.badge}</div>
       </div>
-    </div>`).join('');
-
-  const yadisk = `<div class="demo-yadisk">
-    <div class="yadisk-previews">${previews}</div>
-    <div class="yadisk-foot">
-      <div class="yadisk-info">
-        <div class="yadisk-badge">☁️ Яндекс.Диск · Открытый доступ · Без NDA</div>
-        <div class="yadisk-desc">Скачайте и запустите в своей LMS — или просто откройте в браузере</div>
+      <div class="proj-title">${p.title}</div>
+      <div class="proj-desc">${p.desc}</div>
+      <div class="proj-tags">${p.tags.map(t=>`<span class="tag tag-d">${t}</span>`).join('')}</div>
+      <div class="proj-foot">
+        <span class="proj-cta" style="color:rgba(${p.accent},1)">${p.cta}</span>
+        <svg class="proj-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
       </div>
-      <a href="https://disk.yandex.ru/d/H1Hxoqf9JsA0XQ" target="_blank" rel="noopener" class="ya-btn">Открыть каталог →</a>
-    </div>
-  </div>`;
+    </a>`).join('');
 
-  const locked = `<div class="demo-lock">
+  const locked = `<div class="demo-lock" style="transition-delay:.28s">
     <div class="dl-left">
       <div class="dl-num">∞</div>
       <div class="dl-title">Закрытый каталог — от простого к сложному</div>
@@ -1167,20 +958,19 @@ function buildDemos() {
         <div class="dl-badge">AI-интеграции</div>
         <div class="dl-badge">Мультиязычность</div>
       </div>
-
     </div>
   </div>`;
 
-  grid.innerHTML = yadisk + locked;
+  grid.innerHTML = `<div class="proj-grid">${cards}</div>` + locked;
 
   const obs = new IntersectionObserver(es=>{
     es.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('demo-vis'); });
   },{threshold:.08});
-  grid.querySelectorAll('.demo-yadisk,.demo-lock').forEach(el=>obs.observe(el));
+  grid.querySelectorAll('.proj-card,.demo-lock').forEach(el=>obs.observe(el));
 }
 buildDemos();
 
-// ─── AI CHAT ───────────────────────────// ─── AI CHAT ───────────────────────────
+// ─── AI CHAT ───────────────────────────
 const KB = `Ты AI-помощник на портфолио Юрия Канцурака. Отвечай от 3-го лица, кратко (2-3 предложения), только по фактам ниже.
 Имя: ${C.name}, ${C.city}. Роль: ${C.role}, 8+ лет.
 Цифры: 100+ курсов в production, команда до 20 человек, правки -85%, AI-pipeline ×3.3.
@@ -1237,90 +1027,6 @@ window.send=async function(){
 };
 window.ask=function(el){document.getElementById('ci').value=el.textContent;send();};
 
-// ─── WORKFLOW INTERACTIVE CARDS ───────────────────
-const STEPS = [
-  {
-    icon:'🗂️', title:'Outline & структура модулей',
-    desc:'Описываю тему, аудиторию и цели обучения — LLM предлагает структуру разделов, модулей, последовательности. Я корректирую под педагогические требования и специфику клиента. Результат: готовое содержание за 20–30 минут вместо нескольких часов черновой работы.',
-    tools:['Claude Sonnet','GPT-4o','Кастомные system-промпты','Итеративное уточнение'],
-    benefit:'Экономия 3–4 часов на старте каждого проекта',
-    detail:'Ключевой навык — не просто «попросить AI», а задать правильный контекст: цель, аудитория, формат курса, ограничения. Именно это определяет качество структуры.',
-    tags:['tag-c','tag-c','tag-b','tag-b'],
-  },
-  {
-    icon:'✍️', title:'Скрипты диалогов и тестовые вопросы',
-    desc:'По готовой структуре AI генерирует черновики скриптов для слайдов, диалоговых симуляций и вопросов оценки. Финальный текст всегда редактирую сам — AI даёт 70–80% работы, я довожу до нужного качества и тона заказчика.',
-    tools:['Claude API','GPT-4o','Prompt-шаблоны для e-learning','Контроль качества текста'],
-    benefit:'Итоговое время написания скриптов сокращается в 4–5 раз',
-    detail:'Хотите посмотреть живой пример курса, сценарий которого написан совместно с AI? Скоро появится SCORM-демо прямо на этой странице.',
-    tags:['tag-c','tag-c','tag-b','tag-b'],
-  },
-  {
-    icon:'🎨', title:'Storyboard и педагогическое решение',
-    desc:'Единственный этап без AI — и намеренно. Здесь принимаются профессиональные решения: как организовать поток обучения, где поставить интерактив, как выстроить feedback и проверку знаний. AI здесь делает ошибки, которые заметны только опытному специалисту.',
-    tools:['8+ лет экспертизы','Instructional Design','UX-логика','Педагогические паттерны'],
-    benefit:'Именно здесь опыт имеет значение — AI не заменит это',
-    detail:'Я умею отличать то, что можно делегировать машине, от того, где нужен человеческий профессиональный суждение. Это и есть ценность Lead-разработчика.',
-    tags:['tag-d','tag-d','tag-d','tag-d'],
-  },
-  {
-    icon:'🖼️', title:'Визуал и иллюстрации',
-    desc:'Midjourney или FLUX генерирует иллюстрации по авторским промптам в едином визуальном стиле курса. Иконки, схемы и UI-элементы делаю вручную. Итог: профессиональный дизайн за треть стоимости студийного производства.',
-    tools:['Midjourney','FLUX','Adobe Photoshop','Figma','Adobe Illustrator'],
-    benefit:'Полный комплект иллюстраций к курсу — за 1 день вместо 1–2 недель',
-    detail:'Ключевое — авторские промпты для единого стиля. Без этого AI даёт «мешанину». С правильным подходом — полноценный визуальный брендинг курса.',
-    tags:['tag-c','tag-c','tag-b','tag-b'],
-  },
-  {
-    icon:'🔊', title:'Озвучка и аудиопроизводство',
-    desc:'Для черновиков и бюджетных курсов — AI-голоса ElevenLabs: реалистичная русская речь, несколько персонажей, быстрая перезапись при правках текста. Для premium-проектов — живой диктор с обработкой в Adobe Audition.',
-    tools:['ElevenLabs','Adobe Audition','Профессиональный диктор','Аудиообработка'],
-    benefit:'Пересказ 60 слайдов при правке текста — за 10 минут, не за 2 дня',
-    detail:'AI-озвучка особенно выгодна при частых обновлениях курса — не нужно пересобирать студийную сессию при каждой правке.',
-    tags:['tag-c','tag-b','tag-d','tag-b'],
-  },
-];
-
-const tagLabels = [
-  ['Claude / GPT-4o','Кастомные промпты','Итеративный подход','Контекст = качество'],
-  ['Claude API','GPT-4o','Prompt-шаблоны','Контроль качества'],
-  ['Instructional Design','UX-логика','Педагогика','8+ лет опыта'],
-  ['Midjourney','FLUX','Figma','Adobe Suite'],
-  ['ElevenLabs','Adobe Audition','Диктор','Аудиообработка'],
-];
-
-let activeStep = -1;
-window.showStep = function(i) {
-  const steps = document.querySelectorAll('.ws');
-  const detail = document.getElementById('wdetail');
-  if (activeStep === i) {
-    steps[i].classList.remove('wact');
-    detail.classList.remove('open');
-    activeStep = -1;
-    return;
-  }
-  steps.forEach(s=>s.classList.remove('wact'));
-  steps[i].classList.add('wact');
-  activeStep = i;
-  const s = STEPS[i];
-  const tl = tagLabels[i];
-  detail.innerHTML = `
-    <div class="wdetail-inner">
-      <div>
-        <div style="font-size:2rem;margin-bottom:.5rem">${s.icon}</div>
-        <div class="wdt">${s.title}</div>
-        <div class="wdd">${s.desc}</div>
-        <div style="font-size:.8rem;font-weight:400;color:var(--dim);font-style:italic;margin-bottom:1.25rem">${s.detail}</div>
-        <div class="wdtools">${tl.map((t,idx)=>`<span class="tag ${s.tags[idx]||'tag-d'}">${t}</span>`).join('')}</div>
-      </div>
-      <div class="wdbenefit">
-        ✓ ${s.benefit}
-        <span>Кликните на другой шаг чтобы переключить</span>
-      </div>
-    </div>`;
-  detail.classList.add('open');
-  detail.scrollIntoView({behavior:'smooth',block:'nearest'});
-};
 const ob=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis');});},{threshold:.1});
 document.querySelectorAll('[data-a]').forEach(el=>ob.observe(el));
 })();
