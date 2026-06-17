@@ -434,8 +434,6 @@ footer a{color:var(--blue2);text-decoration:none}
 html,body{overflow-x:hidden;max-width:100vw}
 img,iframe,video{max-width:100%;height:auto}
 
-
-
 .wdbenefit{
   background:rgba(34,197,94,.07);
   border:1px solid rgba(34,197,94,.25);
@@ -506,6 +504,27 @@ img,iframe,video{max-width:100%;height:auto}
 /* nav logo subtle shimmer on load */
 @keyframes navShimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
 .nl{background-size:200% auto;animation:navShimmer 6s linear infinite}
+
+
+/* ─── SECTION SEPARATION — visual rhythm ─── */
+section{position:relative}
+section:not(#hero)::before{
+  content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:min(90%,600px);height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.12) 50%,transparent);
+}
+#cases{background:linear-gradient(180deg,rgba(13,24,48,.4),rgba(13,24,48,.65))}
+#scorm{background:linear-gradient(180deg,rgba(16,32,56,.55),rgba(16,32,56,.3))}
+#skills{background:linear-gradient(180deg,rgba(13,24,48,.3),rgba(13,24,48,.5))}
+#contact{background:linear-gradient(180deg,rgba(16,32,56,.5),rgba(16,32,56,.7))}
+
+/* Tighten section rhythm slightly so it doesn't feel like dead air */
+section{padding:84px 0}
+#hero{padding:100px 0 70px}
+
+/* Section label gets a small accent line for clearer hierarchy */
+.lbl{position:relative;padding-left:1.1rem}
+.lbl::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:.6rem;height:2px;background:var(--cyan)}
 
 </style>
 </head>
@@ -795,8 +814,6 @@ const C = {
     </div>
 
   </div>
-
-
 
 </div>
 </section>
