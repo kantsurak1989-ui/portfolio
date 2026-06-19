@@ -560,6 +560,58 @@ button,input,select,textarea,a,span,p,div,h1,h2,h3{font-family:var(--f)}
   .proj-banner-ico{font-size:2.5rem}
 }
 
+
+/* ─── VIDEO LIGHTBOX — smooth shorts-style viewer ─── */
+.video-modal{
+  position:fixed;inset:0;z-index:700;
+  background:rgba(5,10,20,.92);
+  backdrop-filter:blur(16px) saturate(140%);
+  display:none;align-items:center;justify-content:center;
+  padding:1.5rem;
+  opacity:0;transition:opacity .3s ease;
+}
+.video-modal.open{display:flex;opacity:1}
+.video-modal-inner{
+  position:relative;
+  height:min(82vh,640px);
+  aspect-ratio:9/16;
+  max-width:92vw;
+  border-radius:22px;
+  overflow:hidden;
+  background:#000;
+  box-shadow:0 40px 110px rgba(0,0,0,.65),0 0 0 1px rgba(255,255,255,.08);
+  transform:scale(.86) translateY(24px);
+  opacity:0;
+  transition:transform .42s cubic-bezier(.22,.68,0,1.15),opacity .35s ease;
+}
+.video-modal.open .video-modal-inner{transform:scale(1) translateY(0);opacity:1}
+.video-modal-inner video{
+  width:100%;height:100%;object-fit:cover;display:block;background:#000;
+}
+.video-modal-close{
+  position:absolute;top:.875rem;right:.875rem;z-index:3;
+  width:38px;height:38px;border-radius:50%;
+  background:rgba(12,18,32,.65);
+  border:1px solid rgba(255,255,255,.2);
+  backdrop-filter:blur(8px);
+  color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;
+  transition:background .25s,transform .25s,border-color .25s;
+}
+.video-modal-close:hover{
+  background:rgba(255,255,255,.18);
+  border-color:rgba(255,255,255,.4);
+  transform:scale(1.1) rotate(90deg);
+}
+.video-modal-close:active{transform:scale(.95) rotate(90deg)}
+
+@media(max-width:480px){
+  .video-modal{padding:1rem}
+  .video-modal-inner{height:min(78vh,580px)}
+  .video-modal-close{width:34px;height:34px;top:.65rem;right:.65rem}
+}
+
 </style>
 </head>
 <body>
@@ -659,10 +711,10 @@ const C = {
 <div class="wrap">
 <div class="hg">
   <div>
-    <div class="hbdg"><div class="hbdot"></div> Открыт к предложениям · Lead E-learning Developer</div>
+    <div class="hbdg"><div class="hbdot"></div> Открыт к предложениям · Фокус — AI-разработка</div>
     <div class="hname" id="hname"></div>
     <p class="hrole" id="hrole"></p>
-    <p class="htag">Делаю курсы, которые работают,<br>процессы — без бесконечных правок,<br>и показываю, как AI меняет e-learning.</p>
+    <p class="htag">Перехожу из e-learning в AI-разработку —<br>agentic coding, LLM-интеграции, AI-продукты.<br>8+ лет production-опыта — мой фундамент.</p>
     <div class="hstats">
       <div class="stat" data-a><div class="stn">100<span style="font-size:1rem;color:var(--dim)">+</span></div><div class="stl">запущенных курсов</div></div>
       <div class="stat" data-a><div class="stn">85<span style="font-size:1rem;color:var(--dim)">%</span></div><div class="stl">меньше правок</div></div>
@@ -680,15 +732,15 @@ const C = {
       <div><div class="chn">AI-помощник о Юрии</div><div class="chs">● отвечает по реальным кейсам</div></div>
     </div>
     <div class="cms" id="cms">
-      <div class="cm"><div class="cav">🤖</div><div class="cb ai">Привет! Спросите о навыках, опыте или кейсах Юрия — отвечу по фактам.</div></div>
-      <div class="cm"><div class="cav">💼</div><div class="cb">Умеет JS в Storyline?</div></div>
-      <div class="cm"><div class="cav">🤖</div><div class="cb ai">Да. Юрий пишет кастомный JavaScript прямо в Storyline — симуляции, аналитика, нестандартный drag&drop, и <strong>POST-запросы к LLM API</strong> прямо из SCORM-курса. Демо на этой странице.</div></div>
+      <div class="cm"><div class="cav">🤖</div><div class="cb ai">Привет! Юрий сейчас активно переходит в AI-разработку — спросите про AI-проекты, e-learning опыт или сам переход.</div></div>
+      <div class="cm"><div class="cav">💼</div><div class="cb">А почему вообще переход в AI?</div></div>
+      <div class="cm"><div class="cav">🤖</div><div class="cb ai">8+ лет в e-learning дали понимание продукта и пользователя. Теперь Юрий применяет это в AI: <strong>agentic coding на Claude Code</strong>, AI-генерация видео, LLM-интеграции. Примеры — ниже, в «Избранных работах».</div></div>
     </div>
     <div class="cq" id="cq">
-      <span class="cqb" onclick="ask(this)">Опыт управления командой?</span>
-      <span class="cqb" onclick="ask(this)">Как использует AI?</span>
+      <span class="cqb" onclick="ask(this)">Почему переход в AI?</span>
+      <span class="cqb" onclick="ask(this)">AI-проекты в портфолио?</span>
+      <span class="cqb" onclick="ask(this)">Опыт в e-learning?</span>
       <span class="cqb" onclick="ask(this)">Зарплата / условия?</span>
-      <span class="cqb" onclick="ask(this)">SCORM и LMS?</span>
     </div>
     <div class="cnotice" id="cnotice" style="display:none!important"></div>
     <div class="cinp">
@@ -780,7 +832,7 @@ const C = {
 <div class="wrap">
   <span class="lbl">Демо-каталог</span>
   <h2 class="ttl">Избранные работы</h2>
-  <p class="sub">Открытые проекты — кликните, чтобы посмотреть. Остальное показываю индивидуально, когда есть точки пересечения.</p>
+  <p class="sub">Здесь видно переход в AI на практике: agentic coding, AI-генерация видео — рядом с e-learning экспертизой. Остальное показываю индивидуально, когда есть точки пересечения.</p>
 
   <div class="demo-grid" id="demo-grid">
     <!-- Cards built by JS below -->
@@ -867,10 +919,10 @@ const C = {
     <div class="saln" id="saln"></div>
     <p class="sals">₽ в месяц на руки · готов обсуждать</p>
     <div class="salp">
+      <div>Сейчас — фокус на AI-разработку</div>
       <div>8+ лет в корпоративном e-learning</div>
       <div>100+ курсов в production</div>
-      <div>Команда до 20 человек</div>
-      <div>JavaScript-расширения в Storyline</div>
+      <div>Agentic coding: Claude Code, LLM API</div>
       <div>AI-pipeline: ×3.3 к скорости</div>
       <div>Полная / частичная / проектная</div>
     </div>
@@ -880,6 +932,16 @@ const C = {
 </section>
 
 <footer><div class="wrap"><p>© 2025 Юрий Канцурак · <a id="femail" href="#">kantsurak89@gmail.com</a> · Собрано с участием Claude (Anthropic AI)</p></div></footer>
+
+<!-- Video Lightbox — vertical shorts viewer -->
+<div class="video-modal" id="videoModal" onclick="if(event.target===this)closeProjVideo()">
+  <div class="video-modal-inner">
+    <button class="video-modal-close" onclick="closeProjVideo()" aria-label="Закрыть">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <video id="videoModalPlayer" loop playsinline controls></video>
+  </div>
+</div>
 
 <script>
 (function(){
@@ -999,7 +1061,7 @@ function buildDemos() {
     const isVideo = p.type === 'video';
 
     const banner = isVideo
-      ? `<div class="proj-banner" onclick="playProjVideo(this)" data-video="${p.videoSrc}">
+      ? `<div class="proj-banner" onclick="openProjVideo('${p.videoSrc}','${p.title.replace(/'/g,"\\'")}')">
            <img src="${p.poster}" alt="${p.title}" class="proj-banner-media proj-banner-poster">
            <div class="proj-banner-shade"></div>
            <div class="proj-play">▶</div>
@@ -1034,13 +1096,26 @@ function buildDemos() {
       : `<a href="${p.url}" target="_blank" rel="noopener" class="proj-card" style="${styleVars}">${inner}</a>`;
   }).join('');
 
-  window.playProjVideo = function(banner) {
-    const src = banner.getAttribute('data-video');
-    if (!src) return;
-    banner.outerHTML = `<div class="proj-banner" style="padding:0">
-      <video class="proj-banner-media" src="${src}" autoplay loop muted playsinline></video>
-    </div>`;
+  // Video lightbox — opens as proper vertical shorts viewer
+  window.openProjVideo = function(src, title) {
+    const modal  = document.getElementById('videoModal');
+    const player = document.getElementById('videoModalPlayer');
+    if (!modal || !player) return;
+    player.src = src;
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    player.currentTime = 0;
+    player.play().catch(()=>{});
   };
+  window.closeProjVideo = function() {
+    const modal  = document.getElementById('videoModal');
+    const player = document.getElementById('videoModalPlayer');
+    if (!modal || !player) return;
+    modal.classList.remove('open');
+    player.pause();
+    document.body.style.overflow = '';
+  };
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeProjVideo(); });
 
   const locked = `<div class="demo-lock" style="transition-delay:.28s">
     <div class="dl-left">
@@ -1069,31 +1144,35 @@ function buildDemos() {
 buildDemos();
 
 // ─── AI CHAT ───────────────────────────
-const KB = `Ты AI-помощник на портфолио Юрия Канцурака. Отвечай от 3-го лица, кратко (2-3 предложения), только по фактам ниже.
-Имя: ${C.name}, ${C.city}. Роль: ${C.role}, 8+ лет.
+const KB = `Ты AI-помощник на портфолио Юрия Канцурака. Отвечай от 3-го лица, кратко (2-3 предложения), только по фактам ниже. Если вопрос касается AI, смены направления или будущих планов — подчёркивай, что Юрий целенаправленно переходит в AI-разработку, используя 8+ лет e-learning опыта как фундамент, а не как единственную специализацию.
+Имя: ${C.name}, ${C.city}. База: ${C.role}, 8+ лет. Сейчас: активный переход в AI-разработку.
 Цифры: 100+ курсов в production, команда до 20 человек, правки -85%, AI-pipeline ×3.3.
-Ищет: Lead/Head of E-learning Dev, Senior E-learning Dev. Зарплата от ${C.salary} ₽. Удалённо / гибрид (${C.city}).
+AI-направление: agentic coding на Claude Code (лендинг конференции Yandex Pet Day — от брифа до деплоя), AI-генерация видео (Nano Banana, Kling, CapCut), LLM API интеграции внутри SCORM, prompt-инженеринг, RAG.
+Ищет: роли в AI-разработке, либо Lead/Head of E-learning с AI-фокусом. Зарплата от ${C.salary} ₽. Удалённо / гибрид (${C.city}).
 Контакт: ${C.email}, ${C.phone}.
-Инструменты: Storyline 360 (advanced, custom JS), Rise, Captivate, iSpring, SCORM 1.2/2004, xAPI, WebTutor, Teachbase, Moodle. JavaScript (triggers+LLM API внутри курсов), HTML/CSS, Git. Claude API, GPT-4o, prompt-инженеринг, RAG, Midjourney, FLUX, ElevenLabs.
+Инструменты: Claude API, Claude Code (agentic coding), GPT-4o, Gemini, prompt-инженеринг, RAG, Nano Banana, Kling AI, CapCut, Midjourney, FLUX, ElevenLabs. Storyline 360 (advanced, custom JS), Rise, Captivate, iSpring, SCORM 1.2/2004, xAPI, WebTutor, Teachbase, Moodle, JavaScript, HTML/CSS, Git.
 Управление: команда до 20, постановка задач, менторинг.
-Кейсы: Compliance банк 2400+ (87% completion, 2 итерации правок). AI-тьютор внутри SCORM через JS+LLM (+41% вовлечённость). AI-pipeline: 18ч vs 60ч.`;
+Кейсы: Compliance банк 2400+ (87% completion, 2 итерации правок). AI-тьютор внутри SCORM через JS+LLM (+41% вовлечённость). AI-pipeline: 18ч vs 60ч. Yandex Pet Day — сайт конференции через Claude Code. AI-шортс — атмосферное видео через Nano Banana/Kling/CapCut.`;
 
 const FB = {
+  'переход':  'Юрий целенаправленно переходит в AI-разработку — от e-learning, где AI ускорял production, к собственным AI-продуктам: agentic coding на Claude Code (сайт Yandex Pet Day), AI-генерация видео (Nano Banana, Kling, CapCut). 8+ лет опыта — фундамент, а не ограничение.',
+  'claude code':'Юрий работает с Claude Code как с агентным инструментом разработки — не просто чат, а полноценная сборка проекта от брифа до деплоя. Пример: сайт конференции Yandex Pet Day, собранный через agentic coding.',
+  'agentic':  'Agentic coding — это когда AI не просто подсказывает код, а самостоятельно собирает проект от брифа до деплоя. Юрий применяет это на практике: сайт Yandex Pet Day собран именно так через Claude Code.',
+  'ai':       'Юрий активно развивается в AI-направлении: построил AI-pipeline для e-learning (×3.3 к скорости), а сейчас делает agentic coding на Claude Code и AI-генерацию видео (Nano Banana, Kling, CapCut). Примеры — в разделе «Избранные работы».',
   'команд':   'Юрий руководил production-командой до 20 человек — дизайнеры, методологи, разработчики, монтажёры. Выстраивал процессы, ставил задачи, вёл менторинг джунов.',
-  'ai':       'Юрий построил собственный AI-pipeline: LLM для outline и скриптов, Midjourney для визуала, ElevenLabs для озвучки — и встроил LLM API прямо в SCORM-курс через JavaScript. Сборка часового курса: 18 ч вместо 60 ч.',
   'javascript':'Кастомный JS в Storyline — его специализация: нестандартные drag&drop, ветвление по сложной логике, аналитика прохождения и POST-запросы к внешним API прямо из курса.',
   'зарплат':  `Юрий рассматривает предложения от ${C.salary} ₽ на руки. При интересном функционале или AI-направлении — готов обсуждать выше.`,
   'услови':   `Формат — удалённо или гибрид (Москва). Рассматривает полную, частичную и проектную работу. Зарплатные ожидания от ${C.salary} ₽.`,
   'правк':    'За счёт чек-листов и пересборки этапов согласования Юрий сократил правки с 8–10 до 1–2 итераций — экономия 85–90% времени команды.',
   'scorm':    'Юрий работает со SCORM 1.2 и 2004 на уровне кода — JS напрямую взаимодействует с LMS API. Опыт интеграции: WebTutor, Teachbase, Moodle, iSpring Learn.',
   'курс':     'Юрий разработал более 100 курсов полного цикла — от сценария до SCORM-пакета в LMS. Специализация: корпоративное обучение, compliance, EdTech, сложные интерактивные механики.',
-  'опыт':     'Более 8 лет в корпоративном e-learning. Работал с банковским сектором, ритейлом, госструктурами. Полный цикл: методология, сценарий, Storyline, SCORM, запуск в LMS.',
-  'storyline':'Articulate Storyline 360 — основной инструмент. Владеет на уровне advanced: кастомные JS-триггеры, нестандартные интеракции, анимация, брендированные шаблоны.',
+  'опыт':     'Более 8 лет в корпоративном e-learning — фундамент, на который сейчас опирается переход в AI-разработку. Работал с банковским сектором, ритейлом, госструктурами. Полный цикл: методология, сценарий, Storyline, SCORM, запуск в LMS.',
+  'storyline':'Articulate Storyline 360 — основной инструмент в e-learning. Владеет на уровне advanced: кастомные JS-триггеры, нестандартные интеракции, анимация, брендированные шаблоны.',
   'сколько':  'Часовой курс Юрий собирает за ≈18 рабочих часов (до AI-pipeline было ≈60 ч). Сроки зависят от сложности интерактива и числа итераций согласования.',
   'contact':  `Связаться с Юрием: ${C.email} или ${C.phone}. Отвечает в течение дня.`,
   'свяж':     `Напишите напрямую: ${C.email} или ${C.phone}.`,
-  'умеет':    'Юрий умеет: Articulate Storyline 360 (advanced, custom JS), SCORM 1.2/2004, xAPI, методология, LMS-интеграции, AI-pipeline, управление командой до 20 человек, видеомонтаж.',
-  'лучш':     'Сильные стороны Юрия — глубокое владение Storyline, кастомный JavaScript внутри курсов и выстроенный AI-пайплайн, который ускоряет production в 3.3 раза без потери качества.',
+  'умеет':    'Юрий умеет: agentic coding (Claude Code), AI-генерация медиа (Nano Banana, Kling, CapCut), LLM API интеграции, Articulate Storyline 360 (advanced, custom JS), SCORM 1.2/2004, управление командой до 20 человек.',
+  'лучш':     'Сильные стороны Юрия — быстро растущая экспертиза в AI (agentic coding, LLM-интеграции, генеративные модели) и глубокое владение e-learning production, которое даёт понимание продукта и пользователя.',
 };
 function fb(q){const lq=q.toLowerCase();for(const[k,v] of Object.entries(FB))if(lq.includes(k))return v;return `Хороший вопрос! Свяжитесь с Юрием напрямую: ${C.email} или ${C.phone}.`;}
 
