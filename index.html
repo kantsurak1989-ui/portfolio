@@ -172,14 +172,15 @@ section{padding:96px 0}
 .dyd-btn{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,197,0,.12);border:1.5px solid rgba(255,197,0,.4);color:rgba(255,220,50,1);font-size:.85rem;font-weight:700;padding:.7rem 1.5rem;border-radius:10px;text-decoration:none;transition:all .25s;white-space:nowrap;font-family:var(--f)}
 .dyd-btn:hover{background:rgba(255,197,0,.22);border-color:rgba(255,197,0,.7);transform:translateY(-2px);box-shadow:0 8px 25px rgba(255,197,0,.15)}
 .dyd-note{font-size:.72rem;color:var(--dim2);text-align:center}
-.proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.25rem}
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-bottom:1.25rem}
+@media(max-width:1100px){.proj-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:680px){.proj-grid{grid-template-columns:1fr}}
 .proj-card{
   position:relative;
   display:flex;flex-direction:column;
   background:var(--bg3);
   border:1px solid var(--border);
   border-radius:18px;
-  padding:1.75rem;
   text-decoration:none;
   color:var(--text);
   overflow:hidden;
@@ -189,35 +190,54 @@ section{padding:96px 0}
 .proj-card.demo-vis{opacity:1;transform:translateY(0)}
 .proj-card:hover{
   transform:translateY(-7px);
-  border-color:rgba(255,255,255,.22);
-  box-shadow:0 26px 70px rgba(0,0,0,.5);
+  border-color:var(--proj-accent,rgba(255,255,255,.25));
+  box-shadow:0 26px 60px rgba(0,0,0,.45),0 0 36px var(--proj-glow,rgba(255,255,255,.08));
 }
 .proj-card::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.06) 50%,transparent 60%);
+  content:'';position:absolute;inset:0;z-index:2;
+  background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.05) 50%,transparent 60%);
   transform:translateX(-120%);transition:transform .7s ease;pointer-events:none;
 }
 .proj-card:hover::after{transform:translateX(120%)}
-.proj-glow{
-  position:absolute;top:-40%;right:-30%;width:70%;height:140%;
-  pointer-events:none;opacity:0;transition:opacity .4s;
+
+/* ── fixed-height header zone (banner OR video) — keeps every card the same rhythm ── */
+.proj-banner{
+  position:relative;height:172px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
 }
-.proj-card:hover .proj-glow{opacity:1}
-.proj-top{display:flex;align-items:center;justify-content:space-between;gap:.75rem;margin-bottom:1.1rem;position:relative;z-index:1}
-.proj-ico{
-  width:52px;height:52px;border-radius:14px;border:1px solid;
-  display:flex;align-items:center;justify-content:center;font-size:1.6rem;
-  transition:transform .35s cubic-bezier(.22,.68,0,1.4);flex-shrink:0;
+.proj-banner-ico{
+  font-size:3rem;position:relative;z-index:1;
+  filter:drop-shadow(0 6px 18px rgba(0,0,0,.35));
+  transition:transform .4s cubic-bezier(.22,.68,0,1.4);
 }
-.proj-card:hover .proj-ico{transform:scale(1.12) rotate(-4deg)}
-.proj-badge{font-size:.66rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:.28rem .7rem;border-radius:100px;border:1px solid;white-space:nowrap}
-.proj-title{font-size:1.15rem;font-weight:800;letter-spacing:-.015em;margin-bottom:.625rem;line-height:1.3;position:relative;z-index:1}
-.proj-desc{font-size:.85rem;color:var(--dim);line-height:1.65;margin-bottom:1.1rem;flex:1;position:relative;z-index:1}
-.proj-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.1rem;position:relative;z-index:1}
-.proj-foot{display:flex;align-items:center;justify-content:space-between;gap:.5rem;padding-top:1rem;border-top:1px solid var(--border);position:relative;z-index:1}
-.proj-cta{font-size:.85rem;font-weight:700}
-.proj-arrow{transition:transform .3s;color:var(--dim)}
+.proj-card:hover .proj-banner-ico{transform:scale(1.12) rotate(-4deg)}
+.proj-banner-media{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.proj-banner-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(12,18,32,.85) 100%)}
+.proj-play{
+  position:absolute;z-index:1;width:52px;height:52px;border-radius:50%;
+  background:rgba(255,255,255,.14);border:1.5px solid rgba(255,255,255,.4);
+  backdrop-filter:blur(4px);
+  display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:#fff;
+  transition:transform .3s,background .3s;
+}
+.proj-card:hover .proj-play{transform:scale(1.1);background:rgba(255,255,255,.22)}
+
+.proj-body{display:flex;flex-direction:column;flex:1;padding:1.5rem 1.5rem 1.25rem}
+.proj-top{display:flex;align-items:center;margin-bottom:.875rem;position:relative;z-index:1}
+.proj-badge{font-size:.64rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.28rem .7rem;border-radius:100px;border:1px solid;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.proj-title{font-size:1.1rem;font-weight:800;letter-spacing:-.015em;margin-bottom:.5rem;line-height:1.3;position:relative;z-index:1}
+.proj-desc{
+  font-size:.84rem;color:var(--dim);line-height:1.6;margin-bottom:1rem;position:relative;z-index:1;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+  min-height:calc(.84rem * 1.6 * 3);
+}
+.proj-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:auto;padding-bottom:1rem;position:relative;z-index:1}
+.proj-foot{display:flex;align-items:center;justify-content:space-between;gap:.5rem;padding-top:1rem;border-top:1px solid var(--border);position:relative;z-index:1;margin-top:auto}
+.proj-cta{font-size:.84rem;font-weight:700}
+.proj-arrow{transition:transform .3s;color:var(--dim);flex-shrink:0}
 .proj-card:hover .proj-arrow{transform:translate(3px,-3px);color:inherit}
+.proj-meta{font-size:.7rem;color:var(--dim2);white-space:nowrap}
 
 .demo-lock{grid-column:1/-1;border:1px dashed rgba(26,106,240,.3);border-radius:20px;background:linear-gradient(135deg,rgba(26,106,240,.04),rgba(0,207,255,.03));padding:3rem;display:flex;align-items:center;justify-content:space-between;gap:3rem;position:relative;overflow:hidden;opacity:0;transform:translateY(30px);transition:transform .35s,border-color .3s}
 .demo-lock.demo-vis{opacity:1;transform:translateY(0)}
@@ -530,6 +550,15 @@ section{padding:84px 0}
 /* ─── FONT CONSISTENCY — force Outfit everywhere, no fallback drift ─── */
 button,input,select,textarea,a,span,p,div,h1,h2,h3{font-family:var(--f)}
 .cqb,.tag,.klink,.stat,.proj-card,.str-card,.demo-card{font-family:var(--f)}
+
+
+
+
+
+@media(max-width:480px){
+  .proj-banner{height:150px}
+  .proj-banner-ico{font-size:2.5rem}
+}
 
 </style>
 </head>
@@ -948,23 +977,70 @@ function buildDemos() {
       url:'https://yandex-pet-day-conference.vercel.app/',
       cta:'Смотреть проект →',
     },
+    {
+      type:'video',
+      icon:'🎬', accent:'168,85,247',
+      badge:'AI-генерация · Nano Banana · Kling · CapCut',
+      title:'Атмосферный шортс — текстура и свет',
+      desc:'Серия макро-кадров старой ванной комнаты: капля на кране, льющаяся вода, кафель, ретро-бойлер. Стилистику и кадры сгенерировал в Nano Banana, оживил движение в Kling, собрал ритм и быстрый монтаж в CapCut.',
+      tags:['Nano Banana','Kling AI','CapCut','9:16 Shorts'],
+      videoSrc:'./media/ai-shorts-water.mp4',
+      poster:'./media/ai-shorts-water-poster.jpg',
+      cta:'▶ Смотреть шортс',
+      meta:'13 сек',
+    },
   ];
 
-  const cards = PROJECTS.map((p,i)=>`
-    <a href="${p.url}" target="_blank" rel="noopener" class="proj-card" style="transition-delay:${i*0.12}s">
-      <div class="proj-glow" style="background:radial-gradient(circle,rgba(${p.accent},.25),transparent 70%)"></div>
-      <div class="proj-top">
-        <div class="proj-ico" style="background:rgba(${p.accent},.14);border-color:rgba(${p.accent},.32)">${p.icon}</div>
-        <div class="proj-badge" style="color:rgba(${p.accent},1);background:rgba(${p.accent},.1);border-color:rgba(${p.accent},.28)">${p.badge}</div>
-      </div>
-      <div class="proj-title">${p.title}</div>
-      <div class="proj-desc">${p.desc}</div>
-      <div class="proj-tags">${p.tags.map(t=>`<span class="tag tag-d">${t}</span>`).join('')}</div>
-      <div class="proj-foot">
-        <span class="proj-cta" style="color:rgba(${p.accent},1)">${p.cta}</span>
-        <svg class="proj-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-      </div>
-    </a>`).join('');
+  // ── Universal card renderer — extensible for future project types ──
+  // Each project needs: icon, accent (rgb string), badge, title, desc, tags
+  // Plus either: { url, cta } for link-type  OR  { videoSrc, poster, cta } for video-type
+  const cards = PROJECTS.map((p,i)=>{
+    const accentRgb = p.accent;
+    const isVideo = p.type === 'video';
+
+    const banner = isVideo
+      ? `<div class="proj-banner" onclick="playProjVideo(this)" data-video="${p.videoSrc}">
+           <img src="${p.poster}" alt="${p.title}" class="proj-banner-media proj-banner-poster">
+           <div class="proj-banner-shade"></div>
+           <div class="proj-play">▶</div>
+         </div>`
+      : `<div class="proj-banner" style="background:linear-gradient(135deg,rgba(${accentRgb},.22),rgba(${accentRgb},.05))">
+           <span class="proj-banner-ico">${p.icon}</span>
+         </div>`;
+
+    const footRight = isVideo
+      ? `<span class="proj-meta">${p.meta || ''}</span>`
+      : `<svg class="proj-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>`;
+
+    const inner = `
+      ${banner}
+      <div class="proj-body">
+        <div class="proj-top">
+          <div class="proj-badge" style="color:rgba(${accentRgb},1);background:rgba(${accentRgb},.1);border-color:rgba(${accentRgb},.28)">${p.badge}</div>
+        </div>
+        <div class="proj-title">${p.title}</div>
+        <div class="proj-desc">${p.desc}</div>
+        <div class="proj-tags">${p.tags.map(t=>`<span class="tag tag-d">${t}</span>`).join('')}</div>
+        <div class="proj-foot">
+          <span class="proj-cta" style="color:rgba(${accentRgb},1)">${p.cta}</span>
+          ${footRight}
+        </div>
+      </div>`;
+
+    const styleVars = `--proj-accent:rgba(${accentRgb},.4);--proj-glow:rgba(${accentRgb},.15);transition-delay:${i*0.1}s`;
+
+    return isVideo
+      ? `<div class="proj-card" style="${styleVars}">${inner}</div>`
+      : `<a href="${p.url}" target="_blank" rel="noopener" class="proj-card" style="${styleVars}">${inner}</a>`;
+  }).join('');
+
+  window.playProjVideo = function(banner) {
+    const src = banner.getAttribute('data-video');
+    if (!src) return;
+    banner.outerHTML = `<div class="proj-banner" style="padding:0">
+      <video class="proj-banner-media" src="${src}" autoplay loop muted playsinline></video>
+    </div>`;
+  };
 
   const locked = `<div class="demo-lock" style="transition-delay:.28s">
     <div class="dl-left">
