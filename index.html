@@ -1040,6 +1040,15 @@ function buildDemos() {
       cta:'Смотреть проект →',
     },
     {
+      icon:'🤖', accent:'34,197,94',
+      badge:'Agentic-инфраструктура · Vercel',
+      title:'Telegram-бот записи на услуги',
+      desc:'Бот с многошаговым диалогом и памятью состояния, защитой от невалидного ввода и уведомлениями владельцу в реальном времени. Переведён с polling на webhook-архитектуру и задеплоен как serverless-функция — работает 24/7 без выделенного сервера. Заявки пишутся напрямую в Google Sheets через Service Account.',
+      tags:['Python','Telegram API','Webhook','Vercel Serverless','Google Sheets API'],
+      url:'https://t.me/Yuriykan_bot',
+      cta:'Открыть бота в Telegram →',
+    },
+    {
       type:'video',
       icon:'🎬', accent:'168,85,247',
       badge:'AI-генерация · Nano Banana · Kling · CapCut',
@@ -1147,17 +1156,19 @@ buildDemos();
 const KB = `Ты AI-помощник на портфолио Юрия Канцурака. Отвечай от 3-го лица, кратко (2-3 предложения), только по фактам ниже. Если вопрос касается AI, смены направления или будущих планов — подчёркивай, что Юрий целенаправленно переходит в AI-разработку, используя 8+ лет e-learning опыта как фундамент, а не как единственную специализацию.
 Имя: ${C.name}, ${C.city}. База: ${C.role}, 8+ лет. Сейчас: активный переход в AI-разработку.
 Цифры: 100+ курсов в production, команда до 20 человек, правки -85%, AI-pipeline ×3.3.
-AI-направление: agentic coding на Claude Code (лендинг конференции Yandex Pet Day — от брифа до деплоя), AI-генерация видео (Nano Banana, Kling, CapCut), LLM API интеграции внутри SCORM, prompt-инженеринг, RAG.
+AI-направление: agentic coding на Claude Code (лендинг конференции Yandex Pet Day — от брифа до деплоя; Telegram-бот записи на услуги — webhook-архитектура, Vercel serverless, Google Sheets API), AI-генерация видео (Nano Banana, Kling, CapCut), LLM API интеграции внутри SCORM, prompt-инженеринг, RAG.
 Ищет: роли в AI-разработке, либо Lead/Head of E-learning с AI-фокусом. Зарплата от ${C.salary} ₽. Удалённо / гибрид (${C.city}).
 Контакт: ${C.email}, ${C.phone}.
 Инструменты: Claude API, Claude Code (agentic coding), GPT-4o, Gemini, prompt-инженеринг, RAG, Nano Banana, Kling AI, CapCut, Midjourney, FLUX, ElevenLabs. Storyline 360 (advanced, custom JS), Rise, Captivate, iSpring, SCORM 1.2/2004, xAPI, WebTutor, Teachbase, Moodle, JavaScript, HTML/CSS, Git.
 Управление: команда до 20, постановка задач, менторинг.
-Кейсы: Compliance банк 2400+ (87% completion, 2 итерации правок). AI-тьютор внутри SCORM через JS+LLM (+41% вовлечённость). AI-pipeline: 18ч vs 60ч. Yandex Pet Day — сайт конференции через Claude Code. AI-шортс — атмосферное видео через Nano Banana/Kling/CapCut.`;
+Кейсы: Compliance банк 2400+ (87% completion, 2 итерации правок). AI-тьютор внутри SCORM через JS+LLM (+41% вовлечённость). AI-pipeline: 18ч vs 60ч. Yandex Pet Day — сайт конференции через Claude Code. Telegram-бот записи на услуги — webhook + Vercel serverless + Google Sheets API, работает 24/7. AI-шортс — атмосферное видео через Nano Banana/Kling/CapCut.`;
 
 const FB = {
   'переход':  'Юрий целенаправленно переходит в AI-разработку — от e-learning, где AI ускорял production, к собственным AI-продуктам: agentic coding на Claude Code (сайт Yandex Pet Day), AI-генерация видео (Nano Banana, Kling, CapCut). 8+ лет опыта — фундамент, а не ограничение.',
   'claude code':'Юрий работает с Claude Code как с агентным инструментом разработки — не просто чат, а полноценная сборка проекта от брифа до деплоя. Пример: сайт конференции Yandex Pet Day, собранный через agentic coding.',
-  'agentic':  'Agentic coding — это когда AI не просто подсказывает код, а самостоятельно собирает проект от брифа до деплоя. Юрий применяет это на практике: сайт Yandex Pet Day собран именно так через Claude Code.',
+  'agentic':  'Agentic coding — это когда AI не просто подсказывает код, а самостоятельно собирает проект от брифа до деплоя. Юрий применяет это на практике: сайт Yandex Pet Day и Telegram-бот записи на услуги собраны именно так через Claude Code.',
+  'telegram': 'Юрий собрал Telegram-бота записи на услуги: многошаговый диалог, защита от невалидного ввода, уведомления владельцу, запись заявок в Google Sheets. Бот переведён на webhook-архитектуру и работает 24/7 как serverless-функция на Vercel — без выделенного сервера и без затрат на хостинг.',
+  'бот':      'Юрий собрал Telegram-бота записи на услуги: многошаговый диалог, защита от невалидного ввода, уведомления владельцу, запись заявок в Google Sheets. Бот переведён на webhook-архитектуру и работает 24/7 как serverless-функция на Vercel — без выделенного сервера и без затрат на хостинг.',
   'ai':       'Юрий активно развивается в AI-направлении: построил AI-pipeline для e-learning (×3.3 к скорости), а сейчас делает agentic coding на Claude Code и AI-генерацию видео (Nano Banana, Kling, CapCut). Примеры — в разделе «Избранные работы».',
   'команд':   'Юрий руководил production-командой до 20 человек — дизайнеры, методологи, разработчики, монтажёры. Выстраивал процессы, ставил задачи, вёл менторинг джунов.',
   'javascript':'Кастомный JS в Storyline — его специализация: нестандартные drag&drop, ветвление по сложной логике, аналитика прохождения и POST-запросы к внешним API прямо из курса.',
