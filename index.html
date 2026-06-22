@@ -960,7 +960,7 @@ document.getElementById('klinks').innerHTML = [
   {h:'tel:'+C.phone.replace(/\D/g,''),  i:'📞', n:C.phone,          s:'Звонок или мессенджер',        t:false},
   {h:'https://t.me/YuriyKants',          i:'💬', n:'@YuriyKants',    s:'Telegram — отвечу быстро',     t:true },
   {h:'mailto:'+C.email,                  i:'📧', n:C.email,          s:'Email',                         t:false},
-  {h:C.hh,                               i:'💼', n:'Резюме на hh.ru', s:'Полный опыт и достижения',     t:true },
+  {h:C.hh,                               i:'💼', n:'https://hh.ru/resume/6a36468aff109f94560039ed1f616b74505778', s:'Полный опыт и достижения',     t:true },
 ].map(l=>'<a href="'+l.h+'" class="klink"'+(l.t?' target="_blank"':'')+'>'+
   '<div class="cl-ico">'+l.i+'</div>'+
   '<div><div class="kname">'+l.n+'</div><div class="ksub">'+l.s+'</div></div></a>'
