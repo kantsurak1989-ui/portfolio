@@ -979,7 +979,6 @@ document.getElementById('femail').textContent = C.email;
 document.getElementById('klinks').innerHTML = [
   {h:'tel:'+C.phone.replace(/\D/g,''),  i:'📞', n:C.phone,          s:'Звонок или мессенджер',        t:false},
   {h:'https://t.me/YuriyKants',          i:'💬', n:'@YuriyKants',    s:'Telegram — отвечу быстро',     t:true },
-  {h:'mailto:'+C.email,                  i:'📧', n:C.email,          s:'Email',                         t:false},
   {h:C.hh,                               i:'💼', n:'Резюме на hh.ru', s:'Полный опыт и достижения', t:true },
 ].map(l=>'<a href="'+l.h+'" class="klink"'+(l.t?' target="_blank"':'')+'>'+
   '<div class="cl-ico">'+l.i+'</div>'+
