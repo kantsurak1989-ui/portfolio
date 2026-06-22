@@ -3,7 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Юрий Канцурак — Lead E-learning Developer</title>
+<title>Юрий Канцурак — E-learning Lead → AI Product Builder</title>
+<meta name="description" content="8+ лет в корпоративном e-learning, сейчас — переход в AI-разработку: agentic coding на Claude Code, AI-генерация медиа, LLM-интеграции. Портфолио с живым AI-чатом и реальными проектами.">
+
+<!-- Open Graph / соцсети — домен указан: kantsurak.vercel.app -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Юрий Канцурак — E-learning Lead → AI Product Builder">
+<meta property="og:description" content="8+ лет в e-learning, сейчас — переход в AI-разработку. Agentic coding, AI-генерация медиа, LLM-интеграции. Живой AI-чат прямо в портфолио.">
+<meta property="og:image" content="https://kantsurak.vercel.app/media/og-preview.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ru_RU">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Юрий Канцурак — E-learning Lead → AI Product Builder">
+<meta name="twitter:description" content="8+ лет в e-learning, сейчас — переход в AI-разработку. Agentic coding, AI-генерация медиа, LLM-интеграции.">
+<meta name="twitter:image" content="https://kantsurak.vercel.app/media/og-preview.jpg">
+
+<link rel="icon" type="image/png" sizes="32x32" href="./media/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./media/favicon-16.png">
+<link rel="apple-touch-icon" href="./media/favicon.png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -631,7 +651,7 @@ const C = {
   city:    'Москва',
   phone:   '+7 (968) 991-25-04',
   email:   'kantsurak89@gmail.com',
-  hh:      'https://hh.ru',            // ← вставьте прямую ссылку на ваше резюме
+  hh:      'https://hh.ru/resume/6a36468aff109f94560039ed1f616b74505778',
   salary:  '130 000',
 
   // ── YOUTUBE ────────────────────────────────────────
@@ -711,7 +731,7 @@ const C = {
 <div class="wrap">
 <div class="hg">
   <div>
-    <div class="hbdg"><div class="hbdot"></div> Открыт к предложениям · Фокус — AI-разработка</div>
+    <div class="hbdg"><div class="hbdot"></div> Открыт к предложениям · E-learning Lead → AI Product Builder</div>
     <div class="hname" id="hname"></div>
     <p class="hrole" id="hrole"></p>
     <p class="htag">Перехожу из e-learning в AI-разработку —<br>agentic coding, LLM-интеграции, AI-продукты.<br>8+ лет production-опыта — мой фундамент.</p>
@@ -960,7 +980,7 @@ document.getElementById('klinks').innerHTML = [
   {h:'tel:'+C.phone.replace(/\D/g,''),  i:'📞', n:C.phone,          s:'Звонок или мессенджер',        t:false},
   {h:'https://t.me/YuriyKants',          i:'💬', n:'@YuriyKants',    s:'Telegram — отвечу быстро',     t:true },
   {h:'mailto:'+C.email,                  i:'📧', n:C.email,          s:'Email',                         t:false},
-  {h:C.hh,                               i:'💼', n:'https://hh.ru/resume/6a36468aff109f94560039ed1f616b74505778', s:'Полный опыт и достижения',     t:true },
+  {h:C.hh,                               i:'💼', n:'Резюме на hh.ru', s:'Полный опыт и достижения', t:true },
 ].map(l=>'<a href="'+l.h+'" class="klink"'+(l.t?' target="_blank"':'')+'>'+
   '<div class="cl-ico">'+l.i+'</div>'+
   '<div><div class="kname">'+l.n+'</div><div class="ksub">'+l.s+'</div></div></a>'
@@ -1034,7 +1054,7 @@ function buildDemos() {
       icon:'🚀', accent:'61,135,255',
       badge:'Vibe-coding · Claude Code',
       title:'Yandex Pet Day — сайт конференции',
-      desc:'Лендинг конференции собран через агентное программирование на Claude Code — от брифа до деплоя. Показывает, как я работаю с AI на уровне полноценной разработки, не только e-learning.',
+      desc:'Лендинг собран агентным программированием в Claude Code: бриф → структура → итеративная правка по скриншотам → деплой на Vercel, без единой строчки кода руками. 4 итерации диалога с AI до финальной версии.',
       tags:['Claude Code','Vercel','Frontend'],
       url:'https://yandex-pet-day-conference.vercel.app/',
       cta:'Смотреть проект →',
@@ -1053,7 +1073,7 @@ function buildDemos() {
       icon:'🎬', accent:'168,85,247',
       badge:'AI-генерация · Nano Banana · Kling · CapCut',
       title:'Атмосферный шортс — текстура и свет',
-      desc:'Серия макро-кадров старой ванной комнаты: капля на кране, льющаяся вода, кафель, ретро-бойлер. Стилистику и кадры сгенерировал в Nano Banana, оживил движение в Kling, собрал ритм и быстрый монтаж в CapCut.',
+      desc:'Серия макро-кадров старой ванной: капля на кране, льющаяся вода, кафель, ретро-бойлер. Кадры — в Nano Banana (около 20 генераций на отбор), движение оживил в Kling, ритм и быстрый монтаж — в CapCut.',
       tags:['Nano Banana','Kling AI','CapCut','9:16 Shorts'],
       videoSrc:'./media/ai-shorts-water.mp4',
       poster:'./media/ai-shorts-water-poster.jpg',
