@@ -234,6 +234,7 @@ section{padding:96px 0}
 .proj-card:hover .proj-banner-ico{transform:scale(1.12) rotate(-4deg)}
 .proj-banner-media{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .proj-banner-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(12,18,32,.85) 100%)}
+.proj-banner-clickable{cursor:pointer}
 .proj-play{
   position:absolute;z-index:1;width:52px;height:52px;border-radius:50%;
   background:rgba(255,255,255,.14);border:1.5px solid rgba(255,255,255,.4);
@@ -1089,7 +1090,7 @@ function buildDemos() {
     const isVideo = p.type === 'video';
 
     const banner = isVideo
-      ? `<div class="proj-banner" onclick="openProjVideo('${p.videoSrc}','${p.title.replace(/'/g,"\\'")}')">
+      ? `<div class="proj-banner proj-banner-clickable" onclick="openProjVideo('${p.videoSrc}','${p.title.replace(/'/g,"\\'")}')">
            <img src="${p.poster}" alt="${p.title}" class="proj-banner-media proj-banner-poster">
            <div class="proj-banner-shade"></div>
            <div class="proj-play">▶</div>
