@@ -193,7 +193,8 @@ section{padding:96px 0}
 .dyd-btn:hover{background:rgba(255,197,0,.22);border-color:rgba(255,197,0,.7);transform:translateY(-2px);box-shadow:0 8px 25px rgba(255,197,0,.15)}
 .dyd-note{font-size:.72rem;color:var(--dim2);text-align:center}
 .proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-bottom:1.25rem}
-@media(max-width:1100px){.proj-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:1200px){.proj-grid{grid-template-columns:1fr 1fr 1fr}}
+@media(max-width:900px){.proj-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:680px){.proj-grid{grid-template-columns:1fr}}
 .proj-card{
   position:relative;
@@ -956,7 +957,7 @@ const C = {
 
 <!-- Video Lightbox — vertical shorts viewer -->
 <div class="video-modal" id="videoModal" onclick="if(event.target===this)closeProjVideo()">
-  <div class="video-modal-inner">
+  <div class="video-modal-inner" id="videoModalInner">
     <button class="video-modal-close" onclick="closeProjVideo()" aria-label="Закрыть">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
@@ -1080,6 +1081,31 @@ function buildDemos() {
       cta:'▶ Смотреть шортс',
       meta:'13 сек',
     },
+    {
+      type:'video',
+      icon:'🎮', accent:'239,68,68',
+      badge:'AI-генерация · Hailuo AI · MiniMax · Видео для ютубера',
+      title:'Видео для ютубера — анимационный шортс',
+      desc:'Анимационный ролик в стиле графического романа для YouTube-канала. Персонаж и сцены сгенерированы в Hailuo AI (MiniMax) — тёмный антураж, кинематографичная постановка. Полный цикл от промпта до готового ролика.',
+      tags:['Hailuo AI','MiniMax','AI-анимация','YouTube Shorts','9:16'],
+      videoSrc:'./media/re-video.mp4',
+      poster:'./media/re-poster.jpg',
+      cta:'▶ Смотреть видео',
+      meta:'46 сек',
+    },
+    {
+      type:'video',
+      icon:'🤖', accent:'0,207,255',
+      badge:'AI-аватар · AI-озвучка · Видео-ассистент',
+      title:'ИИ-аватар — видео-ассистент с AI-озвучкой',
+      desc:'Горизонтальное видео с реалистичным AI-аватаром и синтезированной речью. Показывает, как можно делать профессиональные обучающие видео или видео-ассистентов без участия живого диктора или видеографа.',
+      tags:['AI-аватар','AI-озвучка','ElevenLabs','16:9'],
+      videoSrc:'./media/ai-avatar.mp4',
+      poster:'./media/ai-avatar-poster.jpg',
+      cta:'▶ Смотреть демо',
+      meta:'30 сек',
+      horizontal:true,
+    },
   ];
 
   // ── Universal card renderer — extensible for future project types ──
@@ -1090,7 +1116,7 @@ function buildDemos() {
     const isVideo = p.type === 'video';
 
     const banner = isVideo
-      ? `<div class="proj-banner proj-banner-clickable" onclick="openProjVideo('${p.videoSrc}','${p.title.replace(/'/g,"\\'")}')">
+      ? `<div class="proj-banner proj-banner-clickable" onclick="openProjVideo('${p.videoSrc}','${p.title.replace(/'/g,"\\'")}',${!!p.horizontal})">
            <img src="${p.poster}" alt="${p.title}" class="proj-banner-media proj-banner-poster">
            <div class="proj-banner-shade"></div>
            <div class="proj-play">▶</div>
@@ -1126,11 +1152,22 @@ function buildDemos() {
   }).join('');
 
   // Video lightbox — opens as proper vertical shorts viewer
-  window.openProjVideo = function(src, title) {
+  window.openProjVideo = function(src, title, horizontal) {
     const modal  = document.getElementById('videoModal');
+    const inner  = document.getElementById('videoModalInner');
     const player = document.getElementById('videoModalPlayer');
     if (!modal || !player) return;
     player.src = src;
+    // Switch aspect ratio for horizontal (16:9) vs vertical (9:16)
+    if (horizontal) {
+      inner.style.aspectRatio = '16/9';
+      inner.style.height = 'auto';
+      inner.style.width = 'min(88vw,900px)';
+    } else {
+      inner.style.aspectRatio = '9/16';
+      inner.style.height = 'min(82vh,640px)';
+      inner.style.width = 'auto';
+    }
     modal.classList.add('open');
     document.body.style.overflow = 'hidden';
     player.currentTime = 0;
